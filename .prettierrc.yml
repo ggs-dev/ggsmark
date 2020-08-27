@@ -1,0 +1,7 @@
+# JavaScript
+semi: false
+trailingComma: none
+singleQuote: true
+bracketSpacing: true
+htmlWhitespaceSensitivity: 'ignore'
+endOfLine: auto

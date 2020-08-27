@@ -1,0 +1,28 @@
+{
+  "name": "ggsmark",
+  "version": "0.0.1",
+  "description": "CommonMark extension for the Gentlemen's Gaming Society website.",
+  "main": "index.js",
+  "repository": "https://github.com/johnnyhuy/ggsmark.git",
+  "author": "Johnny Huynh <info@johnnyhuy.com>",
+  "license": "MIT",
+  "scripts": {
+    "js": "prettier src/* --write",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.4.2",
+    "jest-junit": "^11.1.0",
+    "prettier": "^2.1.1"
+  },
+  "dependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
+    "babel-core": "^6.26.3",
+    "commonmark": "^0.29.1",
+    "dompurify": "^2.0.14"
+  }
+}
