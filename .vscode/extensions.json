@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "mgmcdermott.vscode-language-babel",
+    "esbenp.prettier-vscode",
+    "ms-azure-devops.azure-pipelines",
+    "orta.vscode-jest",
+    "hbenl.vscode-test-explorer",
+    "kavod-io.vscode-jest-test-adapter"
+  ]
+}
