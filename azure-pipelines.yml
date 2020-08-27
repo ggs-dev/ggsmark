@@ -18,5 +18,9 @@ steps:
 - script: |
     yarn
     yarn test
-    yarn publish --access public
-  displayName: Test & Publish Package
+  displayName: Test
+  
+- task: Npm@1
+  inputs:
+    command: publish
+    publishEndpoint: johnnyhuy-npm
