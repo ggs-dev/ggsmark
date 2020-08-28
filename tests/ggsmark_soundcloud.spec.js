@@ -15,30 +15,19 @@ import ggsmark from '../src/ggsmark_soundcloud'
 // })
 
 describe('render soundcloud blocks', () => {
-  test('repeated soundcloud with text before and after', () => {
+  test('soundcloud iframe test', () => {
     // Arrange
-    let string = `
-**bold** string before youtube :soundloud http://www.youtube.com/watch?v=52c_QSg64fs after youtube :soundcloud http://www.youtube.com/watch?v=waefawefwaef *italics*
-soft new line
-
-new line
-    `
+    let string = `:soundloud https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion`
 
     // Act
     let result = ggsmark(string)
 
     // Assert
-    expect(result).toMatchSnapshot()
-  })
-
-  test('repeated soundcloud', () => {
-    // Arrange
-    let string = `:soundcloud http://www.youtube.com/watch?v=52c_QSg64fs :soundcloud http://www.youtube.com/watch?v=52c_QSg64fs :soundcloud http://www.youshit.com`
-
-    // Act
-    let result = ggsmark(string)
-
-    // Assert
-    expect(result).toMatchSnapshot()
+    expect(result).toBe(`
+    <div class=\\"soundcloud_song\\">
+    <iframe width=\\"100%" height=\\"166" scrolling=\\"no" frameborder=\\"no" src=\\"https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F871426135&show_artwork=true&maxheight=166"></iframe>
+    </div>
+    "
+    `)
   })
 })

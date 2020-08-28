@@ -22,6 +22,7 @@
   "dependencies": {
     "@babel/core": "^7.11.4",
     "@babel/preset-env": "^7.11.0",
+    "axios": "^0.20.0",
     "babel-core": "^6.26.3",
     "commonmark": "^0.29.1",
     "dompurify": "^2.0.14"

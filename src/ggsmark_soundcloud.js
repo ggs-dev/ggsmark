@@ -30,6 +30,7 @@ export default function (text) {
 
       let matchSoundCloudExp = /\:(?:soundcloud)\s((?:https?\:\/\/)?(?:www\.)?(?:soundcloud\.com\/)[^&#\s\?]+\/[^&#\s\?]+)/
       let splitText = node.literal.split(matchSoundCloudExp)
+      
 
       for (let index in splitText) {
         if (index % 2 == 0) {
@@ -37,12 +38,13 @@ export default function (text) {
           text.literal = splitText[index]
           node.insertBefore(text)
         } else {
+          let response = axios.get(`https://soundcloud.com/oembed?&format=json&url=${splitText[index]}&maxheight=166`)
           let div = new Node('custom_block')
           div.onEnter = '<div class="soundcloud_song">'
           div.onExit = '</div>'
           let iframe = new Node('custom_inline')
-          iframe.onEnter = `<iframe src="https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F489177243&show_artwork=true&maxheight=166" type="text/html" frameborder="0">`
-          iframe.onExit = '</iframe>'
+          iframe.onEnter = `${response.html}`
+          iframe.onExit = ''
           div.appendChild(iframe)
           node.insertBefore(div)
         }
