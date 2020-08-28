@@ -1,5 +1,6 @@
 import { HtmlRenderer, Parser, Node } from 'commonmark'
 import DOMPurify from 'dompurify'
+import axios from 'axios'
 
 export default function (text) {
   let reader = new Parser()
@@ -30,20 +31,19 @@ export default function (text) {
 
       let matchSoundCloudExp = /\:(?:soundcloud)\s((?:https?\:\/\/)?(?:www\.)?(?:soundcloud\.com\/)[^&#\s\?]+\/[^&#\s\?]+)/
       let splitText = node.literal.split(matchSoundCloudExp)
-      
-
+     
       for (let index in splitText) {
         if (index % 2 == 0) {
           let text = new Node('text')
           text.literal = splitText[index]
           node.insertBefore(text)
         } else {
-          let response = axios.get(`https://soundcloud.com/oembed?&format=json&url=${splitText[index]}&maxheight=166`)
           let div = new Node('custom_block')
           div.onEnter = '<div class="soundcloud_song">'
           div.onExit = '</div>'
           let iframe = new Node('custom_inline')
-          iframe.onEnter = `${response.html}`
+          let response = axios.get(`https://soundcloud.com/oembed?&format=json&url=${splitText[index]}&maxheight=166`)
+          iframe.onEnter = response.data.html;
           iframe.onExit = ''
           div.appendChild(iframe)
           node.insertBefore(div)
