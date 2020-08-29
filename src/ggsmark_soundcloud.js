@@ -2,7 +2,7 @@ import { HtmlRenderer, Parser, Node } from 'commonmark'
 import DOMPurify from 'dompurify'
 import axios from 'axios'
 
-export default function (text) {
+export default async function (text) {
   let reader = new Parser()
   let writer = new HtmlRenderer()
   let parsed = reader.parse(text)
@@ -31,7 +31,7 @@ export default function (text) {
 
       let matchSoundCloudExp = /\:(?:soundcloud)\s((?:https?\:\/\/)?(?:www\.)?(?:soundcloud\.com\/)[^&#\s\?]+\/[^&#\s\?]+)/
       let splitText = node.literal.split(matchSoundCloudExp)
-     
+
       for (let index in splitText) {
         if (index % 2 == 0) {
           let text = new Node('text')
@@ -42,18 +42,19 @@ export default function (text) {
           div.onEnter = '<div class="soundcloud_song">'
           div.onExit = '</div>'
           let iframe = new Node('custom_inline')
-          let response = axios.get(`https://soundcloud.com/oembed?&format=json&url=${splitText[index]}&maxheight=166`)
-          iframe.onEnter = response.data.html;
-          iframe.onExit = ''
-          div.appendChild(iframe)
-          node.insertBefore(div)
+          await axios.get(`https://soundcloud.com/oembed?&format=json&url=${splitText[index]}&maxheight=166`).then((data) => {
+            iframe.onEnter = "testt"
+            iframe.onExit = ''
+            div.appendChild(iframe)
+            node.insertBefore(div)
+          })
         }
       }
 
       node.unlink()
-    }
-    // if (node.type === 'text' && !!node.parent && node.parent.type === 'paragraph')
-  }
+      // if (node.type === 'text' && !!node.parent && node.parent.type === 'paragraph')
 
-  return DOMPurify.sanitize(writer.render(parsed), { ADD_TAGS: ['iframe'] })
+      return DOMPurify.sanitize(writer.render(parsed), { ADD_TAGS: ['iframe'] })
+    }
+  }
 }

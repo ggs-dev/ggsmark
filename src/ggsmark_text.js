@@ -15,7 +15,7 @@ export default function (text) {
       node.type === 'text' &&
       !!node.parent &&
       node.parent.type === 'paragraph' &&
-      node.literal.match(/\:youtube/)
+      node.literal.match(/\:text-center/)
     ) {
       let nestedEvent = walker.next()
       let nestedNode = nestedEvent.node
@@ -28,8 +28,8 @@ export default function (text) {
         nestedNode = nestedEvent.node
       }
 
-      let matchYoutubeExp = /\:(?:youtube)\s(?:https?\:\/\/)?(?:www\.)?(?:youtube\.com\/watch|youtu\.be\/)(?:\?v\=)?([^\s]+)/
-      let splitText = node.literal.split(matchYoutubeExp)
+      let matchTextCntrExp = /(?:text-center)/
+      let splitText = node.literal.split(matchTextCntrExp)
 
       for (let index in splitText) {
         if (index % 2 == 0) {
@@ -38,11 +38,8 @@ export default function (text) {
           node.insertBefore(text)
         } else {
           let div = new Node('custom_block')
-          div.onEnter = '<div class="youtube-video">'
+          div.onEnter = `<div class="text-center" style="text-allign: center"> ${splitText[index]}`
           div.onExit = '</div>'
-          let iframe = new Node('custom_inline')
-          iframe.onEnter = `<iframe src="https://www.youtube.com/embed/${splitText[index]}" type="text/html" frameborder="0">`
-          iframe.onExit = '</iframe>'
           div.appendChild(iframe)
           node.insertBefore(div)
         }
