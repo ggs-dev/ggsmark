@@ -84,11 +84,11 @@ export default function (text) {
 
       if (soundCloudMatch !== undefined) {
         let soundCloudUrl = soundCloudMatch[1]
-        let soundCloudData = axios
+        axios
           .get(
             `https://soundcloud.com/oembed?&format=json&url=${soundCloudUrl}&maxheight=166`
           )
-          .then((response) => {
+          .then(function (response) {
             console.log(response)
             let div = new Node('custom_block')
             div.onEnter = '<div class="soundcloud">'
@@ -96,10 +96,7 @@ export default function (text) {
             let iframe = new Node('custom_inline')
             div.appendChild(iframe)
             node.insertBefore(div)
-            debugger
           })
-        // let soundCloudData = getSoundCloud(soundCloudUrl)
-        debugger
       }
 
       node.unlink()
