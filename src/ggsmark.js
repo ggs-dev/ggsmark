@@ -50,9 +50,7 @@ export default async function (text) {
       }
 
       node.unlink()
-    }
-
-    if (
+    } else if (
       node.type === 'text' &&
       !!node.parent &&
       node.parent.type === 'paragraph' &&
