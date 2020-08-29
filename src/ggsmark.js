@@ -2,7 +2,19 @@ import { HtmlRenderer, Parser, Node } from 'commonmark'
 import DOMPurify from 'dompurify'
 import axios from 'axios'
 
-export default async function (text) {
+const getSoundCloud = async (url) => {
+  try {
+    const resp = await axios.get(
+      `https://soundcloud.com/oembed?&format=json&url=${url}&maxheight=166`
+    )
+    console.log(resp.data)
+  } catch (err) {
+    // Handle Error Here
+    console.error(err)
+  }
+}
+
+export default function (text) {
   let reader = new Parser()
   let writer = new HtmlRenderer()
   let parsed = reader.parse(text)
@@ -67,24 +79,27 @@ export default async function (text) {
         nestedNode = nestedEvent.node
       }
 
-      let matchSoundCloudExp = /^(?:soundcloud|sc)\s((?:https?\:\/\/)?(?:www\.)?(?:soundcloud\.com\/)[^&#\s\?]+\/[^&#\s\?]+)/
-      let splitText = node.literal.split(matchSoundCloudExp)
+      let matchSoundCloudExp = /(?:soundcloud|sc)\s((?:https?\:\/\/)?(?:www\.)?(?:soundcloud\.com\/)[^&#\s\?]+\/[^&#\s\?]+)/
+      let soundCloudMatch = node.literal.match(matchSoundCloudExp)
 
-      for (let index in splitText) {
-        if (index % 2 == 0) {
-          let text = new Node('text')
-          text.literal = splitText[index]
-          node.insertBefore(text)
-        } else {
-          let div = new Node('custom_block')
-          div.onEnter = '<div class="soundcloud">'
-          div.onExit = '</div>'
-          let iframe = new Node('custom_inline')
-          iframe.onEnter = `<iframe src="https://www.youtube.com/embed/${splitText[index]}" type="text/html" frameborder="0">`
-          iframe.onExit = '</iframe>'
-          div.appendChild(iframe)
-          node.insertBefore(div)
-        }
+      if (soundCloudMatch !== undefined) {
+        let soundCloudUrl = soundCloudMatch[1]
+        let soundCloudData = axios
+          .get(
+            `https://soundcloud.com/oembed?&format=json&url=${soundCloudUrl}&maxheight=166`
+          )
+          .then((response) => {
+            console.log(response)
+            let div = new Node('custom_block')
+            div.onEnter = '<div class="soundcloud">'
+            div.onExit = '</div>'
+            let iframe = new Node('custom_inline')
+            div.appendChild(iframe)
+            node.insertBefore(div)
+            debugger
+          })
+        // let soundCloudData = getSoundCloud(soundCloudUrl)
+        debugger
       }
 
       node.unlink()
