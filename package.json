@@ -12,6 +12,7 @@
     "test": "jest"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.11.0",
     "eslint": "^7.7.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
@@ -22,6 +23,8 @@
   "dependencies": {
     "@babel/core": "^7.11.4",
     "@babel/preset-env": "^7.11.0",
+    "@babel/runtime": "^7.11.2",
+    "axios": "^0.20.0",
     "babel-core": "^6.26.3",
     "commonmark": "^0.29.1",
     "dompurify": "^2.0.14"
