@@ -1,5 +1,66 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`render centered text single line text center 1`] = `
+"<p>
+</p><div style=\\"text-align: center\\">  Test123
+</div>
+<p></p>
+"
+`;
+
+exports[`render centered text text center in text center 1`] = `
+"<p>
+</p><div style=\\"text-align: center\\">  test 
+</div>
+ wtf 
+<div style=\\"text-align: center\\">  test 
+</div>
+<p></p>
+"
+`;
+
+exports[`render centered text text center with some text before and after 1`] = `
+"<p>this should not be in text center 
+</p><div style=\\"text-align: center\\">  yeet 
+</div>
+ after text<p></p>
+"
+`;
+
+exports[`render centered text use bold text 1`] = `
+"<p>
+</p><div style=\\"text-align: center\\"> 
+</div>
+<p></p>
+<p><strong>test</strong>
+
+</p><div style=\\"text-align: center\\"> 
+</div>
+<p></p>
+"
+`;
+
+exports[`render centered text use heading 1`] = `
+"<p>
+</p><div style=\\"text-align: center\\"> 
+</div>
+<p></p>
+<h1>test</h1>
+<p>
+</p><div style=\\"text-align: center\\"> 
+</div>
+<p></p>
+"
+`;
+
+exports[`render centered text wrap text center 1`] = `
+"<p>
+</p><div style=\\"text-align: center\\">  yeet 
+</div>
+<p></p>
+"
+`;
+
 exports[`render youtube blocks repeated youtube 1`] = `
 "<p>
 </p><div class=\\"youtube-video\\">
