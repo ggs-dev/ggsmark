@@ -40,7 +40,6 @@ export default function (text) {
           let div = new Node('custom_block')
           div.onEnter = `<div class="text-center" style="text-allign: center"> ${splitText[index]}`
           div.onExit = '</div>'
-          div.appendChild(iframe)
           node.insertBefore(div)
         }
       }
