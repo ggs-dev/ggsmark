@@ -57,10 +57,10 @@ new line
     let result = ggsmark(string)
 
     expect(result).toContain(`
-    <p>
-    </p><div style=\"text-allign: center\" class=\"text-center\">  Test123
-    </div>
-    <p></p>`)
+<p>
+</p><div style=\"text-allign: center\" class=\"text-center\">  Test123
+</div>
+<p></p>`)
 
   })
 })
