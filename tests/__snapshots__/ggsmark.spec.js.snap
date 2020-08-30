@@ -30,11 +30,16 @@ exports[`render centered text text center with some text before and after 1`] = 
 exports[`render centered text use bold text 1`] = `
 "<p>
 </p><div style=\\"text-align: center\\"> 
+<strong>test</strong>
 </div>
 <p></p>
-<p><strong>test</strong>
+"
+`;
 
-</p><div style=\\"text-align: center\\"> 
+exports[`render centered text use bold text single line 1`] = `
+"<p>
+</p><div style=\\"text-align: center\\">  
+<strong>bold</strong>
 </div>
 <p></p>
 "
@@ -43,11 +48,7 @@ exports[`render centered text use bold text 1`] = `
 exports[`render centered text use heading 1`] = `
 "<p>
 </p><div style=\\"text-align: center\\"> 
-</div>
-<p></p>
 <h1>test</h1>
-<p>
-</p><div style=\\"text-align: center\\"> 
 </div>
 <p></p>
 "
@@ -56,6 +57,22 @@ exports[`render centered text use heading 1`] = `
 exports[`render centered text wrap text center 1`] = `
 "<p>
 </p><div style=\\"text-align: center\\">  yeet 
+</div>
+<p></p>
+"
+`;
+
+exports[`render left allignment text text-left 1`] = `
+"<p>
+</p><div style=\\"text-align: left\\">  Test123
+</div>
+<p></p>
+"
+`;
+
+exports[`render right allignment text text-right 1`] = `
+"<p>
+</p><div style=\\"text-align: right\\">  Test123
 </div>
 <p></p>
 "

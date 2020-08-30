@@ -76,6 +76,13 @@ describe('render centered text', () => {
     expect(result).toMatchSnapshot()
   })
 
+  test('use bold text single line', () => {
+    let string = ':text-center **bold**'
+    let result = ggsmark(string)
+
+    expect(result).toMatchSnapshot()
+  })
+
   test('use heading', () => {
     let string = '\n\n:text-center\n# test\n:text-center'
     let result = ggsmark(string)
@@ -89,10 +96,7 @@ describe('render right allignment text', () => {
     let string = ':text-right Test123'
     let result = ggsmark(string)
 
-    expect(result).toContain(`<p>
-</p><div style=\"text-align: right\">  Test123
-</div>
-<p></p>`)
+    expect(result).toMatchSnapshot()
   })
 })
 
@@ -101,9 +105,6 @@ describe('render left allignment text', () => {
     let string = ':text-left Test123'
     let result = ggsmark(string)
 
-    expect(result).toContain(`<p>
-</p><div style=\"text-align: left\">  Test123
-</div>
-<p></p>`)
+    expect(result).toMatchSnapshot()
   })
 })
