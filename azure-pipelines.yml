@@ -54,6 +54,7 @@ jobs:
     Package.Version: $[ dependencies.build.outputs['check.Package.Version'] ]
   steps:
   - task: GitHubRelease@1
+    displayName: Release on GitHub
     inputs:
       gitHubConnection: 'johnnyhuy-github'
       repositoryName: '$(Build.Repository.Name)'
@@ -62,6 +63,8 @@ jobs:
       tagSource: 'userSpecifiedTag'
       tag: '$(Package.Version)'
       title: 'Release $(Package.Version)'
+      releaseNotesSource: 'inline'
+      releaseNotesInline: 'Release of the GGSMark Node package!'
       changeLogCompareToRelease: 'lastFullRelease'
       changeLogType: 'commitBased'
     
