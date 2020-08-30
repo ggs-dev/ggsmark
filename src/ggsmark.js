@@ -89,7 +89,7 @@ export default function (text) {
     node.type === 'text' &&
     !!node.parent &&
     node.parent.type === 'paragraph' &&
-    node.literal.match(/\:text-right)
+    node.literal.match(/\:text-right/)
   ) {
     let nestedEvent = walker.next()
     let nestedNode = nestedEvent.node
@@ -102,8 +102,8 @@ export default function (text) {
       nestedNode = nestedEvent.node
     }
 
-    let matchTextCntrExp = (/\:text-right/)
-    let splitText = node.literal.split(matchTextCntrExp)
+    let matchTextRightExp = (/\:text-right/)
+    let splitText = node.literal.split(matchTextRightExp)
 
     for (let index in splitText) {
       if (index % 2 == 0) {

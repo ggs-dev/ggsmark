@@ -64,3 +64,14 @@ expect(result).toContain(`<p>
 <p></p>`)
   })
 })
+  describe('render right allignment text', () => {
+    test('text-right', () => {
+      let string = ':text-right Test123'
+      let result = ggsmark(string)
+  
+  expect(result).toContain(`<p>
+  </p><div style=\"text-align: right\">  Test123
+  </div>
+  <p></p>`)
+    })
+})
