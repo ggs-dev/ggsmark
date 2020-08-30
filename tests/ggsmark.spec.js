@@ -45,43 +45,28 @@ describe('render centered text', () => {
     let string = ':text-center Test123'
     let result = ggsmark(string)
 
-    expect(result).toContain(`<p>
-</p><div style=\"text-align: center\">  Test123
-</div>
-<p></p>`)
+    expect(result).toMatchSnapshot()
   })
 
   test('wrap text center', () => {
     let string = `:text-center yeet :text-center`
     let result = ggsmark(string)
 
-    expect(result).toBe(`<p>
-</p><div style="text-align: center">  yeet
-</div>
-<p></p>`) // TODO
+    expect(result).toMatchSnapshot() // TODO
   })
 
   test('text center with some text before and after', () => {
     let string = `this should not be in text center :text-center yeet :text-center after text`
     let result = ggsmark(string)
 
-    expect(result).toBe(`<p>this should not be in text center·
-    </p><div style=\"text-align: center\">  yeet·
-    </div>
-     after text<p></p>`) // TODO
+    expect(result).toMatchSnapshot() // TODO
   })
 
   test('text center in text center', () => {
     let string = ':text-center :text-center wtf :text-center :text-center'
     let result = ggsmark(string)
 
-    expect(result).toBe(`<p>
-    </p><div style=\"text-align: center\">  
-    </div>
-    wtf 
-    <div style=\"text-align: center\">  
-    </div>
-    <p></p>`) // TODO
+    expect(result).toMatchSnapshot() // TODO
   })
 })
 
@@ -90,10 +75,7 @@ describe('render right allignment text', () => {
     let string = ':text-right Test123'
     let result = ggsmark(string)
 
-    expect(result).toContain(`<p>
-</p><div style=\"text-align: right\">  Test123
-</div>
-<p></p>`)
+    expect(result).toMatchSnapshot()
   })
 })
 
@@ -102,9 +84,6 @@ describe('render left allignment text', () => {
     let string = ':text-left Test123'
     let result = ggsmark(string)
 
-    expect(result).toContain(`<p>
-</p><div style=\"text-align: left\">  Test123
-</div>
-<p></p>`)
+    expect(result).toMatchSnapshot()
   })
 })
