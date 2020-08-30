@@ -1,4 +1,6 @@
-# GGSMark.js
+# GGSMark
+
+[![Build Status](https://dev.azure.com/johnnyhuy/ggsmark/_apis/build/status/GGSMark.js%20Build%20%26%20Release?branchName=master)](https://dev.azure.com/johnnyhuy/ggsmark/_build/latest?definitionId=10&branchName=master) ![npm](https://img.shields.io/npm/v/ggsmark) ![GitHub followers](https://img.shields.io/github/followers/johnnyhuy?style=social)
 
 CommonMark extension for the Gentlemen's Gaming Society website.
 
