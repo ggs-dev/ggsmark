@@ -200,8 +200,5 @@ export default (text) => {
   node.unlink()
   }
 }
-  return DOMPurify.sanitize(writer.render(parsed), { ADD_TAGS: ['iframe'] })
-  }
-
   return render(tree)
 }
