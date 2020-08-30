@@ -2,24 +2,19 @@ import { HtmlRenderer, Parser, Node } from 'commonmark'
 import DOMPurify from 'dompurify'
 import axios from 'axios'
 
-const getSoundCloud = async (url) => {
-  try {
-    const resp = await axios.get(
-      `https://soundcloud.com/oembed?&format=json&url=${url}&maxheight=166`
-    )
-    console.log(resp.data)
-  } catch (err) {
-    // Handle Error Here
-    console.error(err)
-  }
+const render = (tree) => {
+  let writer = new HtmlRenderer()
+  return DOMPurify.sanitize(writer.render(tree), {
+    ADD_TAGS: ['iframe']
+  })
 }
 
-export default function (text) {
+const parse = (text, callback) => {
   let reader = new Parser()
-  let writer = new HtmlRenderer()
-  let parsed = reader.parse(text)
-  var walker = parsed.walker()
+  let tree = reader.parse(text)
+  var walker = tree.walker()
   let event, node
+  let promises = []
 
   while ((event = walker.next())) {
     node = event.node
@@ -72,37 +67,51 @@ export default function (text) {
       let nestedNode = nestedEvent.node
 
       // Make sure text nodes are not fragmented
-      // while (!!nestedNode.prev && nestedNode.type === 'text') {
-      //   nestedNode.prev.literal = nestedNode.prev.literal + nestedNode.literal
-      //   nestedNode.unlink()
-      //   nestedEvent = walker.next()
-      //   nestedNode = nestedEvent.node
-      // }
+      while (!!nestedNode.prev && nestedNode.type === 'text') {
+        nestedNode.prev.literal = nestedNode.prev.literal + nestedNode.literal
+        nestedNode.unlink()
+        nestedEvent = walker.next()
+        nestedNode = nestedEvent.node
+      }
 
       let matchSoundCloudExp = /(?:soundcloud|sc)\s((?:https?\:\/\/)?(?:www\.)?(?:soundcloud\.com\/)[^&#\s\?]+\/[^&#\s\?]+)/
       let soundCloudMatch = node.literal.match(matchSoundCloudExp)
 
       if (soundCloudMatch !== undefined) {
         let soundCloudUrl = soundCloudMatch[1]
-        axios
-          .get(
-            `https://soundcloud.com/oembed?&format=json&url=${soundCloudUrl}&maxheight=166`
-          )
-          .then((response) => {
-            let div = new Node('html_block')
-            div.literal = response.data.html
-            console.log(response.data)
-            // console.log(node)
-            node.appendChild(div)
-          })
-          .catch((response) => {
-            console.log(response)
-          })
-      }
+        let selectedNode = node
 
-      // node.unlink()
+        promises.push(
+          axios
+            .get(
+              `https://soundcloud.com/oembed?&format=json&url=${soundCloudUrl}&maxheight=166`
+            )
+            .then((response) => {
+              let div = new Node('html_block')
+              div.literal = response.data.html
+              selectedNode.insertAfter(div)
+              selectedNode.unlink()
+              return tree
+            })
+        )
+      }
     }
   }
 
-  return DOMPurify.sanitize(writer.render(parsed), { ADD_TAGS: ['iframe'] })
+  return {
+    output: render(tree),
+    promises: Promise.all(promises)
+  }
+}
+
+export default (text, callback) => {
+  let test = parse(text, callback)
+  test.promises
+    .then((parsed) => {
+      callback(render(parsed[0]))
+    })
+    .catch((error) => {
+      throw error
+    })
+  return test.output
 }

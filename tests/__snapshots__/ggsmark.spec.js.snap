@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`render soundcloud blocks multiple occurrences 1`] = `
+"<p>
+<iframe src=\\"https://w.soundcloud.com/player/?visual=true&amp;url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F871426135&amp;show_artwork=true&amp;maxheight=166\\" height=\\"166\\" width=\\"100%\\"></iframe><iframe src=\\"https://w.soundcloud.com/player/?visual=true&amp;url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F871426135&amp;show_artwork=true&amp;maxheight=166\\" height=\\"166\\" width=\\"100%\\"></iframe><iframe src=\\"https://w.soundcloud.com/player/?visual=true&amp;url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F871426135&amp;show_artwork=true&amp;maxheight=166\\" height=\\"166\\" width=\\"100%\\"></iframe>
+</p>
+"
+`;
+
+exports[`render soundcloud blocks single line 1`] = `
+"<p>
+<iframe src=\\"https://w.soundcloud.com/player/?visual=true&amp;url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F871426135&amp;show_artwork=true&amp;maxheight=166\\" height=\\"166\\" width=\\"100%\\"></iframe>
+</p>
+"
+`;
+
 exports[`render youtube blocks repeated youtube 1`] = `
 "<p>
 </p><div class=\\"youtube-video\\">
