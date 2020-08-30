@@ -58,9 +58,7 @@ new line
     let string = ':text-center Test123'
     let result = ggsmark(string)
 
-    expect(result).toContain(`
-
-<p>
+expect(result).toContain(`<p>
 </p><div style=\"text-allign: center\" class=\"text-center\">  Test123
 </div>
 <p></p>`)
