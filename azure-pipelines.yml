@@ -24,26 +24,26 @@ jobs:
         }
       pwsh: true
 
-  - task: NodeTool@0
-    inputs:
-      versionSpec: 14.x
-    displayName: Install Node.js
+  # - task: NodeTool@0
+  #   inputs:
+  #     versionSpec: 14.x
+  #   displayName: Install Node.js
 
-  - task: YarnInstaller@3
-    inputs:
-      versionSpec: 1.x
-    displayName: Install Yarn
+  # - task: YarnInstaller@3
+  #   inputs:
+  #     versionSpec: 1.x
+  #   displayName: Install Yarn
 
-  - script: |
-      yarn
-      yarn test
-    displayName: Test
+  # - script: |
+  #     yarn
+  #     yarn test
+  #   displayName: Test
 
-  - task: PublishTestResults@2
-    inputs:
-      testResultsFormat: JUnit
-      testResultsFiles: '**/test_results.xml'
-      testRunTitle: Jest Tests
+  # - task: PublishTestResults@2
+  #   inputs:
+  #     testResultsFormat: JUnit
+  #     testResultsFiles: '**/test_results.xml'
+  #     testRunTitle: Jest Tests
 
 - job: release
   displayName: Release Node Package
@@ -59,6 +59,7 @@ jobs:
       action: 'create'
       target: '$(Package.Version)'
       tagSource: 'gitTag'
+      tagPattern: '*'
       title: 'Release $(Package.Version)'
       changeLogCompareToRelease: 'lastFullRelease'
       changeLogType: 'commitBased'
