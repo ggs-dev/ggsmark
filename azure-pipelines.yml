@@ -24,37 +24,38 @@ jobs:
         }
       pwsh: true
 
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSpec: 14.x
-  #   displayName: Install Node.js
+  - task: NodeTool@0
+    inputs:
+      versionSpec: 14.x
+    displayName: Install Node.js
 
-  # - task: YarnInstaller@3
-  #   inputs:
-  #     versionSpec: 1.x
-  #   displayName: Install Yarn
+  - task: YarnInstaller@3
+    inputs:
+      versionSpec: 1.x
+    displayName: Install Yarn
 
-  # - script: |
-  #     yarn
-  #     yarn test
-  #   displayName: Test
+  - script: |
+      yarn
+      yarn test
+    displayName: Test
 
-  # - task: PublishTestResults@2
-  #   displayName: Publish Test Results
-  #   inputs:
-  #     testResultsFormat: JUnit
-  #     testResultsFiles: '**/test_results.xml'
-  #     testRunTitle: Jest Tests
+  - task: PublishTestResults@2
+    displayName: Publish Test Results
+    inputs:
+      testResultsFormat: JUnit
+      testResultsFiles: '**/test_results.xml'
+      testRunTitle: Jest Tests
 
 - job: release
   displayName: Release Node Package
-  # condition: and(succeeded(), ne(dependencies.build.outputs['check.Package.VersionExists'], 'true'))
+  condition: and(succeeded(), ne(dependencies.build.outputs['check.Package.VersionExists'], 'true'))
   dependsOn: build
   variables:
     Package.Version: $[ dependencies.build.outputs['check.Package.Version'] ]
   steps:
   - task: GitHubRelease@1
     displayName: Release on GitHub
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     inputs:
       gitHubConnection: 'johnnyhuy-github'
       repositoryName: '$(Build.Repository.Name)'
@@ -68,9 +69,9 @@ jobs:
       changeLogCompareToRelease: 'lastFullRelease'
       changeLogType: 'commitBased'
     
-  # - task: Npm@1
-  #   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-  #   inputs:
-  #     command: publish
-  #     publishEndpoint: johnnyhuy-npm
-  #   displayName: Publish Node package
+  - task: Npm@1
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    inputs:
+      command: publish
+      publishEndpoint: johnnyhuy-npm
+    displayName: Publish Node package
