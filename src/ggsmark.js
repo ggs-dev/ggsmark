@@ -1,12 +1,19 @@
 import { HtmlRenderer, Parser, Node } from 'commonmark'
 import DOMPurify from 'dompurify'
 
-export default function (text) {
-  let reader = new Parser()
+const render = (tree) => {
   let writer = new HtmlRenderer()
-  let parsed = reader.parse(text)
-  var walker = parsed.walker()
+  return DOMPurify.sanitize(writer.render(tree), {
+    ADD_TAGS: ['iframe']
+  })
+}
+
+export default (text) => {
+  let reader = new Parser()
+  let tree = reader.parse(text)
+  var walker = tree.walker()
   let event, node
+  let promises = []
 
   while ((event = walker.next())) {
     node = event.node
@@ -38,13 +45,51 @@ export default function (text) {
           node.insertBefore(text)
         } else {
           let div = new Node('custom_block')
-          div.onEnter = '<div class="youtube-video">'
+          div.onEnter = '<div class="ggsmark-youtube">'
           div.onExit = '</div>'
-          let iframe = new Node('custom_inline')
-          iframe.onEnter = `<iframe src="https://www.youtube.com/embed/${splitText[index]}" type="text/html" frameborder="0">`
-          iframe.onExit = '</iframe>'
+          let iframe = new Node('html_block')
+          iframe.literal =
+            '<iframe src="https://www.youtube.com/embed/${splitText[index]}" type="text/html" frameborder="0"></iframe>'
           div.appendChild(iframe)
           node.insertBefore(div)
+        }
+      }
+
+      node.unlink()
+    } else if (
+      node.type === 'text' &&
+      !!node.parent &&
+      node.parent.type === 'paragraph' &&
+      node.literal.match(/\:soundcloud/)
+    ) {
+      let nestedEvent = walker.next()
+      let nestedNode = nestedEvent.node
+
+      // Make sure text nodes are not fragmented
+      while (!!nestedNode.prev && nestedNode.type === 'text') {
+        nestedNode.prev.literal = nestedNode.prev.literal + nestedNode.literal
+        nestedNode.unlink()
+        nestedEvent = walker.next()
+        nestedNode = nestedEvent.node
+      }
+
+      let soundCloudExp = /(?:\:soundcloud|sc)\s((?:https?\:\/\/)?(?:www\.)?(?:soundcloud\.com\/)[^&#\s\?]+\/[^&#\s\?]+)/
+      let soundCloudSplit = node.literal.split(soundCloudExp)
+
+      // Split the text string by the regex
+      for (let index in soundCloudSplit) {
+        // Non-SoundCloud text
+        if (index % 2 == 0) {
+          let text = new Node('text')
+          text.literal = soundCloudSplit[index]
+
+          node.insertBefore(text)
+        } else {
+          // SoundCloud
+          let soundCloudUrl = soundCloudSplit[index]
+          let iframe = new Node('html_block')
+          iframe.literal = `<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=${soundCloudUrl}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>`
+          node.insertBefore(iframe)
         }
       }
 
@@ -156,4 +201,7 @@ export default function (text) {
   }
 }
   return DOMPurify.sanitize(writer.render(parsed), { ADD_TAGS: ['iframe'] })
+  }
+
+  return render(tree)
 }
