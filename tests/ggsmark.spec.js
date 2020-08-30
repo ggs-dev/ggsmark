@@ -52,6 +52,8 @@ new line
     // Assert
     expect(result).toMatchSnapshot()
   })
+})
+  describe('render centered text', () => {
   test('text-center', () => {
     let string = ':text-center Test123'
     let result = ggsmark(string)
@@ -61,6 +63,5 @@ new line
     </p><div style=\"text-allign: center\" class=\"text-center\">  Test123
     </div>
     <p></p>`)
-
   })
 })
