@@ -40,6 +40,7 @@ jobs:
   #   displayName: Test
 
   # - task: PublishTestResults@2
+  #   displayName: Publish Test Results
   #   inputs:
   #     testResultsFormat: JUnit
   #     testResultsFiles: '**/test_results.xml'
@@ -52,14 +53,23 @@ jobs:
   variables:
     Package.Version: $[ dependencies.build.outputs['check.Package.Version'] ]
   steps:
+  - task: GitTag@5
+    displayName: Git Tag $(Package.Version)
+    inputs:
+      workingdir: $(System.DefaultWorkingDirectory)
+      tagUser: 'Johnny Huynh'
+      tagEmail: 'info@johnnyhuy.com'
+      tag: '$(Package.Version)'
+      tagMessage: 'GGSMark $(Package.Version)'
+
   - task: GitHubRelease@1
+    displayName: Release on GitHub
     inputs:
       gitHubConnection: 'johnnyhuy-github'
       repositoryName: '$(Build.Repository.Name)'
       action: 'create'
       target: '$(Package.Version)'
       tagSource: 'gitTag'
-      tagPattern: '.*'
       title: 'Release $(Package.Version)'
       changeLogCompareToRelease: 'lastFullRelease'
       changeLogType: 'commitBased'
