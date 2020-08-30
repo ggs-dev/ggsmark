@@ -48,6 +48,7 @@ jobs:
 - job: release
   displayName: Release Node Package
   condition: and(succeeded(), ne(dependencies.build.outputs['check.Package.VersionExists'], 'true'))
+  dependsOn: build
   steps:
   - task: GitHubRelease@1
     inputs:
