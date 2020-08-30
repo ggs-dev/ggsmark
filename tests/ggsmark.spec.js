@@ -55,7 +55,7 @@ new line
 })
 
 describe('render centered text', () => {
-  test('text-center', () => {
+  test('single line text center', () => {
     let string = ':text-center Test123'
     let result = ggsmark(string)
 
@@ -64,7 +64,28 @@ describe('render centered text', () => {
 </div>
 <p></p>`)
   })
+
+  test('wrap text center', () => {
+    let string = `:text-center yeet :text-center`
+    let result = ggsmark(string)
+
+    expect(result).toContain(``)
+
+  test('text center with some text before and after', () => {
+    let string = `this should not be in text center :text-center yeet :text-center after text`
+    let result = ggsmark(string)
+
+    expect(result).toContain(``)
+  })
+
+  test('text center in text center', () => {
+    let string = ':text-center :text-center wtf :text-center :text-center'
+    let result = ggsmark(string)
+
+    expect(result).toContain(``)
+  })
 })
+
 describe('render right allignment text', () => {
   test('text-right', () => {
     let string = ':text-right Test123'
