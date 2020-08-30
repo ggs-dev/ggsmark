@@ -1,40 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`render soundcloud blocks content before and after 1`] = `
+"<p><strong>bold text</strong> before text 
+<iframe src=\\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\\" height=\\"300\\" width=\\"100%\\"></iframe>
+ after text <strong>bold</strong></p>
+"
+`;
+
 exports[`render soundcloud blocks multiple occurrences 1`] = `
 "<p>
-<iframe src=\\"https://w.soundcloud.com/player/?visual=true&amp;url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F871426135&amp;show_artwork=true&amp;maxheight=166\\" height=\\"166\\" width=\\"100%\\"></iframe><iframe src=\\"https://w.soundcloud.com/player/?visual=true&amp;url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F871426135&amp;show_artwork=true&amp;maxheight=166\\" height=\\"166\\" width=\\"100%\\"></iframe><iframe src=\\"https://w.soundcloud.com/player/?visual=true&amp;url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F871426135&amp;show_artwork=true&amp;maxheight=166\\" height=\\"166\\" width=\\"100%\\"></iframe>
+<iframe src=\\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\\" height=\\"300\\" width=\\"100%\\"></iframe>
+ 
+<iframe src=\\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\\" height=\\"300\\" width=\\"100%\\"></iframe>
+ 
+<iframe src=\\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\\" height=\\"300\\" width=\\"100%\\"></iframe>
+ 
+<iframe src=\\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\\" height=\\"300\\" width=\\"100%\\"></iframe>
 </p>
 "
 `;
 
 exports[`render soundcloud blocks single line 1`] = `
 "<p>
-<iframe src=\\"https://w.soundcloud.com/player/?visual=true&amp;url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F871426135&amp;show_artwork=true&amp;maxheight=166\\" height=\\"166\\" width=\\"100%\\"></iframe>
+<iframe src=\\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\\" height=\\"300\\" width=\\"100%\\"></iframe>
 </p>
 "
 `;
 
 exports[`render youtube blocks repeated youtube 1`] = `
 "<p>
-</p><div class=\\"youtube-video\\">
-<iframe type=\\"text/html\\" src=\\"https://www.youtube.com/embed/52c_QSg64fs\\"></iframe>
+</p><div class=\\"ggsmark-youtube\\">
+<iframe type=\\"text/html\\" src=\\"https://www.youtube.com/embed/\${splitText[index]}\\"></iframe>
 </div>
  
-<div class=\\"youtube-video\\">
-<iframe type=\\"text/html\\" src=\\"https://www.youtube.com/embed/52c_QSg64fs\\"></iframe>
+<div class=\\"ggsmark-youtube\\">
+<iframe type=\\"text/html\\" src=\\"https://www.youtube.com/embed/\${splitText[index]}\\"></iframe>
 </div>
  :youtube http://www.youshit.com<p></p>
 "
 `;
 
 exports[`render youtube blocks repeated youtube with text before and after 1`] = `
-"<p><strong>bold</strong> string before youtube 
-</p><div class=\\"youtube-video\\">
-<iframe type=\\"text/html\\" src=\\"https://www.youtube.com/embed/52c_QSg64fs\\"></iframe>
-</div>
- after youtube 
-<div class=\\"youtube-video\\">
-<iframe type=\\"text/html\\" src=\\"https://www.youtube.com/embed/waefawefwaef\\"></iframe>
+"<p><strong>bold</strong> string before comyoutube :youtube http://www.youtube./watch?v=52c_QSg64fs after youtube 
+</p><div class=\\"ggsmark-youtube\\">
+<iframe type=\\"text/html\\" src=\\"https://www.youtube.com/embed/\${splitText[index]}\\"></iframe>
 </div>
  <em>italics</em>
 soft new line<p></p>
@@ -44,8 +53,8 @@ soft new line<p></p>
 
 exports[`render youtube blocks youtube with timestamp 1`] = `
 "<p>
-</p><div class=\\"youtube-video\\">
-<iframe type=\\"text/html\\" src=\\"https://www.youtube.com/embed/IJhgZBn-LHg?t=712\\"></iframe>
+</p><div class=\\"ggsmark-youtube\\">
+<iframe type=\\"text/html\\" src=\\"https://www.youtube.com/embed/\${splitText[index]}\\"></iframe>
 </div>
 <p></p>
 "

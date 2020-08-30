@@ -1,6 +1,5 @@
 import { HtmlRenderer, Parser, Node } from 'commonmark'
 import DOMPurify from 'dompurify'
-import axios from 'axios'
 
 const render = (tree) => {
   let writer = new HtmlRenderer()
@@ -9,7 +8,7 @@ const render = (tree) => {
   })
 }
 
-const parse = (text, callback) => {
+export default (text) => {
   let reader = new Parser()
   let tree = reader.parse(text)
   var walker = tree.walker()
@@ -46,11 +45,11 @@ const parse = (text, callback) => {
           node.insertBefore(text)
         } else {
           let div = new Node('custom_block')
-          div.onEnter = '<div class="youtube-video">'
+          div.onEnter = '<div class="ggsmark-youtube">'
           div.onExit = '</div>'
-          let iframe = new Node('custom_inline')
-          iframe.onEnter = `<iframe src="https://www.youtube.com/embed/${splitText[index]}" type="text/html" frameborder="0">`
-          iframe.onExit = '</iframe>'
+          let iframe = new Node('html_block')
+          iframe.literal =
+            '<iframe src="https://www.youtube.com/embed/${splitText[index]}" type="text/html" frameborder="0"></iframe>'
           div.appendChild(iframe)
           node.insertBefore(div)
         }
@@ -74,44 +73,29 @@ const parse = (text, callback) => {
         nestedNode = nestedEvent.node
       }
 
-      let matchSoundCloudExp = /(?:soundcloud|sc)\s((?:https?\:\/\/)?(?:www\.)?(?:soundcloud\.com\/)[^&#\s\?]+\/[^&#\s\?]+)/
-      let soundCloudMatch = node.literal.match(matchSoundCloudExp)
+      let soundCloudExp = /(?:\:soundcloud|sc)\s((?:https?\:\/\/)?(?:www\.)?(?:soundcloud\.com\/)[^&#\s\?]+\/[^&#\s\?]+)/
+      let soundCloudSplit = node.literal.split(soundCloudExp)
 
-      if (soundCloudMatch !== undefined) {
-        let soundCloudUrl = soundCloudMatch[1]
-        let selectedNode = node
+      // Split the text string by the regex
+      for (let index in soundCloudSplit) {
+        // Non-SoundCloud text
+        if (index % 2 == 0) {
+          let text = new Node('text')
+          text.literal = soundCloudSplit[index]
 
-        promises.push(
-          axios
-            .get(
-              `https://soundcloud.com/oembed?&format=json&url=${soundCloudUrl}&maxheight=166`
-            )
-            .then((response) => {
-              let div = new Node('html_block')
-              div.literal = response.data.html
-              selectedNode.insertAfter(div)
-              selectedNode.unlink()
-              return tree
-            })
-        )
+          node.insertBefore(text)
+        } else {
+          // SoundCloud
+          let soundCloudUrl = soundCloudSplit[index]
+          let iframe = new Node('html_block')
+          iframe.literal = `<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=${soundCloudUrl}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>`
+          node.insertBefore(iframe)
+        }
       }
+
+      node.unlink()
     }
   }
 
-  return {
-    output: render(tree),
-    promises: Promise.all(promises)
-  }
-}
-
-export default (text, callback) => {
-  let test = parse(text, callback)
-  test.promises
-    .then((parsed) => {
-      callback(render(parsed[0]))
-    })
-    .catch((error) => {
-      throw error
-    })
-  return test.output
+  return render(tree)
 }

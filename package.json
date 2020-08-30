@@ -1,6 +1,6 @@
 {
   "name": "ggsmark",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "CommonMark extension for the Gentlemen's Gaming Society website.",
   "main": "index.js",
   "repository": "https://github.com/johnnyhuy/ggsmark.git",
@@ -24,7 +24,6 @@
     "@babel/core": "^7.11.4",
     "@babel/preset-env": "^7.11.0",
     "@babel/runtime": "^7.11.2",
-    "axios": "^0.20.0",
     "babel-core": "^6.26.3",
     "commonmark": "^0.29.1",
     "dompurify": "^2.0.14"

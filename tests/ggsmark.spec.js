@@ -1,50 +1,40 @@
 import ggsmark from '../src/ggsmark'
-import axios from 'axios'
-
-jest.mock('axios')
 
 describe('render soundcloud blocks', () => {
-  // Arrange
-  const response = {
-    data: {
-      html:
-        '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F871426135&show_artwork=true&maxheight=166"></iframe>'
-    }
-  }
-  axios.get.mockResolvedValue(response)
-
-  test('single line', (done) => {
+  test('single line', () => {
     // Arrange
     let string =
       ':soundcloud https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion'
 
     // Act
-    let result = ggsmark(string, (result) => {
-      try {
-        // Assert
-        expect(result).toMatchSnapshot()
-        done()
-      } catch (error) {
-        done(error)
-      }
-    })
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toMatchSnapshot()
   })
 
-  test('multiple occurrences', (done) => {
+  test('content before and after', () => {
+    // Arrange
+    let string =
+      '**bold text** before text :soundcloud https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion after text **bold**'
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+
+  test('multiple occurrences', () => {
     // Arrange
     let string =
       ':soundcloud https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion :soundcloud https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion :soundcloud https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion :soundcloud https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion'
 
     // Act
-    let result = ggsmark(string, (result) => {
-      try {
-        // Assert
-        expect(result).toMatchSnapshot()
-        done()
-      } catch (error) {
-        done(error)
-      }
-    })
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toMatchSnapshot()
   })
 })
 
@@ -52,7 +42,7 @@ describe('render youtube blocks', () => {
   test('repeated youtube with text before and after', () => {
     // Arrange
     let string = `
-**bold** string before youtube :youtube http://www.youtube.com/watch?v=52c_QSg64fs after youtube :youtube http://www.youtube.com/watch?v=waefawefwaef *italics*
+**bold** string before comyoutube :youtube http://www.youtube./watch?v=52c_QSg64fs after youtube :youtube http://www.youtube.com/watch?v=waefawefwaef *italics*
 soft new line
 
 new line
