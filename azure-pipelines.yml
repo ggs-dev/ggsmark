@@ -19,9 +19,16 @@ steps:
     yarn
     yarn test
   displayName: Test
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: JUnit
+    testResultsFiles: '**/test_results.xml'
+    testRunTitle: Jest Tests
   
 - task: Npm@1
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   inputs:
     command: publish
     publishEndpoint: johnnyhuy-npm
+  displayName: Publish Node package
