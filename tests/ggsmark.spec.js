@@ -55,21 +55,33 @@ describe('render centered text', () => {
     let string = `:text-center yeet :text-center`
     let result = ggsmark(string)
 
-    expect(result).toBe(``) // TODO
+    expect(result).toBe(`<p>
+</p><div style="text-align: center">  yeet
+</div>
+<p></p>`) // TODO
   })
 
   test('text center with some text before and after', () => {
     let string = `this should not be in text center :text-center yeet :text-center after text`
     let result = ggsmark(string)
 
-    expect(result).toBe(``) // TODO
+    expect(result).toBe(`<p>this should not be in text center·
+    </p><div style=\"text-align: center\">  yeet·
+    </div>
+     after text<p></p>`) // TODO
   })
 
   test('text center in text center', () => {
     let string = ':text-center :text-center wtf :text-center :text-center'
     let result = ggsmark(string)
 
-    expect(result).toBe(``) // TODO
+    expect(result).toBe(`<p>
+    </p><div style=\"text-align: center\">  
+    </div>
+    wtf 
+    <div style=\"text-align: center\">  
+    </div>
+    <p></p>`) // TODO
   })
 })
 
