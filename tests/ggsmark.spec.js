@@ -56,6 +56,7 @@ describe('render centered text', () => {
     let result = ggsmark(string)
 
     expect(result).toContain(``) // TODO
+  })
 
   test('text center with some text before and after', () => {
     let string = `this should not be in text center :text-center yeet :text-center after text`
