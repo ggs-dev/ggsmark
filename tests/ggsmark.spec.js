@@ -53,27 +53,28 @@ new line
     expect(result).toMatchSnapshot()
   })
 })
-  describe('render centered text', () => {
+
+describe('render centered text', () => {
   test('text-center', () => {
     let string = ':text-center Test123'
     let result = ggsmark(string)
 
-expect(result).toContain(`<p>
+    expect(result).toContain(`<p>
 </p><div style=\"text-align: center\">  Test123
 </div>
 <p></p>`)
   })
 })
-  describe('render right allignment text', () => {
-    test('text-right', () => {
-      let string = ':text-right Test123'
-      let result = ggsmark(string)
-  
-expect(result).toContain(`<p>
+describe('render right allignment text', () => {
+  test('text-right', () => {
+    let string = ':text-right Test123'
+    let result = ggsmark(string)
+
+    expect(result).toContain(`<p>
 </p><div style=\"text-align: right\">  Test123
 </div>
 <p></p>`)
-    })
+  })
 })
 
 describe('render left allignment text', () => {
@@ -81,7 +82,7 @@ describe('render left allignment text', () => {
     let string = ':text-left Test123'
     let result = ggsmark(string)
 
-expect(result).toContain(`<p>
+    expect(result).toContain(`<p>
 </p><div style=\"text-align: left\">  Test123
 </div>
 <p></p>`)
