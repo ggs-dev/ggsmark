@@ -17,7 +17,7 @@ jobs:
         $package = Get-Content package.json | ConvertFrom-Json
         $checkVersion = npm view "$($package.name)@$($package.version)"
         if ($checkVersion) {
-          Write-Host "##vso[task.setvariable variable=Package.Version;]$($package.version)"
+          Write-Host "##vso[task.setvariable variable=Package.Version;isOutput=true]$($package.version)"
           Write-Host "##vso[task.setvariable variable=Package.VersionExists;isOutput=true]true"
         } else {
           Write-Host "##vso[task.setvariable variable=Package.VersionExists;isOutput=true]false"
@@ -47,16 +47,19 @@ jobs:
 
 - job: release
   displayName: Release Node Package
-  condition: and(succeeded(), ne(dependencies.build.outputs['check.Package.VersionExists'], 'true'))
+  # condition: and(succeeded(), ne(dependencies.build.outputs['check.Package.VersionExists'], 'true'))
   dependsOn: build
+  variables:
+    Package.Version: $[ dependencies.build.outputs['check.Package.Version'] ]
   steps:
   - task: GitHubRelease@1
     inputs:
-      gitHubConnection: johnnyhuy-github
+      gitHubConnection: 'johnnyhuy-github'
       repositoryName: '$(Build.Repository.Name)'
       action: 'create'
-      target: $(Package.Version)
+      target: '$(Package.Version)'
       tagSource: 'gitTag'
+      title: 'Release $(Package.Version)'
       changeLogCompareToRelease: 'lastFullRelease'
       changeLogType: 'commitBased'
     
