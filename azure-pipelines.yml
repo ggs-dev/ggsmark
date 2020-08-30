@@ -59,7 +59,7 @@ jobs:
       action: 'create'
       target: '$(Package.Version)'
       tagSource: 'gitTag'
-      tagPattern: '*'
+      tagPattern: '.*'
       title: 'Release $(Package.Version)'
       changeLogCompareToRelease: 'lastFullRelease'
       changeLogType: 'commitBased'
