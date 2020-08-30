@@ -4,31 +4,64 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: 14.x
-  displayName: Install Node.js
+jobs:
+- job: build
+  displayName: Build Node Package
+  steps:
+  - task: PowerShell@2
+    name: check
+    displayName: Check Node Version
+    inputs:
+      targetType: inline
+      script: |
+        $package = Get-Content package.json | ConvertFrom-Json
+        $checkVersion = npm view "$($package.name)@$($package.version)"
+        if ($checkVersion) {
+          Write-Host "##vso[task.setvariable variable=Package.Version;]$($package.version)"
+          Write-Host "##vso[task.setvariable variable=Package.VersionExists;isOutput=true]true"
+        } else {
+          Write-Host "##vso[task.setvariable variable=Package.VersionExists;isOutput=true]false"
+        }
+      pwsh: true
 
-- task: YarnInstaller@3
-  inputs:
-    versionSpec: 1.x
-  displayName: Install Yarn
+  - task: NodeTool@0
+    inputs:
+      versionSpec: 14.x
+    displayName: Install Node.js
 
-- script: |
-    yarn
-    yarn test
-  displayName: Test
+  - task: YarnInstaller@3
+    inputs:
+      versionSpec: 1.x
+    displayName: Install Yarn
 
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: JUnit
-    testResultsFiles: '**/test_results.xml'
-    testRunTitle: Jest Tests
-  
-- task: Npm@1
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-  inputs:
-    command: publish
-    publishEndpoint: johnnyhuy-npm
-  displayName: Publish Node package
+  - script: |
+      yarn
+      yarn test
+    displayName: Test
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: JUnit
+      testResultsFiles: '**/test_results.xml'
+      testRunTitle: Jest Tests
+
+- job: release
+  displayName: Release Node Package
+  condition: and(succeeded(), ne(dependencies.build.outputs['check.Package.VersionExists'], 'true'))
+  steps:
+  - task: GitHubRelease@1
+    inputs:
+      gitHubConnection: johnnyhuy-github
+      repositoryName: '$(Build.Repository.Name)'
+      action: 'create'
+      target: $(Package.Version)
+      tagSource: 'gitTag'
+      changeLogCompareToRelease: 'lastFullRelease'
+      changeLogType: 'commitBased'
+    
+  # - task: Npm@1
+  #   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  #   inputs:
+  #     command: publish
+  #     publishEndpoint: johnnyhuy-npm
+  #   displayName: Publish Node package
