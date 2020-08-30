@@ -87,7 +87,6 @@ export default function (text) {
     node.unlink()
   }
 }
-  // if (node.type === 'text' && !!node.parent && node.parent.type === 'paragraph')
 
   return DOMPurify.sanitize(writer.render(parsed), { ADD_TAGS: ['iframe'] })
 }
