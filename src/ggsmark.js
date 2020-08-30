@@ -78,7 +78,7 @@ export default function (text) {
         node.insertBefore(text)
       } else {
         let div = new Node('custom_block')
-        div.onEnter = `<div class="text-center" style="text-allign: center"> ${splitText[index]}`
+        div.onEnter = `<div class="text-center" style="text-align: center"> ${splitText[index]}`
         div.onExit = '</div>'
         node.insertBefore(div)
       }
