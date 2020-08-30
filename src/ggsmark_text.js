@@ -28,7 +28,7 @@ export default function (text) {
         nestedNode = nestedEvent.node
       }
 
-      let matchTextCntrExp = /(?:text-center)/
+      let matchTextCntrExp = (/\:text-center/)
       let splitText = node.literal.split(matchTextCntrExp)
 
       for (let index in splitText) {
