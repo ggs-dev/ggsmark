@@ -75,3 +75,15 @@ expect(result).toContain(`<p>
   <p></p>`)
     })
 })
+
+describe('render left allignment text', () => {
+  test('text-left', () => {
+    let string = ':text-left Test123'
+    let result = ggsmark(string)
+
+expect(result).toContain(`<p>
+</p><div style=\"text-align: left\">  Test123
+</div>
+<p></p>`)
+  })
+})
