@@ -1,19 +1,5 @@
 import ggsmark from '../src/ggsmark'
 
-// describe('render text alignment', () => {
-//   test('text center', () => {
-
-//     // Arrange
-//     let string = `:text-right\n# Heading\n\n**bold text**\ntest\n:text-right\ntest`
-
-//     // Act
-//     let result = ggsmark(string)
-
-//     // Assert
-//     expect(result).toMatchSnapshot()
-//   })
-// })
-
 describe('render youtube blocks', () => {
   test('repeated youtube with text before and after', () => {
     // Arrange
