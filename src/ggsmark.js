@@ -72,12 +72,12 @@ export default function (text) {
       let nestedNode = nestedEvent.node
 
       // Make sure text nodes are not fragmented
-      while (!!nestedNode.prev && nestedNode.type === 'text') {
-        nestedNode.prev.literal = nestedNode.prev.literal + nestedNode.literal
-        nestedNode.unlink()
-        nestedEvent = walker.next()
-        nestedNode = nestedEvent.node
-      }
+      // while (!!nestedNode.prev && nestedNode.type === 'text') {
+      //   nestedNode.prev.literal = nestedNode.prev.literal + nestedNode.literal
+      //   nestedNode.unlink()
+      //   nestedEvent = walker.next()
+      //   nestedNode = nestedEvent.node
+      // }
 
       let matchSoundCloudExp = /(?:soundcloud|sc)\s((?:https?\:\/\/)?(?:www\.)?(?:soundcloud\.com\/)[^&#\s\?]+\/[^&#\s\?]+)/
       let soundCloudMatch = node.literal.match(matchSoundCloudExp)
@@ -88,18 +88,19 @@ export default function (text) {
           .get(
             `https://soundcloud.com/oembed?&format=json&url=${soundCloudUrl}&maxheight=166`
           )
-          .then(function (response) {
+          .then((response) => {
+            let div = new Node('html_block')
+            div.literal = response.data.html
+            console.log(response.data)
+            // console.log(node)
+            node.appendChild(div)
+          })
+          .catch((response) => {
             console.log(response)
-            let div = new Node('custom_block')
-            div.onEnter = '<div class="soundcloud">'
-            div.onExit = '</div>'
-            let iframe = new Node('custom_inline')
-            div.appendChild(iframe)
-            node.insertBefore(div)
           })
       }
 
-      node.unlink()
+      // node.unlink()
     }
   }
 

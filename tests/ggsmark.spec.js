@@ -3,6 +3,8 @@ import axios from 'axios'
 
 jest.mock('axios')
 
+const flushPromises = () => new Promise(setImmediate)
+
 // describe('render text alignment', () => {
 //   test('text center', () => {
 
@@ -18,25 +20,12 @@ jest.mock('axios')
 // })
 
 describe('render soundcloud blocks', () => {
-  test('soundcloud iframe test', () => {
+  test('soundcloud iframe test', async () => {
     // Arrange
     const response = {
       data: {
-        version: 1.0,
-        type: 'rich',
-        provider_name: 'SoundCloud',
-        provider_url: 'https://soundcloud.com',
-        height: 166,
-        width: '100%',
-        title: 'WAP feat. Megan Thee Stallion by Cardi B',
-        description:
-          'Cardi B - WAP feat. Megan Thee Stallion\nStream/Download: https://CardiB.lnk.to/WAP\n\nSubscribe for more official content from Cardi B: https://CardiB.lnk.to/Subscribe\n\nFollow Cardi B\nhttp://cardibofficial.com\nhttp://Twitter.com/IAmCardiB\nhttp://Facebook.com/IAmCardiB\nhttp://Instagram.com/f/iamcardib\nhttp://Soundcloud.com/IAmCardiB\n\nExclusive Bardi Gang merchandise available here: http://smarturl.it/BardiGangMerchYT',
-        thumbnail_url:
-          'https://i1.sndcdn.com/artworks-xRcHRzwpJGpfGt1d-wqhSGQ-t500x500.jpg',
         html:
-          '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F871426135&show_artwork=true&maxheight=166"></iframe>',
-        author_name: 'Cardi B',
-        author_url: 'https://soundcloud.com/iamcardib'
+          '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F871426135&show_artwork=true&maxheight=166"></iframe>'
       }
     }
     axios.get.mockResolvedValue(response)
@@ -44,11 +33,10 @@ describe('render soundcloud blocks', () => {
 
     // Act
     let result = ggsmark(string)
+    // await flushPromises()
 
     // Assert
-    expect(result)
-      .toBe(`<iframe width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" src=\"https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F871426135&show_artwork=true&maxheight=166\"></iframe>
-    `)
+    expect(result).toContain(response.data.html)
   })
 })
 
