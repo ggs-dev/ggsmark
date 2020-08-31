@@ -1,6 +1,10 @@
 import { HtmlRenderer, Parser, Node } from 'commonmark'
 import DOMPurify from 'dompurify'
 
+/**
+ * Render AST node into HTML
+ * @param {Node} tree
+ */
 const render = (tree) => {
   let writer = new HtmlRenderer()
   return DOMPurify.sanitize(writer.render(tree), {
@@ -8,19 +12,26 @@ const render = (tree) => {
   })
 }
 
+/**
+ * Make sure text nodes are not fragmented
+ * @param {NodeWalker} walker
+ */
 const mergeTextNodes = (walker) => {
-  let nestedEvent = walker.next()
-  let nestedNode = nestedEvent.node
+  let event = walker.next()
+  let node = event.node
 
-  // Make sure text nodes are not fragmented
-  while (!!nestedNode.prev && nestedNode.type === 'text') {
-    nestedNode.prev.literal = nestedNode.prev.literal + nestedNode.literal
-    nestedNode.unlink()
-    nestedEvent = walker.next()
-    nestedNode = nestedEvent.node
+  while (!!node.prev && node.type === 'text') {
+    node.prev.literal = node.prev.literal + node.literal
+    node.unlink()
+    event = walker.next()
+    node = event.node
   }
 }
 
+/**
+ * Default exported function
+ * @param {string} text
+ */
 export default (text) => {
   let reader = new Parser()
   let rootNode = reader.parse(text)
