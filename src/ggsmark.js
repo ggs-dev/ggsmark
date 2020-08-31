@@ -8,10 +8,23 @@ const render = (tree) => {
   })
 }
 
+const mergeTextNodes = (walker) => {
+  let nestedEvent = walker.next()
+  let nestedNode = nestedEvent.node
+
+  // Make sure text nodes are not fragmented
+  while (!!nestedNode.prev && nestedNode.type === 'text') {
+    nestedNode.prev.literal = nestedNode.prev.literal + nestedNode.literal
+    nestedNode.unlink()
+    nestedEvent = walker.next()
+    nestedNode = nestedEvent.node
+  }
+}
+
 export default (text) => {
   let reader = new Parser()
-  let tree = reader.parse(text)
-  var walker = tree.walker()
+  let rootNode = reader.parse(text)
+  let walker = rootNode.walker()
   let event, node
   let promises = []
 
@@ -24,16 +37,7 @@ export default (text) => {
       node.parent.type === 'paragraph' &&
       node.literal.match(/\:youtube/)
     ) {
-      let nestedEvent = walker.next()
-      let nestedNode = nestedEvent.node
-
-      // Make sure text nodes are not fragmented
-      while (!!nestedNode.prev && nestedNode.type === 'text') {
-        nestedNode.prev.literal = nestedNode.prev.literal + nestedNode.literal
-        nestedNode.unlink()
-        nestedEvent = walker.next()
-        nestedNode = nestedEvent.node
-      }
+      mergeTextNodes(walker)
 
       let matchYoutubeExp = /\:(?:youtube)\s(?:https?\:\/\/)?(?:www\.)?(?:youtube\.com\/watch|youtu\.be\/)(?:\?v\=)?([^\s]+)/
       let splitText = node.literal.split(matchYoutubeExp)
@@ -62,16 +66,7 @@ export default (text) => {
       node.parent.type === 'paragraph' &&
       node.literal.match(/\:soundcloud/)
     ) {
-      let nestedEvent = walker.next()
-      let nestedNode = nestedEvent.node
-
-      // Make sure text nodes are not fragmented
-      while (!!nestedNode.prev && nestedNode.type === 'text') {
-        nestedNode.prev.literal = nestedNode.prev.literal + nestedNode.literal
-        nestedNode.unlink()
-        nestedEvent = walker.next()
-        nestedNode = nestedEvent.node
-      }
+      mergeTextNodes(walker)
 
       let soundCloudExp = /(?:\:soundcloud|sc)\s((?:https?\:\/\/)?(?:www\.)?(?:soundcloud\.com\/)[^&#\s\?]+\/[^&#\s\?]+)/
       let soundCloudSplit = node.literal.split(soundCloudExp)
@@ -97,5 +92,5 @@ export default (text) => {
     }
   }
 
-  return render(tree)
+  return render(rootNode)
 }
