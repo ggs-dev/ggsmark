@@ -28,7 +28,8 @@ describe('render centered text', () => {
 
   //   expect(result).toMatchSnapshot()
   // })
-
+  
+// Failing Test
   test('use bold text', () => {
     let string = '\n\n:text-center\n\n**test** \n:text-center'
     let result = ggsmark(string)
@@ -36,13 +37,14 @@ describe('render centered text', () => {
     expect(result).toMatchSnapshot()
   })
 
+  // Failing Test
   test('use bold text single line', () => {
     let string = ':text-center **bold**'
     let result = ggsmark(string)
 
     expect(result).toMatchSnapshot()
   })
-
+// Failing Test
   test('use heading', () => {
     let string = '\n\n:text-center\n# test\n'
     let result = ggsmark(string)
