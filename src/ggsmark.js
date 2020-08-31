@@ -38,13 +38,15 @@ export default (text) => {
   let walker = rootNode.walker()
   let event, node
   let promises = []
+  let inColour = false
+  let inColourNodes = []
 
   while ((event = walker.next())) {
     node = event.node
 
     if (
       node.type === 'text' &&
-      !!node.parent &&
+      node.parent &&
       node.parent.type === 'paragraph' &&
       node.literal.match(/\:youtube/)
     ) {
@@ -71,9 +73,11 @@ export default (text) => {
       }
 
       node.unlink()
-    } else if (
+    }
+
+    if (
       node.type === 'text' &&
-      !!node.parent &&
+      node.parent &&
       node.parent.type === 'paragraph' &&
       node.literal.match(/\:soundcloud/)
     ) {
@@ -100,6 +104,41 @@ export default (text) => {
       }
 
       node.unlink()
+    }
+
+    if (
+      node.type === 'text' &&
+      node.parent &&
+      node.parent.type === 'paragraph' &&
+      node.literal.match(/^\:(?:color|colour)/)
+    ) {
+      mergeTextNodes(walker)
+
+      let colourExp = /^\:(?:color|colour)(\s(?:(\#?[A-z]+|\d{1,3}\,\s?\d{1,3}\,\s?\d{1,3}(\,\s?\d{1,3})?)))?$/
+      let colourMatch = node.literal.match(colourExp)
+
+      if (colourMatch && !inColour) {
+        inColour = true
+      } else if (inColour) {
+        let div = new Node('custom_block')
+        div.onEnter = '<div style="color: red">'
+        div.onExit = '</div>'
+        node.parent.insertBefore(div)
+
+        for (let colourNode of inColourNodes) {
+          div.appendChild(colourNode)
+        }
+
+        inColour = false
+      }
+
+      if (node.parent.type === 'paragraph') {
+        node.parent.unlink()
+      }
+    }
+
+    if (node.parent && node.parent.type === 'document' && inColour) {
+      inColourNodes.push(node)
     }
   }
 

@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`render colour blocks colour wrapped 1`] = `
+"<p><strong>bold text</strong>
+before text</p>
+<div style=\\"color: red\\">
+<h1>Heading</h1>
+<p><strong>bold text</strong></p>
+<p>test</p>
+<h1>Heading</h1>
+<p><strong>bold text</strong>test</p>
+<p>test</p>
+</div>
+<p><strong>bold text</strong></p>
+<h1>Another Heading</h1>
+"
+`;
+
 exports[`render soundcloud blocks content before and after 1`] = `
 "<p><strong>bold text</strong> before text 
 <iframe src=\\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\\" height=\\"300\\" width=\\"100%\\"></iframe>

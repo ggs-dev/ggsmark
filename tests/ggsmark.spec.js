@@ -77,3 +77,37 @@ new line
     expect(result).toMatchSnapshot()
   })
 })
+
+describe('render colour blocks', () => {
+  test('colour wrapped', () => {
+    // Arrange
+    let string = `
+**bold text**
+before text
+
+:colour red
+
+# Heading
+
+**bold text**
+
+test
+
+<h1>Heading</h1>
+<p><strong>bold text</strong>test</p>
+<p>test</p>
+
+:colour
+
+**bold text**
+
+# Another Heading
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+})
