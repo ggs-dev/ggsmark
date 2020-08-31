@@ -2,7 +2,7 @@
 
 exports[`render centered text single line text center 1`] = `
 "<p>
-</p><div style=\\"text-align: center\\">  Test123
+</p><div style=\"text-align: center\">  Test123
 </div>
 <p></p>
 "
@@ -10,10 +10,10 @@ exports[`render centered text single line text center 1`] = `
 
 exports[`render centered text text center in text center 1`] = `
 "<p>
-</p><div style=\\"text-align: center\\">  test 
+</p><div style=\"text-align: center\">  test 
 </div>
  wtf 
-<div style=\\"text-align: center\\">  test 
+<div style=\"text-align: center\">  test 
 </div>
 <p></p>
 "
@@ -21,7 +21,7 @@ exports[`render centered text text center in text center 1`] = `
 
 exports[`render centered text text center with some text before and after 1`] = `
 "<p>this should not be in text center 
-</p><div style=\\"text-align: center\\">  yeet 
+</p><div style=\"text-align: center\">  yeet 
 </div>
  after text<p></p>
 "
@@ -29,7 +29,7 @@ exports[`render centered text text center with some text before and after 1`] = 
 
 exports[`render centered text use bold text 1`] = `
 "<p>
-</p><div style=\\"text-align: center\\"> 
+</p><div style=\"text-align: center\"> 
 <strong>test</strong>
 </div>
 <p></p>
@@ -38,7 +38,7 @@ exports[`render centered text use bold text 1`] = `
 
 exports[`render centered text use bold text single line 1`] = `
 "<p>
-</p><div style=\\"text-align: center\\">  
+</p><div style=\"text-align: center\">  
 <strong>bold</strong>
 </div>
 <p></p>
@@ -47,7 +47,7 @@ exports[`render centered text use bold text single line 1`] = `
 
 exports[`render centered text use heading 1`] = `
 "<p>
-</p><div style=\\"text-align: center\\"> 
+</p><div style=\"text-align: center\"> 
 <h1>test</h1>
 </div>
 <p></p>
@@ -56,7 +56,7 @@ exports[`render centered text use heading 1`] = `
 
 exports[`render centered text wrap text center 1`] = `
 "<p>
-</p><div style=\\"text-align: center\\">  yeet 
+</p><div style=\"text-align: center\">  yeet 
 </div>
 <p></p>
 "
@@ -64,7 +64,7 @@ exports[`render centered text wrap text center 1`] = `
 
 exports[`render left allignment text text-left 1`] = `
 "<p>
-</p><div style=\\"text-align: left\\">  Test123
+</p><div style=\"text-align: left\">  Test123
 </div>
 <p></p>
 "
@@ -72,45 +72,45 @@ exports[`render left allignment text text-left 1`] = `
 
 exports[`render right allignment text text-right 1`] = `
 "<p>
-</p><div style=\\"text-align: right\\">  Test123
+</p><div style=\"text-align: right\">  Test123
 </div>
 <p></p>
 
 exports[`render soundcloud blocks content before and after 1`] = `
 "<p><strong>bold text</strong> before text 
-<iframe src=\\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\\" height=\\"300\\" width=\\"100%\\"></iframe>
+<iframe src=\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\" height=\"300\" width=\"100%\"></iframe>
  after text <strong>bold</strong></p>
 "
 `;
 
 exports[`render soundcloud blocks multiple occurrences 1`] = `
 "<p>
-<iframe src=\\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\\" height=\\"300\\" width=\\"100%\\"></iframe>
+<iframe src=\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\" height=\"300\" width=\"100%\"></iframe>
  
-<iframe src=\\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\\" height=\\"300\\" width=\\"100%\\"></iframe>
+<iframe src=\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\" height=\"300\" width=\"100%\"></iframe>
  
-<iframe src=\\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\\" height=\\"300\\" width=\\"100%\\"></iframe>
+<iframe src=\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\" height=\"300\" width=\"100%\"></iframe>
  
-<iframe src=\\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\\" height=\\"300\\" width=\\"100%\\"></iframe>
+<iframe src=\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\" height=\"300\" width=\"100%\"></iframe>
 </p>
 "
 `;
 
 exports[`render soundcloud blocks single line 1`] = `
 "<p>
-<iframe src=\\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\\" height=\\"300\\" width=\\"100%\\"></iframe>
+<iframe src=\"https://w.soundcloud.com/player/?url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true\" height=\"300\" width=\"100%\"></iframe>
 </p>
 "
 `;
 
 exports[`render youtube blocks repeated youtube 1`] = `
 "<p>
-</p><div class=\\"ggsmark-youtube\\">
-<iframe type=\\"text/html\\" src=\\"https://www.youtube.com/embed/\${splitText[index]}\\"></iframe>
+</p><div class=\"ggsmark-youtube\">
+<iframe type=\"text/html\" src=\"https://www.youtube.com/embed/\${splitText[index]}\"></iframe>
 </div>
  
-<div class=\\"ggsmark-youtube\\">
-<iframe type=\\"text/html\\" src=\\"https://www.youtube.com/embed/\${splitText[index]}\\"></iframe>
+<div class=\"ggsmark-youtube\">
+<iframe type=\"text/html\" src=\"https://www.youtube.com/embed/\${splitText[index]}\"></iframe>
 </div>
  :youtube http://www.youshit.com<p></p>
 "
@@ -118,8 +118,8 @@ exports[`render youtube blocks repeated youtube 1`] = `
 
 exports[`render youtube blocks repeated youtube with text before and after 1`] = `
 "<p><strong>bold</strong> string before comyoutube :youtube http://www.youtube./watch?v=52c_QSg64fs after youtube 
-</p><div class=\\"ggsmark-youtube\\">
-<iframe type=\\"text/html\\" src=\\"https://www.youtube.com/embed/\${splitText[index]}\\"></iframe>
+</p><div class=\"ggsmark-youtube\">
+<iframe type=\"text/html\\" src=\"https://www.youtube.com/embed/\${splitText[index]}\"></iframe>
 </div>
  <em>italics</em>
 soft new line<p></p>
@@ -129,8 +129,8 @@ soft new line<p></p>
 
 exports[`render youtube blocks youtube with timestamp 1`] = `
 "<p>
-</p><div class=\\"ggsmark-youtube\\">
-<iframe type=\\"text/html\\" src=\\"https://www.youtube.com/embed/\${splitText[index]}\\"></iframe>
+</p><div class=\"ggsmark-youtube\">
+<iframe type=\"text/html\" src=\"https://www.youtube.com/embed/\${splitText[index]}\"></iframe>
 </div>
 <p></p>
 "
