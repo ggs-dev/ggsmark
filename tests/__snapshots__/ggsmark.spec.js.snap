@@ -2,20 +2,9 @@
 
 exports[`render centered text single line text center 1`] = `
 "<p>
-</p><div style=\"text-align: center\">  Test123
-</div>
-<p></p>
-"
-`;
-
-exports[`render centered text text center in text center 1`] = `
-"<p>
-</p><div style=\"text-align: center\">  test 
-</div>
- wtf 
-<div style=\"text-align: center\">  test 
-</div>
-<p></p>
+    </p><div style=\"text-align: center\">  Test123
+    </div>
+    <p></p>
 "
 `;
 
@@ -49,14 +38,6 @@ exports[`render centered text use heading 1`] = `
 "<p>
 </p><div style=\"text-align: center\"> 
 <h1>test</h1>
-</div>
-<p></p>
-"
-`;
-
-exports[`render centered text wrap text center 1`] = `
-"<p>
-</p><div style=\"text-align: center\">  yeet 
 </div>
 <p></p>
 "
