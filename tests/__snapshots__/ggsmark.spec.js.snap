@@ -10,9 +10,9 @@ exports[`render centered text single line text center 1`] = `
 
 exports[`render centered text text center with some text before and after 1`] = `
 "<p>this should not be in text center 
-</p><div style=\\"text-align: center\\">  yeet 
+</p><div style="text-align: center">  yeet
 </div>
-<p></p>
+p></p>
 "
 `;
 
