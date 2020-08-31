@@ -106,24 +106,25 @@ export default (text) => {
       node.unlink()
     }
 
-    if (
-      node.type === 'text' &&
-      node.parent &&
-      node.parent.type === 'paragraph' &&
-      node.literal.match(/^\:(?:color|colour)/)
-    ) {
+    // let type = node.type
+    // if (type === 'html_block') {
+    //   debugger
+    // }
+
+    if (node.literal && node.literal.match(/\~(?:color|colour)/)) {
       mergeTextNodes(walker)
 
-      let colourExp = /^\:(?:color|colour)(\s(?:(\#?[A-z]+|\d{1,3}\,\s?\d{1,3}\,\s?\d{1,3}(\,\s?\d{1,3})?)))?$/
+      let colourExp = /^\~(?:color|colour)(\s(?:(\#?[A-z]+|\d{1,3}\,\s?\d{1,3}\,\s?\d{1,3}(\,\s?\d{1,3})?)))?$/
       let colourMatch = node.literal.match(colourExp)
+      node.literal = node.literal.replace(/\~(?:color|colour)(?:\s.+)?/, '')
 
       if (colourMatch && !inColour) {
         inColour = true
       } else if (inColour) {
         let div = new Node('custom_block')
-        div.onEnter = '<div style="color: red">'
+        div.onEnter = `<div style="color: red">`
         div.onExit = '</div>'
-        node.parent.insertBefore(div)
+        node.insertAfter(div)
 
         for (let colourNode of inColourNodes) {
           div.appendChild(colourNode)
@@ -132,9 +133,9 @@ export default (text) => {
         inColour = false
       }
 
-      if (node.parent.type === 'paragraph') {
-        node.parent.unlink()
-      }
+      // if (node.parent.type === 'paragraph') {
+      //   node.parent.unlink()
+      // }
     }
 
     if (node.parent && node.parent.type === 'document' && inColour) {

@@ -1,18 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`render colour blocks colour wrapped 1`] = `
-"<p><strong>bold text</strong>
+"<p><strong>before bold text</strong>
 before text</p>
 <div style=\\"color: red\\">
-<h1>Heading</h1>
+<h1>Start of colour heading</h1>
 <p><strong>bold text</strong></p>
-<p>test</p>
-<h1>Heading</h1>
-<p><strong>bold text</strong>test</p>
-<p>test</p>
+<p>plain text</p>
+<h1>HTML Heading</h1>
+<p>This is HTML inline <strong>bold</strong> text</p>
+<p>another paragraph inline HTML</p>
 </div>
+<p><strong>after colour bold text</strong></p>
+<h1>Another Heading after colour</h1>
+"
+`;
+
+exports[`render colour blocks parse colour when no new lines between colour 1`] = `
+"<p><strong>before bold text</strong>
+before text</p>
+<div style=\\"color: red\\">
+<h1>Start of colour heading</h1>
 <p><strong>bold text</strong></p>
-<h1>Another Heading</h1>
+<p>plain text</p>
+<h1>HTML Heading</h1>
+<p>This is HTML inline <strong>bold</strong> text</p>
+<p>another paragraph inline HTML</p>
+</div>
+<p><strong>after colour bold text</strong></p>
+<h1>Another Heading after colour</h1>
 "
 `;
 

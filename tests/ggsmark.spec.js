@@ -82,26 +82,55 @@ describe('render colour blocks', () => {
   test('colour wrapped', () => {
     // Arrange
     let string = `
-**bold text**
+**before bold text**
 before text
 
 :colour red
 
-# Heading
+# Start of colour heading
 
 **bold text**
 
-test
+plain text
 
-<h1>Heading</h1>
-<p><strong>bold text</strong>test</p>
-<p>test</p>
+<h1>HTML Heading</h1>
+<p>This is HTML inline <strong>bold</strong> text</p>
+<p>another paragraph inline HTML</p>
 
 :colour
 
+**after colour bold text**
+
+# Another Heading after colour
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+
+  test('parse colour when no new lines between colour', () => {
+    // Arrange
+    let string = `
+**before bold text**
+before text
+~color red
+# Start of colour heading
+
 **bold text**
 
-# Another Heading
+plain text
+
+<h1>HTML Heading</h1>
+<p>This is HTML inline <strong>bold</strong> text</p>
+<p>another paragraph inline HTML</p>
+~color
+
+**after colour bold text**
+
+# Another Heading after colour
     `
 
     // Act
