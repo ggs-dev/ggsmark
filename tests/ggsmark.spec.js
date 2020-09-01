@@ -1,10 +1,12 @@
+import dedent from 'dedent'
 import ggsmark from '../src/ggsmark'
 
 describe('render soundcloud blocks', () => {
   test('single line', () => {
     // Arrange
-    let string =
-      ':soundcloud https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion'
+    let string = dedent`
+    !(https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion)
+    `
 
     // Act
     let result = ggsmark(string)
@@ -16,7 +18,7 @@ describe('render soundcloud blocks', () => {
   test('content before and after', () => {
     // Arrange
     let string =
-      '**bold text** before text :soundcloud https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion after text **bold**'
+      '**bold text** before text !(https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion) after text **bold**'
 
     // Act
     let result = ggsmark(string)
@@ -27,8 +29,11 @@ describe('render soundcloud blocks', () => {
 
   test('multiple occurrences', () => {
     // Arrange
-    let string =
-      ':soundcloud https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion :soundcloud https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion :soundcloud https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion :soundcloud https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion'
+    let string = dedent`
+    !(https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion)
+    !(https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion)
+    !(https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion)
+    `
 
     // Act
     let result = ggsmark(string)
@@ -41,11 +46,11 @@ describe('render soundcloud blocks', () => {
 describe('render youtube blocks', () => {
   test('repeated youtube with text before and after', () => {
     // Arrange
-    let string = `
-**bold** string before comyoutube :youtube http://www.youtube./watch?v=52c_QSg64fs after youtube :youtube http://www.youtube.com/watch?v=waefawefwaef *italics*
-soft new line
+    let string = dedent`
+    **bold** string before comyoutube !(http://www.youtube./watch?v=52c_QSg64fs) after youtube !(http://www.youtube.com/watch?v=waefawefwaef) *italics*
+    soft new line
 
-new line
+    new line
     `
 
     // Act
@@ -57,7 +62,11 @@ new line
 
   test('repeated youtube', () => {
     // Arrange
-    let string = `:youtube http://www.youtube.com/watch?v=52c_QSg64fs :youtube http://www.youtube.com/watch?v=52c_QSg64fs :youtube http://www.youshit.com`
+    let string = dedent`
+    !(http://www.youtube.com/watch?v=52c_QSg64fs)
+    !(http://www.youtube.com/watch?v=52c_QSg64fs)
+    !(http://www.youshit.com)
+    `
 
     // Act
     let result = ggsmark(string)
@@ -68,7 +77,7 @@ new line
 
   test('youtube with timestamp', () => {
     // Arrange
-    let string = `:youtube https://youtu.be/IJhgZBn-LHg?t=712`
+    let string = dedent`!(https://youtu.be/IJhgZBn-LHg?t=712)`
 
     // Act
     let result = ggsmark(string)
