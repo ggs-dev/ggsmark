@@ -1,6 +1,10 @@
-# GGSMark.js
+# GGSMark
 
-CommonMark extension for the Gentlemen's Gaming Society website.
+Markdown extension for the Gentlemen's Gaming Society website.
+
+## Credits
+
+This package is built on top of the [remarkjs/remark](https://github.com/remarkjs/remark) ecosystem. Mad props to the community and their [plugins](https://github.com/remarkjs/remark/blob/HEAD/doc/plugins.md#list-of-plugins).
 
 ## Installing
 
