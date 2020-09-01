@@ -1,7 +1,7 @@
 {
   "name": "ggsmark",
-  "version": "0.0.2",
-  "description": "CommonMark extension for the Gentlemen's Gaming Society website.",
+  "version": "0.0.3",
+  "description": "Markdown extension for the Gentlemen's Gaming Society website.",
   "main": "index.js",
   "repository": "https://github.com/johnnyhuy/ggsmark.git",
   "author": "Johnny Huynh <info@johnnyhuy.com>",
@@ -25,7 +25,10 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/runtime": "^7.11.2",
     "babel-core": "^6.26.3",
-    "commonmark": "^0.29.1",
-    "dompurify": "^2.0.14"
+    "rehype-stringify": "^8.0.0",
+    "remark-iframes": "^4.0.4",
+    "remark-parse": "^8.0.3",
+    "remark-rehype": "^7.0.0",
+    "unified": "^9.2.0"
   }
 }
