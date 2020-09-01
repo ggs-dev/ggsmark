@@ -36,7 +36,7 @@ jobs:
 
   - script: |
       yarn
-      yarn test
+      yarn test --ci
     displayName: Test
 
   - task: PublishTestResults@2
