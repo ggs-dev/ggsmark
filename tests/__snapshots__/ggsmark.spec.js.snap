@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`render center alignment text multi line 1`] = `
-"<div class=\\"align-center\\"><p>This is a multiple line texts
-2nd line here</p></div>"
-`;
-
-exports[`render center alignment text single line 1`] = `"<div class=\\"align-center\\"><p>CenterText</p></div>"`;
-
 exports[`render center allignment text multi line 1`] = `
 "<div class=\\"align-center\\"><p>This is a multiple line texts
 2nd line here</p></div>"
@@ -20,13 +13,6 @@ exports[`render left alignment text multi line 1`] = `
 `;
 
 exports[`render left alignment text single line 1`] = `"<div class=\\"align-left\\"><p>LeftText</p></div>"`;
-
-exports[`render right alignment text multi line 1`] = `
-"<div class=\\"align-right\\"><p>This is a multiple line texts
-2nd line here</p></div>"
-`;
-
-exports[`render right alignment text single line 1`] = `"<div class=\\"align-right\\"><p>RightText</p></div>"`;
 
 exports[`render right allignment text multi line 1`] = `
 "<div class=\\"align-right\\"><p>This is a multiple line texts
