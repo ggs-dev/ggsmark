@@ -191,7 +191,86 @@ describe('render youtube blocks', () => {
     expect(result).toMatchSnapshot()
   })
 })
+describe('render left alignment text', () => {
+  test('single line', () => {
+    // Arrange
+    let string = dedent`
+    <-LeftText<-
+    `
 
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+  test('multi line', () => {
+    // Arrange
+    let string = dedent`
+    <-This is a multiple line texts\n 2nd line here<-
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+})
+
+describe('render center alignment text', () => {
+  test('single line', () => {
+    // Arrange
+    let string = dedent`
+    ->CenterText<-
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+  test('multi line', () => {
+    // Arrange
+    let string = dedent`
+    ->This is a multiple line texts\n 2nd line here<-
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+})
+
+describe('render right alignment text', () => {
+  test('single line', () => {
+    // Arrange
+    let string = dedent`
+    ->RightText->
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+  test('multi line', () => {
+    // Arrange
+    let string = dedent`
+    ->This is a multiple line texts\n 2nd line here->
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+})
 describe('do not render custom html', () => {
   test('span', () => {
     // Arrange
