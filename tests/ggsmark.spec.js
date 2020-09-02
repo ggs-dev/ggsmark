@@ -218,7 +218,7 @@ describe('render left alignment text', () => {
   })
 })
 
-describe('render center allignment text', () => {
+describe('render center alignment text', () => {
   test('single line', () => {
     // Arrange
     let string = dedent`
@@ -245,7 +245,7 @@ describe('render center allignment text', () => {
   })
 })
 
-describe('render right allignment text', () => {
+describe('render right alignment text', () => {
   test('single line', () => {
     // Arrange
     let string = dedent`
