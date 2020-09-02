@@ -86,7 +86,7 @@ describe('render youtube blocks', () => {
     expect(result).toMatchSnapshot()
   })
 })
-describe('render left allignment text', () => {
+describe('render left alignment text', () => {
   test('single line', () => {
     // Arrange
     let string = dedent`
