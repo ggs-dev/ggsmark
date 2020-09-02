@@ -1,6 +1,111 @@
 import dedent from 'dedent'
 import ggsmark from '../src/ggsmark'
 
+describe('should have github-like markdown', () => {
+  test('strikethrough', () => {
+    // Arrange
+    let string = dedent`
+    ~~shit~~
+    `
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <p><del>shit</del></p>
+    `)
+  })
+
+  test('auto-link', () => {
+    // Arrange
+    let string = dedent`
+    visit https://ggs.sx/
+    `
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <p>visit <a href="https://ggs.sx/">https://ggs.sx/</a></p>
+    `)
+  })
+
+  test('task lists', () => {
+    // Arrange
+    let string = dedent`
+    - [x] Do work
+    - [ ] Get a life
+    - [ ] Open book
+    `
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <ul class="contains-task-list">
+    <li class="task-list-item"><input type="checkbox" checked disabled> Do work</li>
+    <li class="task-list-item"><input type="checkbox" disabled> Get a life</li>
+    <li class="task-list-item"><input type="checkbox" disabled> Open book</li>
+    </ul>
+    `)
+  })
+
+  test('tables', () => {
+    // Arrange
+    let string = dedent`
+    | Command | Description |
+    | --- | --- |
+    | git status | List all new or modified files |
+    | git diff | Show file differences that haven't been staged |
+    `
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <table>
+    <thead>
+    <tr>
+    <th>Command</th>
+    <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>git status</td>
+    <td>List all new or modified files</td>
+    </tr>
+    <tr>
+    <td>git diff</td>
+    <td>Show file differences that haven't been staged</td>
+    </tr>
+    </tbody>
+    </table>
+    `)
+  })
+
+  test('code fencing', () => {
+    // Arrange
+    let string = dedent`
+    \`\`\`ruby
+    require 'redcarpet'
+    markdown = Redcarpet.new("Hello World!")
+    puts markdown.to_html
+    \`\`\`
+    `
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <pre><code class="language-ruby">require 'redcarpet'
+    markdown = Redcarpet.new("Hello World!")
+    puts markdown.to_html
+    </code></pre>
+    `)
+  })
+})
+
 describe('render soundcloud blocks', () => {
   test('single line', () => {
     // Arrange
@@ -84,5 +189,49 @@ describe('render youtube blocks', () => {
 
     // Assert
     expect(result).toMatchSnapshot()
+  })
+})
+
+describe('do not render custom html', () => {
+  test('span', () => {
+    // Arrange
+    let string = dedent`
+    <span style="color: red">Test</span>
+    `
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <p>Test</p>
+    `)
+  })
+
+  test('heading', () => {
+    // Arrange
+    let string = dedent`
+    <h3 style="color: red">Test</h3>
+    `
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <p>Test</p>
+    `)
+  })
+
+  test('div', () => {
+    // Arrange
+    let string = dedent`
+    <div style="color: red">Test</div>
+    `
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <p>Test</p>
+    `)
   })
 })
