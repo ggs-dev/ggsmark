@@ -271,3 +271,46 @@ describe('render right allignment text', () => {
     expect(result).toMatchSnapshot()
   })
 })
+describe('do not render custom html', () => {
+  test('span', () => {
+    // Arrange
+    let string = dedent`
+    <span style="color: red">Test</span>
+    `
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <p>Test</p>
+    `)
+  })
+
+  test('heading', () => {
+    // Arrange
+    let string = dedent`
+    <h3 style="color: red">Test</h3>
+    `
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <p>Test</p>
+    `)
+  })
+
+  test('div', () => {
+    // Arrange
+    let string = dedent`
+    <div style="color: red">Test</div>
+    `
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <p>Test</p>
+    `)
+  })
+})
