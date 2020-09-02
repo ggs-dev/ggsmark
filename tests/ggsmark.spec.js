@@ -86,7 +86,7 @@ describe('render youtube blocks', () => {
     expect(result).toMatchSnapshot()
   })
 })
-describe('render left alignment text', () => {
+describe('render left allignment text', () => {
   test('single line', () => {
     // Arrange
     let string = dedent`
@@ -113,7 +113,7 @@ describe('render left alignment text', () => {
   })
 })
 
-describe('render center alignment text', () => {
+describe('render center allignment text', () => {
   test('single line', () => {
     // Arrange
     let string = dedent`
@@ -140,7 +140,7 @@ describe('render center alignment text', () => {
   })
 })
 
-describe('render right alignment text', () => {
+describe('render right allignment text', () => {
   test('single line', () => {
     // Arrange
     let string = dedent`
