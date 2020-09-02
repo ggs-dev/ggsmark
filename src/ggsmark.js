@@ -10,7 +10,9 @@ import 'regenerator-runtime/runtime'
 
 export default (text) => {
   return unified()
-    .use(markdown)
+    .use(markdown, {
+      blocks: []
+    })
     .use(iframe, {
       'www.youtube.com': {
         tag: 'iframe',
