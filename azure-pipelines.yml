@@ -54,6 +54,13 @@ jobs:
   variables:
     Package.Version: $[ dependencies.build.outputs['check.Package.Version'] ]
   steps:
+  - task: PowerShell@2
+    name: check
+    displayName: Check Node Version
+    inputs:
+      targetType: inline
+      script: |
+        Write-Host "Package is on $(Package.Version)"
   - task: GitHubRelease@1
     displayName: Release on GitHub
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
