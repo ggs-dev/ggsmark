@@ -58,7 +58,6 @@ export default (text) => {
         ]
       }
     })
-    .use(markdown)
     .use(remarkAlign, {
       left: 'align-left',
       center: 'align-center',
