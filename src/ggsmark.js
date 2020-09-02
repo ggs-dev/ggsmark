@@ -3,6 +3,7 @@ import markdown from 'remark-parse'
 import stringify from 'rehype-stringify'
 import rehype from 'remark-rehype'
 import iframe from 'remark-iframes'
+const remarkAlign = require('remark-align')
 
 // Import this since remark-iframe needs it
 import 'regenerator-runtime/runtime'
@@ -54,6 +55,12 @@ export default (text) => {
           ['http://', 'https://']
         ]
       }
+    })
+    .use(markdown)
+    .use(remarkAlign, {
+      left: 'align-left',
+      center: 'align-center',
+      right: 'align-right',
     })
     .use(rehype)
     .use(stringify)
