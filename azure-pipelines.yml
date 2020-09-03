@@ -15,14 +15,15 @@ jobs:
       targetType: inline
       script: |
         $package = Get-Content package.json | ConvertFrom-Json
-        $checkVersion = npm view "$($package.name)@$($package.version)"
-        Write-Host "Package is on $($package.name)@$($package.version)"
+        $packageName = "$($package.name)@$($package.version)"
+        $checkVersion = npm view $packageName
+        Write-Host "Package is on $packageName"
         if ($checkVersion) {
           Write-Host "##vso[task.setvariable variable=Package.VersionExists;isOutput=true]true"
         } else {
           Write-Host "##vso[task.setvariable variable=Package.VersionExists;isOutput=true]false"
         }
-        Write-Host "##vso[task.setvariable variable=Package.Version;isOutput=true]$($package.version)"
+        Write-Host "##vso[task.setvariable variable=Package.Name;isOutput=true]$packageName"
       pwsh: true
 
   - task: NodeTool@0
@@ -52,7 +53,7 @@ jobs:
   condition: and(succeeded(), ne(dependencies.build.outputs['check.Package.VersionExists'], 'true'))
   dependsOn: build
   variables:
-    Package.Version: $[ dependencies.build.outputs['check.Package.Version'] ]
+    Package.Name: $[ dependencies.build.outputs['check.Package.Name'] ]
   steps:
   - task: GitHubRelease@1
     displayName: Release on GitHub
@@ -63,10 +64,10 @@ jobs:
       action: create
       target: $(Build.SourceVersion)
       tagSource: userSpecifiedTag
-      tag: $(Package.Version)
-      title: Release $(Package.Version)
+      tag: $(Package.Name)
+      title: $(Package.Name)
       releaseNotesSource: inline
-      releaseNotesInline: Release of the GGSMark Node package!
+      releaseNotesInline: Release of the $(Package.Name).
       changeLogCompareToRelease: lastFullRelease
       changeLogType: commitBased
     
