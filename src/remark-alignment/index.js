@@ -1,13 +1,13 @@
-const spaceSeparated = require('space-separated-tokens')
+import spaceSeparated from 'space-separated-tokens'
 
 const C_NEWLINE = '\n'
 const C_NEWPARAGRAPH = '\n\n'
 
-module.exports = function plugin (classNames = {}) {
+module.exports = function plugin(classNames = {}) {
   const locateMarker = new RegExp(`[^\\\\]?(->|<-)`)
   const endMarkers = ['->', '<-']
 
-  function alignTokenizer (eat, value, silent) {
+  function alignTokenizer(eat, value, silent) {
     const keep = value.match(locateMarker)
     if (!keep || keep.index !== 0) return
 
@@ -26,26 +26,25 @@ module.exports = function plugin (classNames = {}) {
 
     while (canEatLine) {
       const nextIndex = value.indexOf(C_NEWLINE, index + 1)
-      const lineToEat = nextIndex !== -1
-        ? value.slice(index, nextIndex)
-        : value.slice(index)
+      const lineToEat =
+        nextIndex !== -1 ? value.slice(index, nextIndex) : value.slice(index)
 
       linesToEat.push(lineToEat)
 
       const endIndex = endMarkers.indexOf(lineToEat.slice(-2))
 
       // If nextIndex = (blockStartIndex + 2), it's the first marker of the block.
-      if ((nextIndex > (blockStartIndex + 2) || nextIndex === -1) &&
+      if (
+        (nextIndex > blockStartIndex + 2 || nextIndex === -1) &&
         lineToEat.length >= 2 &&
         endIndex !== -1
       ) {
-
         if (endMarker === '') endMarker = lineToEat.slice(-2)
 
         finishedBlocks.push(linesToEat.join(C_NEWLINE))
 
         // Check if another block is following
-        if (value.indexOf('->', nextIndex) !== (nextIndex + 1)) break
+        if (value.indexOf('->', nextIndex) !== nextIndex + 1) break
         linesToEat = []
         blockStartIndex = nextIndex + 1
       }
@@ -98,9 +97,9 @@ module.exports = function plugin (classNames = {}) {
       data: {
         hName: 'div',
         hProperties: {
-          class: spaceSeparated.parse(classes),
-        },
-      },
+          class: spaceSeparated.parse(classes)
+        }
+      }
     })
   }
 
@@ -125,7 +124,7 @@ module.exports = function plugin (classNames = {}) {
       const markers = {
         left: ['<-', '<-'],
         right: ['->', '->'],
-        center: ['->', '<-'],
+        center: ['->', '<-']
       }
       const alignType = node.type.slice(0, -7)
 
@@ -133,7 +132,8 @@ module.exports = function plugin (classNames = {}) {
 
       const [start, end] = markers[alignType]
 
-      if (innerContent.length < 2) return `${start} ${innerContent.join('\n').trim()} ${end}`
+      if (innerContent.length < 2)
+        return `${start} ${innerContent.join('\n').trim()} ${end}`
 
       return `${start}\n${innerContent.join('\n\n').trim()}\n${end}`
     }

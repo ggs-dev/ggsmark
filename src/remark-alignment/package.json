@@ -1,5 +1,5 @@
 {
-  "name": "@johnnyhuy/remark-text-alignment",
+  "name": "remark-text-alignment",
   "version": "0.0.1",
   "repository": {
     "url": "https://github.com/johnnyhuy/ggsmark/tree/master/svc/remark-alignment",
