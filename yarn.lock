@@ -4032,6 +4032,13 @@ rehype-stringify@^8.0.0:
   dependencies:
     hast-util-to-html "^7.1.1"
 
+remark-align@^1.2.13:
+  version "1.2.13"
+  resolved "https://registry.yarnpkg.com/remark-align/-/remark-align-1.2.13.tgz#bc948ee8d755d0e46824c6a0203869dca2445d3a"
+  integrity sha512-G/U3eNzMcLIy0zFCQJDsCugE+/LaQ5m58Hgg6Q64OnAhPSb74wA3VikkBSfbdFfT+HgBg6KdkeGpauYqRn2pCg==
+  dependencies:
+    space-separated-tokens "^1.1.5"
+
 remark-iframes@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/remark-iframes/-/remark-iframes-4.0.4.tgz#1d4c56eddee48a1097d54c6fae75495ff913760b"
@@ -4414,7 +4421,7 @@ source-map@^0.7.3:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.3.tgz#5302f8169031735226544092e64981f751750383"
   integrity sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
 
-space-separated-tokens@^1.0.0:
+space-separated-tokens@^1.0.0, space-separated-tokens@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/space-separated-tokens/-/space-separated-tokens-1.1.5.tgz#85f32c3d10d9682007e917414ddc5c26d1aa6899"
   integrity sha512-q/JSVd1Lptzhf5bkYm4ob4iWPjx0KiRe3sRFBNrVqbJkFaBm5vbbowy1mymoPNLRa52+oadOhJ+K49wsSeSjTA==

@@ -61,7 +61,7 @@ export default (text) => {
     .use(remarkAlign, {
       left: 'align-left',
       center: 'align-center',
-      right: 'align-right',
+      right: 'align-right'
     })
     .use(rehype)
     .use(stringify)
