@@ -4032,10 +4032,8 @@ rehype-stringify@^8.0.0:
   dependencies:
     hast-util-to-html "^7.1.1"
 
-remark-align@^1.2.13:
-  version "1.2.13"
-  resolved "https://registry.yarnpkg.com/remark-align/-/remark-align-1.2.13.tgz#bc948ee8d755d0e46824c6a0203869dca2445d3a"
-  integrity sha512-G/U3eNzMcLIy0zFCQJDsCugE+/LaQ5m58Hgg6Q64OnAhPSb74wA3VikkBSfbdFfT+HgBg6KdkeGpauYqRn2pCg==
+"remark-align@file:src/remark-alignment":
+  version "0.0.1"
   dependencies:
     space-separated-tokens "^1.1.5"
 
