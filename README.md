@@ -11,9 +11,6 @@ This package is built on top of the [remarkjs/remark](https://github.com/remarkj
 When you have Node JS installed run the following command in your project.
 
 ```bash
-npm install ggsmark
-
-# If you're a Yarn fan run this command.
 yarn add ggsmark
 ```
 
@@ -22,17 +19,13 @@ yarn add ggsmark
 Clone this repository and install dependencies.
 
 ```bash
-# NPM install packages
-npm install
-
-# Or Yarn install packages
 yarn
 ```
 
 Run JavaScript unit tests run the following command.
 
 ```bash
-npm run test
+yarn test
 ```
 
 ## Usage
