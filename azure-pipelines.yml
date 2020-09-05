@@ -46,5 +46,6 @@ jobs:
     displayName: Install Yarn
 
   - script: |
+      yarn
       yarn release
     displayName: Release
