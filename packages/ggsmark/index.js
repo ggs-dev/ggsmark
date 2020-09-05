@@ -56,6 +56,33 @@ export default (text) => {
           ],
           ['http://', 'https://']
         ]
+      },
+      'www.clips.twitch.tv': {
+        tag: 'iframe',
+        width: 720,
+        height: 1280,
+        disabled: false,
+        replace: [
+          [
+            'clips.twitch.tv/',
+            'clips.twitch.tv/embed?clip='
+          ],
+          ['http://', 'https://']
+        ]
+
+      },
+      'clips.twitch.tv': {
+        tag:      'iframe',
+        width:    720,
+        height:   1280,
+        disabled: false,
+        replace: [
+          [
+            'clips.twitch.tv/',
+            'clips.twitch.tv/embed?clip='
+          ],
+          ['http://', 'https://']
+        ],
       }
     })
     .use(align, {
