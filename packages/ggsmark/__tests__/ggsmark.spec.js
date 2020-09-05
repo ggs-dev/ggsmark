@@ -1,5 +1,5 @@
 import dedent from 'dedent'
-import ggsmark from '../index'
+import ggsmark from '../src/ggsmark'
 
 describe('should have github-like markdown', () => {
   test('strikethrough', () => {
@@ -314,3 +314,33 @@ describe('do not render custom html', () => {
     `)
   })
 })
+
+describe('try twitch iframes', () => {
+  test('normal link', () => {
+    // Arrange
+    let string = dedent`
+    !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
+    `
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <h1>test</h1>
+    `)
+   })
+   test('embed link', () => {
+    // Arrange
+    let string = dedent`
+    !(https://clips.twitch.tv/embed?clip=LovelyAstuteCoffeeImGlitch&parent=www.example.com)
+    `
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <h1>test</h1>
+    `)
+   })
+})
+
