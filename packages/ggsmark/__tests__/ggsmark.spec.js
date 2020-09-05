@@ -326,19 +326,23 @@ describe('render twitch blocks', () => {
     let result = ggsmark(string)
 
     // Assert
-    expect(result).toMatchSnapshot()
+    expect(result).toBe(dedent`
+    <iframe src=\"https://clips.twitch.tv/embed?clip=LovelyAstuteCoffeeImGlitch&parent=www.example.com\" frameborder=\"0"\ allowfullscreen=\"true"\ scrolling=\"no"\ height=\"378"\ width=\"620"\></iframe>
+    `
   })
 
   test('content before and after', () => {
     // Arrange
     let string =
-      '**bold text** before text !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch) after text **bold**'
+      '<p><strong>bold text</strong> before text <iframe src=\"https://clips.twitch.tv/embed?clip=LovelyAstuteCoffeeImGlitch&parent=www.example.com\" frameborder=\"0"\ allowfullscreen=\"true"\ scrolling=\"no"\ height=\"378"\ width=\"620"\></iframe> after text <strong>bold</strong></p>'
 
     // Act
     let result = ggsmark(string)
 
     // Assert
-    expect(result).toMatchSnapshot()
+    expect(result).toBe(dedent`
+    
+    `
   })
 
   test('multiple occurrences', () => {
@@ -353,6 +357,11 @@ describe('render twitch blocks', () => {
     let result = ggsmark(string)
 
     // Assert
-    expect(result).toMatchSnapshot()
+    expect(result).toBe(dedent`
+    <iframe src=\"https://clips.twitch.tv/embed?clip=LovelyAstuteCoffeeImGlitch&parent=www.example.com\" frameborder=\"0"\ allowfullscreen=\"true"\ scrolling=\"no"\ height=\"378"\ width=\"620"\></iframe>
+    <iframe src=\"https://clips.twitch.tv/embed?clip=LovelyAstuteCoffeeImGlitch&parent=www.example.com\" frameborder=\"0"\ allowfullscreen=\"true"\ scrolling=\"no"\ height=\"378"\ width=\"620"\></iframe>
+    <iframe src=\"https://clips.twitch.tv/embed?clip=LovelyAstuteCoffeeImGlitch&parent=www.example.com\" frameborder=\"0"\ allowfullscreen=\"true"\ scrolling=\"no"\ height=\"378"\ width=\"620"\></iframe>
+    
+    `
   })
 })
