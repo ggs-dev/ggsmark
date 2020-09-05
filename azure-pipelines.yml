@@ -8,24 +8,6 @@ jobs:
 - job: build
   displayName: Build Node Package
   steps:
-  - task: PowerShell@2
-    name: check
-    displayName: Check Node Version
-    inputs:
-      targetType: inline
-      script: |
-        $package = Get-Content package.json | ConvertFrom-Json
-        $packageName = "$($package.name)@$($package.version)"
-        $checkVersion = npm view $packageName
-        Write-Host "Package is on $packageName"
-        if ($checkVersion) {
-          Write-Host "##vso[task.setvariable variable=Package.VersionExists;isOutput=true]true"
-        } else {
-          Write-Host "##vso[task.setvariable variable=Package.VersionExists;isOutput=true]false"
-        }
-        Write-Host "##vso[task.setvariable variable=Package.Name;isOutput=true]$packageName"
-      pwsh: true
-
   - task: NodeTool@0
     inputs:
       versionSpec: 14.x
@@ -39,7 +21,7 @@ jobs:
   - script: |
       yarn
       yarn test --ci
-    displayName: Test
+    displayName: Run Tests
 
   - task: PublishTestResults@2
     displayName: Publish Test Results
@@ -49,31 +31,10 @@ jobs:
       testRunTitle: Jest Tests
 
 - job: release
-  displayName: Release Node Package
-  condition: and(succeeded(), ne(dependencies.build.outputs['check.Package.VersionExists'], 'true'))
+  displayName: Release Packages
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   dependsOn: build
-  variables:
-    Package.Name: $[ dependencies.build.outputs['check.Package.Name'] ]
   steps:
-  - task: GitHubRelease@1
-    displayName: Release on GitHub
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-    inputs:
-      gitHubConnection: johnnyhuy-github
-      repositoryName: $(Build.Repository.Name)
-      action: create
-      target: $(Build.SourceVersion)
-      tagSource: userSpecifiedTag
-      tag: $(Package.Name)
-      title: $(Package.Name)
-      releaseNotesSource: inline
-      releaseNotesInline: Release of the $(Package.Name).
-      changeLogCompareToRelease: lastFullRelease
-      changeLogType: commitBased
-    
-  - task: Npm@1
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-    inputs:
-      command: publish
-      publishEndpoint: johnnyhuy-npm
-    displayName: Publish Node package
+  - script: |
+      yarn release
+    displayName: Release

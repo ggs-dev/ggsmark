@@ -1,18 +1,24 @@
 {
   "name": "ggsmark-monorepo",
   "private": true,
+  "version": "0.0.0",
   "repository": "https://github.com/johnnyhuy/ggsmark.git",
   "author": "Johnny Huynh <info@johnnyhuy.com>",
   "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "postinstall": "lerna bootstrap --no-ci",
     "format": "prettier packages/**/* --write",
     "lerna": "lerna",
     "lint": "eslint packages/**/*",
-    "test": "jest"
+    "test": "jest",
+    "release": "multi-semantic-release"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.11.0",
+    "@qiwi/multi-semantic-release": "^3.8.3",
     "dedent": "^0.7.0",
     "eslint": "^7.7.0",
     "eslint-config-prettier": "^6.11.0",
