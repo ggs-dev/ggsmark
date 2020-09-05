@@ -314,3 +314,45 @@ describe('do not render custom html', () => {
     `)
   })
 })
+
+describe('render twitch blocks', () => {
+  test('single line', () => {
+    // Arrange
+    let string = dedent`
+    !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+
+  test('content before and after', () => {
+    // Arrange
+    let string =
+      '**bold text** before text !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch) after text **bold**'
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+
+  test('multiple occurrences', () => {
+    // Arrange
+    let string = dedent`
+    !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
+    !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
+    !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+})
