@@ -49,3 +49,6 @@ jobs:
       yarn
       yarn release
     displayName: Release
+    env:
+      GH_TOKEN: $(GH.Token)
+      NPM_TOKEN: $(NPM.Token)
