@@ -69,53 +69,53 @@ I've composed a wiki page to describe features of this extension.
 #### SoundCloud
 
 ```markdown
-:soundcloud https://soundcloud.com/djtechnoboy/tnt-sound-rush-right-now
+!(https://soundcloud.com/djtechnoboy/tnt-sound-rush-right-now)
 ```
 
 #### YouTube
 
 ```markdown
-:youtube https://www.youtube.com/watch?v=pwmY1XUTBpE
+!(https://www.youtube.com/watch?v=pwmY1XUTBpE)
 ```
 
-<!-- #### Color
+#### Color
 
 ```markdown
 # Worded colors
-:color red
+!# red
 Hello I should be in red text :D
-:color
+!#
 
-:color-red this is inline! :color
+!# red (this is inline!)
 
 # 3 Character hex
-:color #AAA
+!# #AAA
 Hello!
-:color
+!#
 
-:color-#AAA this is inline! :color
+!# #AAA (this is inline!)
 
 # 6 Character hex
-:color #DADADA
+!# #DADADA
 Hello!
-:color
+!#
 
-:color-#DADADA this is inline! :color
+!# #DADADA (this is inline!)
 
 # RGB
-:color 255,255,255
+!# 255,255,255
 Hello!
-:color
+!#
 
-:color-255,255,255 this is inline! :color
+!# 255,255,255 (this is inline!)
 
 # RGBA
-:color 255,255,255,50
+!# 255,255,255,50
 Hello!
-:color
+!#
 
-:color-255,255,255,50 this is inline! :color
-``` -->
+!# 255,255,255,50 (this is inline!)
+```
 
 #### Text Alignment
 

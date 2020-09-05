@@ -1,37 +1,37 @@
 {
-  "name": "ggsmark",
-  "version": "0.2.0",
-  "description": "Markdown extension for the Gentlemen's Gaming Society website.",
-  "main": "index.js",
+  "name": "ggsmark-monorepo",
+  "private": true,
+  "version": "0.0.0",
   "repository": "https://github.com/johnnyhuy/ggsmark.git",
   "author": "Johnny Huynh <info@johnnyhuy.com>",
   "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "format": "prettier src/* --write",
-    "lint": "eslint .",
-    "test": "jest"
+    "postinstall": "lerna bootstrap --no-ci",
+    "format": "prettier packages/**/* --write",
+    "lerna": "lerna",
+    "lint": "eslint packages/**/*",
+    "test": "jest",
+    "release": "multi-semantic-release"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.11.0",
+    "@qiwi/multi-semantic-release": "^3.8.3",
     "dedent": "^0.7.0",
     "eslint": "^7.7.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.4.2",
     "jest-junit": "^11.1.0",
+    "lerna": "^3.22.1",
     "prettier": "^2.1.1"
   },
   "dependencies": {
     "@babel/core": "^7.11.4",
     "@babel/preset-env": "^7.11.0",
     "@babel/runtime": "^7.11.2",
-    "regenerator-runtime": "^0.13.7",
-    "rehype-stringify": "^8.0.0",
-    "remark-align": "^1.2.13",
-    "remark-iframes": "^4.0.4",
-    "remark-parse": "^8.0.3",
-    "remark-rehype": "^7.0.0",
-    "remark-stringify": "^8.1.1",
-    "unified": "^9.2.0"
+    "regenerator-runtime": "^0.13.7"
   }
 }
