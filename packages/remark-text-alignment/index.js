@@ -3,9 +3,11 @@ import spaceSeparated from 'space-separated-tokens'
 const C_NEWLINE = '\n'
 const C_NEWPARAGRAPH = '\n\n'
 
-module.exports = function plugin(classNames = {}) {
+export default function plugin(options = {}) {
   const locateMarker = new RegExp(`[^\\\\]?(->|<-)`)
   const endMarkers = ['->', '<-']
+  options.classNames = {}
+  options.useClassNames = options.useClassNames ?? false
 
   function alignTokenizer(eat, value, silent) {
     const keep = value.match(locateMarker)
@@ -54,19 +56,42 @@ module.exports = function plugin(classNames = {}) {
     }
 
     let elementType = ''
-    let classes = ''
+    let classes, style
+
     if (startMarker === '<-' && endMarker === '<-') {
       elementType = 'leftAligned'
-      classes = classNames.left ? classNames.left : 'align-left'
+
+      if (options.useClassNames) {
+        classes = options.classNames.left
+          ? spaceSeparated.parse(options.classNames.left)
+          : 'align-left'
+      } else {
+        style = 'text-align: left'
+      }
     }
+
     if (startMarker === '->') {
       if (endMarker === '<-') {
         elementType = 'centerAligned'
-        classes = classNames.center ? classNames.center : 'align-center'
+
+        if (options.useClassNames) {
+          classes = options.classNames.center
+            ? spaceSeparated.parse(options.classNames.center)
+            : 'align-center'
+        } else {
+          style = 'text-align: center'
+        }
       }
       if (endMarker === '->') {
         elementType = 'rightAligned'
-        classes = classNames.right ? classNames.right : 'align-right'
+
+        if (options.useClassNames) {
+          classes = options.classNames.right
+            ? spaceSeparated.parse(options.classNames.right)
+            : 'align-right'
+        } else {
+          style = 'text-align: right'
+        }
       }
     }
 
@@ -97,7 +122,8 @@ module.exports = function plugin(classNames = {}) {
       data: {
         hName: 'div',
         hProperties: {
-          class: spaceSeparated.parse(classes)
+          class: classes,
+          style
         }
       }
     })
@@ -137,6 +163,7 @@ module.exports = function plugin(classNames = {}) {
 
       return `${start}\n${innerContent.join('\n\n').trim()}\n${end}`
     }
+
     visitors.leftAligned = alignCompiler
     visitors.rightAligned = alignCompiler
     visitors.centerAligned = alignCompiler

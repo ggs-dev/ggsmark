@@ -4,9 +4,6 @@
   "repository": "https://github.com/johnnyhuy/ggsmark.git",
   "author": "Johnny Huynh <info@johnnyhuy.com>",
   "license": "MIT",
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
     "postinstall": "lerna bootstrap --no-ci",
     "format": "prettier packages/**/* --write",
@@ -24,7 +21,9 @@
     "jest": "^26.4.2",
     "jest-junit": "^11.1.0",
     "lerna": "^3.22.1",
-    "prettier": "^2.1.1"
+    "prettier": "^2.1.1",
+    "remark": "^12.0.1",
+    "remark-html": "^12.0.0"
   },
   "dependencies": {
     "@babel/core": "^7.11.4",

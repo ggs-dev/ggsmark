@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`align text with class names should align multi line 1`] = `
+"<div class=\\"align-left\\"><p>This is a multiple line texts
+2nd line here</p></div>
+"
+`;
+
+exports[`align text with class names should align single line 1`] = `
+"<div class=\\"align-left\\"><p>LeftText</p></div>
+"
+`;
+
+exports[`align text with inline style should align multi line 1`] = `
+"<div style=\\"text-align: left\\"><p>This is a multiple line texts
+2nd line here</p></div>
+"
+`;
+
+exports[`align text with inline style should align single line 1`] = `
+"<div style=\\"text-align: left\\"><p>LeftText</p></div>
+"
+`;
