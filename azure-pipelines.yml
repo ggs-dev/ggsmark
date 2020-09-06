@@ -48,7 +48,12 @@ jobs:
   - script: |
       yarn
       yarn release
+      git config --global user.email $GH_EMAIL
+      git config --global user.name $GH_USERNAME
+      git push --tags
     displayName: Release
     env:
+      GH_USERNAME: $(GH.Username)
+      GH_EMAIL: $(GH.Email)
       GH_TOKEN: $(GH.Token)
       NPM_TOKEN: $(NPM.Token)
