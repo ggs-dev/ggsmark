@@ -260,6 +260,7 @@ describe('render right alignment text', () => {
     // Assert
     expect(result).toMatchSnapshot()
   })
+
   test('multi line', () => {
     // Arrange
     let string = dedent`
@@ -273,6 +274,7 @@ describe('render right alignment text', () => {
     expect(result).toMatchSnapshot()
   })
 })
+
 describe('do not render custom html', () => {
   test('span', () => {
     // Arrange

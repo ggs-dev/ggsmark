@@ -13,7 +13,7 @@ describe('align text with inline style', () => {
     // Act
     let result = remark()
       .use(html)
-      .use(alignment, { useInlineStyles: true })
+      .use(alignment)
       .processSync(string)
       .toString()
 
@@ -31,7 +31,7 @@ describe('align text with inline style', () => {
     // Act
     let result = remark()
       .use(html)
-      .use(alignment, { useInlineStyles: true })
+      .use(alignment)
       .processSync(string)
       .toString()
 
@@ -50,7 +50,7 @@ describe('align text with class names', () => {
     // Act
     let result = remark()
       .use(html)
-      .use(alignment)
+      .use(alignment, { useClassNames: true })
       .processSync(string)
       .toString()
 
@@ -68,7 +68,7 @@ describe('align text with class names', () => {
     // Act
     let result = remark()
       .use(html)
-      .use(alignment)
+      .use(alignment, { useClassNames: true })
       .processSync(string)
       .toString()
 

@@ -7,7 +7,7 @@ export default function plugin(options = {}) {
   const locateMarker = new RegExp(`[^\\\\]?(->|<-)`)
   const endMarkers = ['->', '<-']
   options.classNames = {}
-  options.useInlineStyles = options.useInlineStyles ?? false
+  options.useClassNames = options.useClassNames ?? false
 
   function alignTokenizer(eat, value, silent) {
     const keep = value.match(locateMarker)
@@ -61,12 +61,12 @@ export default function plugin(options = {}) {
     if (startMarker === '<-' && endMarker === '<-') {
       elementType = 'leftAligned'
 
-      if (options.useInlineStyles) {
-        style = 'text-align: left'
-      } else {
+      if (options.useClassNames) {
         classes = options.classNames.left
           ? spaceSeparated.parse(options.classNames.left)
           : 'align-left'
+      } else {
+        style = 'text-align: left'
       }
     }
 
@@ -74,23 +74,23 @@ export default function plugin(options = {}) {
       if (endMarker === '<-') {
         elementType = 'centerAligned'
 
-        if (options.useInlineStyles) {
-          style = 'text-align: center'
-        } else {
+        if (options.useClassNames) {
           classes = options.classNames.center
             ? spaceSeparated.parse(options.classNames.center)
             : 'align-center'
+        } else {
+          style = 'text-align: center'
         }
       }
       if (endMarker === '->') {
         elementType = 'rightAligned'
 
-        if (options.useInlineStyles) {
-          style = 'text-align: right'
-        } else {
+        if (options.useClassNames) {
           classes = options.classNames.right
             ? spaceSeparated.parse(options.classNames.right)
             : 'align-right'
+        } else {
+          style = 'text-align: right'
         }
       }
     }
@@ -122,7 +122,7 @@ export default function plugin(options = {}) {
       data: {
         hName: 'div',
         hProperties: {
-          classes ? {class: classes} : null,
+          class: classes,
           style
         }
       }
