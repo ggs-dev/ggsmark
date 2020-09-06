@@ -4,9 +4,6 @@
   "repository": "https://github.com/johnnyhuy/ggsmark.git",
   "author": "Johnny Huynh <info@johnnyhuy.com>",
   "license": "MIT",
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
     "postinstall": "lerna bootstrap",
     "format": "prettier packages/**/* --write",
