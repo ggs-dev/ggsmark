@@ -46,11 +46,10 @@ jobs:
     displayName: Install Yarn
 
   - script: |
-      yarn
-      yarn release
       git config --global user.email $GH_EMAIL
       git config --global user.name $GH_USERNAME
-      git push --tags
+      yarn
+      yarn release
     displayName: Release
     env:
       GH_USERNAME: $(GH.Username)
