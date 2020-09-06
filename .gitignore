@@ -105,3 +105,4 @@ dist
 
 test_results.xml
 package-lock.json
+yarn.lock
