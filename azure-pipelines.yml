@@ -13,22 +13,22 @@ jobs:
       versionSpec: 14.x
     displayName: Install Node.js
 
-  - task: YarnInstaller@3
-    inputs:
-      versionSpec: 1.x
-    displayName: Install Yarn
+  # - task: YarnInstaller@3
+  #   inputs:
+  #     versionSpec: 1.x
+  #   displayName: Install Yarn
 
-  - script: |
-      yarn
-      yarn test --ci
-    displayName: Run Tests
+  # - script: |
+  #     yarn
+  #     yarn test --ci
+  #   displayName: Run Tests
 
-  - task: PublishTestResults@2
-    displayName: Publish Test Results
-    inputs:
-      testResultsFormat: JUnit
-      testResultsFiles: '**/test_results.xml'
-      testRunTitle: Jest Tests
+  # - task: PublishTestResults@2
+  #   displayName: Publish Test Results
+  #   inputs:
+  #     testResultsFormat: JUnit
+  #     testResultsFiles: '**/test_results.xml'
+  #     testRunTitle: Jest Tests
 
 - job: release
   displayName: Release Packages
@@ -45,6 +45,11 @@ jobs:
       versionSpec: 1.x
     displayName: Install Yarn
 
+  - task: npmAuthenticate@0
+    inputs:
+      workingFile: '.npmrc'
+      customEndpoint: 'johnnyhuy-npm'
+
   - script: |
       git remote set-url origin https://$GH_USERNAME:$GH_TOKEN@github.com/johnnyhuy/ggsmark.git
       git config --global user.email $GH_EMAIL
@@ -57,3 +62,13 @@ jobs:
       GH_EMAIL: $(GH.Email)
       GH_TOKEN: $(GH.Token)
       NPM_TOKEN: $(NPM.Token)
+      
+  - task: GitHubRelease@1
+    inputs:
+      gitHubConnection: 'johnnyhuy-github'
+      repositoryName: '$(Build.Repository.Name)'
+      action: 'create'
+      target: '$(Build.SourceVersion)'
+      tagSource: 'gitTag'
+      changeLogCompareToRelease: 'lastFullRelease'
+      changeLogType: 'commitBased'
