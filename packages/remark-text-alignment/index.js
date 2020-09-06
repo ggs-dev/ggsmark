@@ -3,9 +3,11 @@ import spaceSeparated from 'space-separated-tokens'
 const C_NEWLINE = '\n'
 const C_NEWPARAGRAPH = '\n\n'
 
-module.exports = function plugin(classNames = {}) {
+export default function plugin(options = {}) {
   const locateMarker = new RegExp(`[^\\\\]?(->|<-)`)
   const endMarkers = ['->', '<-']
+  options.classNames = {}
+  options.useInlineStyles = options.useInlineStyles ?? false
 
   function alignTokenizer(eat, value, silent) {
     const keep = value.match(locateMarker)
@@ -54,19 +56,42 @@ module.exports = function plugin(classNames = {}) {
     }
 
     let elementType = ''
-    let classes = ''
+    let classes, style
+
     if (startMarker === '<-' && endMarker === '<-') {
       elementType = 'leftAligned'
-      classes = classNames.left ? classNames.left : 'align-left'
+
+      if (options.useInlineStyles) {
+        style = 'text-align: left'
+      } else {
+        classes = options.classNames.left
+          ? spaceSeparated.parse(options.classNames.left)
+          : 'align-left'
+      }
     }
+
     if (startMarker === '->') {
       if (endMarker === '<-') {
         elementType = 'centerAligned'
-        classes = classNames.center ? classNames.center : 'align-center'
+
+        if (options.useInlineStyles) {
+          style = 'text-align: center'
+        } else {
+          classes = options.classNames.center
+            ? spaceSeparated.parse(options.classNames.center)
+            : 'align-center'
+        }
       }
       if (endMarker === '->') {
         elementType = 'rightAligned'
-        classes = classNames.right ? classNames.right : 'align-right'
+
+        if (options.useInlineStyles) {
+          style = 'text-align: right'
+        } else {
+          classes = options.classNames.right
+            ? spaceSeparated.parse(options.classNames.right)
+            : 'align-right'
+        }
       }
     }
 
@@ -97,7 +122,8 @@ module.exports = function plugin(classNames = {}) {
       data: {
         hName: 'div',
         hProperties: {
-          class: spaceSeparated.parse(classes)
+          classes ? {class: classes} : null,
+          style
         }
       }
     })
@@ -137,6 +163,7 @@ module.exports = function plugin(classNames = {}) {
 
       return `${start}\n${innerContent.join('\n\n').trim()}\n${end}`
     }
+
     visitors.leftAligned = alignCompiler
     visitors.rightAligned = alignCompiler
     visitors.centerAligned = alignCompiler
