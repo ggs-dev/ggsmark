@@ -13,14 +13,9 @@ jobs:
       versionSpec: 14.x
     displayName: Install Node.js
 
-  - task: YarnInstaller@3
-    inputs:
-      versionSpec: 1.x
-    displayName: Install Yarn
-
   - script: |
-      yarn
-      yarn test --ci
+      npm run
+      npm run test --ci
     displayName: Run Tests
 
   - task: PublishTestResults@2
@@ -40,17 +35,12 @@ jobs:
       versionSpec: 14.x
     displayName: Install Node.js
 
-  - task: YarnInstaller@3
-    inputs:
-      versionSpec: 1.x
-    displayName: Install Yarn
-
   - script: |
       git remote set-url origin https://$GH_USERNAME:$GH_TOKEN@github.com/johnnyhuy/ggsmark.git
       git config --global user.email $GH_EMAIL
       git config --global user.name $GH_USERNAME
-      yarn
-      yarn release
+      npm run
+      npm run release
     displayName: Release
     env:
       GH_USERNAME: $(GH.Username)
