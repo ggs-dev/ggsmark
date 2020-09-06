@@ -45,11 +45,6 @@ jobs:
       versionSpec: 1.x
     displayName: Install Yarn
 
-  - task: npmAuthenticate@0
-    inputs:
-      workingFile: '.npmrc'
-      customEndpoint: 'johnnyhuy-npm'
-
   - script: |
       git remote set-url origin https://$GH_USERNAME:$GH_TOKEN@github.com/johnnyhuy/ggsmark.git
       git config --global user.email $GH_EMAIL
