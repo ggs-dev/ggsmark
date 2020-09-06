@@ -14,7 +14,7 @@ jobs:
     displayName: Install Node.js
 
   - script: |
-      npm run
+      npm i
       npm run test --ci
     displayName: Run Tests
 
@@ -39,7 +39,7 @@ jobs:
       git remote set-url origin https://$GH_USERNAME:$GH_TOKEN@github.com/johnnyhuy/ggsmark.git
       git config --global user.email $GH_EMAIL
       git config --global user.name $GH_USERNAME
-      npm run
+      npm i
       npm run release
     displayName: Release
     env:
