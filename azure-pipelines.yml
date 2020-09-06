@@ -46,9 +46,25 @@ jobs:
     displayName: Install Yarn
 
   - script: |
+      git remote set-url origin https://$GH_USERNAME:$GH_TOKEN@github.com/johnnyhuy/ggsmark.git
+      git config --global user.email $GH_EMAIL
+      git config --global user.name $GH_USERNAME
       yarn
       yarn release
     displayName: Release
     env:
+      GH_USERNAME: $(GH.Username)
+      GH_EMAIL: $(GH.Email)
       GH_TOKEN: $(GH.Token)
       NPM_TOKEN: $(NPM.Token)
+      
+  - task: GitHubRelease@1
+    displayName: GitHub Release
+    inputs:
+      gitHubConnection: johnnyhuy-github
+      repositoryName: $(Build.Repository.Name)
+      action: create
+      target: $(Build.SourceVersion)
+      tagSource: gitTag
+      changeLogCompareToRelease: lastFullRelease
+      changeLogType: commitBased
