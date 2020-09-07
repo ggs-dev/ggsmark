@@ -1,10 +1,11 @@
 const C_NEWLINE = '\n'
 const C_NEWPARAGRAPH = '\n\n'
 
-export default function plugin() {
+export default function plugin(options = {}) {
   const Parser = this.Parser
   const tokenizers = Parser.prototype.blockTokenizers
   const methods = Parser.prototype.blockMethods
+  options.token = options.token ?? ['!#']
 
   tokenizers.colorContainer = tokenizeColorContainer
 
@@ -14,41 +15,54 @@ export default function plugin() {
   // tokenizeColorContainer.locator = locateMention
 
   function tokenizeColorContainer(eat, value, silent) {
-    let match = /^\!\#\s(\w+||\#[A-z0-9]{3,6}||[A-z]+|\d{1,3}\,\d{1,3}\,\d{1,3}(?:\,\d{1,3})?)/.exec(
-      value
-    )
+    // let match = /^\!\#\s(\w+||\#[A-z0-9]{3,6}||[A-z]+|\d{1,3}\,\d{1,3}\,\d{1,3}(?:\,\d{1,3})?)/.exec(
+    //   value
+    // )
+    let matchToken = value.indexOf(options.token)
 
-    if (!match) return
+    if (matchToken === -1) return
 
     if (silent) return true
 
     let [, color] = match
     let index = 0
-    let linesToEat = []
-    const finishedBlocks = []
+    let prepareEatLines = []
+    const finalEatLines = []
     let canEatLine = true
     let blockStartIndex = 0
 
     while (canEatLine) {
+      // Find new line
       const nextIndex = value.indexOf(C_NEWLINE, index + 1)
+
       const lineToEat =
         nextIndex !== -1 ? value.slice(index, nextIndex) : value.slice(index)
 
-      linesToEat.push(lineToEat)
+      prepareEatLines.push(lineToEat)
+
+      const endIndex = ['!#'].indexOf(lineToEat)
 
       if (
         (nextIndex > blockStartIndex + 2 || nextIndex === -1) &&
-        lineToEat.length >= 2
+        lineToEat.length >= 2 &&
+        endIndex !== -1
       ) {
-        finishedBlocks.push(linesToEat.join(C_NEWLINE))
+        finalEatLines.push(prepareEatLines.join(C_NEWLINE))
 
-        linesToEat = []
+        prepareEatLines = []
         blockStartIndex = nextIndex + 1
       }
 
       index = nextIndex + 1
       canEatLine = nextIndex !== -1
     }
+
+    debugger
+
+    // const add = eat(toEat.join(C_NEWLINE))
+    // const exit = this.enterBlock()
+    // const values = this.tokenizeBlock(stringToEat, now)
+    // exit()
 
     return add({
       type: 'colorContainer',

@@ -42,18 +42,22 @@ describe('color ast testing', () => {
   test('create color block', () => {
     // Arrange
     let string = dedent`
-    # Hello world
+    # Hello world before color
 
-    Test 123
+    before color
 
     !# red
-    Hello I should be in red text :D
+    Hello I should be in red text right under the start point
     
-    # Test
+    # I should still be red text
 
-    Test
-    123
+    more text
+    I'm right above the color token and should still be red
     !#
+    I'm right under the end token
+    after text
+
+    ## Some more headings
     `
 
     // Act
