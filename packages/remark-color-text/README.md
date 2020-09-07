@@ -1,4 +1,4 @@
-# remark-text-alignment
+# remark-color-text
 
 Markdown extension for the Gentlemen's Gaming Society website.
 
@@ -7,7 +7,7 @@ Markdown extension for the Gentlemen's Gaming Society website.
 ```js
 import remark from 'remark'
 import html from 'remark-html'
-import color from 'remark-color-containers'
+import color from 'remark-color-text'
 
 // Basic use
 let output = remark()

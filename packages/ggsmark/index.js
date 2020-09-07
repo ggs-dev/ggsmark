@@ -4,6 +4,7 @@ import stringify from 'rehype-stringify'
 import rehype from 'remark-rehype'
 import iframe from 'remark-iframes'
 import align from 'remark-text-alignment'
+import color from 'remark-color-text'
 
 // Import this since remark-iframe needs it
 import 'regenerator-runtime/runtime'
@@ -58,11 +59,8 @@ export default (text) => {
         ]
       }
     })
-    .use(align, {
-      left: 'align-left',
-      center: 'align-center',
-      right: 'align-right'
-    })
+    .use(align)
+    .use(color)
     .use(rehype)
     .use(stringify)
     .processSync(text)
