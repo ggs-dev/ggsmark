@@ -59,8 +59,8 @@ export default (text) => {
       },
       'www.clips.twitch.tv': {
         tag: 'iframe',
-        width: 378,
-        height: 620,
+        width: 620,
+        height: 378,
         disabled: false,
         replace: [
           [
@@ -73,8 +73,8 @@ export default (text) => {
       },
       'clips.twitch.tv': {
         tag: 'iframe',
-        width: 378,
-        height: 620,
+        width: 620,
+        height: 378,
         disabled: false,
         replace: [
           [
