@@ -6,6 +6,22 @@ Markdown extension for the Gentlemen's Gaming Society website.
 
 Plugin was originally built on top of [zMarkdown's remark-align plugin](https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-align).
 
+## Usage
+
+```js
+import remark from 'remark'
+import html from 'remark-html'
+import alignment from 'remark-text-alignment'
+
+let result = remark()
+  .use(html)
+  .use(alignment)
+  .processSync('example markdown text')
+  .toString()
+
+console.log(result)
+```
+
 ## Examples
 
 ```markdown
