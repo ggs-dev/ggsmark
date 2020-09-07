@@ -63,7 +63,10 @@ export default (text, options = {}) => {
         height: 1280,
         disabled: false,
         replace: [
-          ['clips.twitch.tv/', 'clips.twitch.tv/embed?clip='],
+          [
+            'clips.twitch.tv/',
+            `https://clips.twitch.tv/embed?parent=${options.twitchParentLinks}x&clip=`
+          ],
           ['http://', 'https://']
         ]
 
@@ -74,7 +77,10 @@ export default (text, options = {}) => {
         height: 1280,
         disabled: false,
         replace: [
-          ['clips.twitch.tv/', 'clips.twitch.tv/embed?clip='],
+          [
+            `clips.twitch.tv/`,
+            `https://clips.twitch.tv/embed?parent=${options.twitchParentLinks}x&clip=`
+          ],
           ['http://', 'https://']
         ]
       }
