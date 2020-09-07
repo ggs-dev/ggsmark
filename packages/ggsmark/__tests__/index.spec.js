@@ -321,9 +321,7 @@ describe('do not render custom html', () => {
 describe('render twitch blocks', () => {
   test('single line', () => {
     // Arrange
-    let string = (dedent`
-    !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
-    `, {twitchParentLinks = ['ggs.sx', 'www.ggs.sx', 'example.com']})
+    let string = (dedent`!(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)`, `${twitchParentLinks = ['ggs.sx', 'www.ggs.sx', 'example.com']}`)
 
     // Act
     let result = ggsmark(string)
@@ -337,7 +335,7 @@ describe('render twitch blocks', () => {
   test('content before and after', () => {
     // Arrange
     let string =
-      ('**bold text** before text !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch) after text **bold**', {twitchParentLinks = ['ggs.sx', 'www.ggs.sx', 'example.com']})
+      ('**bold text** before text !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch) after text **bold**', `${twitchParentLinks = ['ggs.sx', 'www.ggs.sx', 'example.com']}`)
 
     // Act
     let result = ggsmark(string)
@@ -354,7 +352,7 @@ describe('render twitch blocks', () => {
     !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
     !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
     !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
-    `, {twitchParentLinks = ['ggs.sx', 'www.ggs.sx', 'example.com']})
+    `, `${twitchParentLinks = ['ggs.sx', 'www.ggs.sx', 'example.com']}`)
 
     // Act
     let result = ggsmark(string)
