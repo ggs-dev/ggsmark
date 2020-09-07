@@ -321,7 +321,7 @@ describe('do not render custom html', () => {
 describe('render twitch blocks', () => {
   test('single line', () => {
     // Arrange
-    let string = dedent()`!(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)`)
+    let string = dedent(`!(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)`)
 
     // Act
     let result = ggsmark(string)
