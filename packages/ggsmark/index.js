@@ -59,13 +59,13 @@ export default (text) => {
       },
       'www.clips.twitch.tv': {
         tag: 'iframe',
-        width: 720,
-        height: 1280,
+        width: 378,
+        height: 620,
         disabled: false,
         replace: [
           [
-            'clips.twitch.tv/',
-            `https://clips.twitch.tv/embed?parent=ggs.sx&clip=`
+            'https://clips.twitch.tv/',
+            'https://clips.twitch.tv/embed?parent=ggs.sx&clip='
           ],
           ['http://', 'https://']
         ]
@@ -73,13 +73,13 @@ export default (text) => {
       },
       'clips.twitch.tv': {
         tag: 'iframe',
-        width: 720,
-        height: 1280,
+        width: 378,
+        height: 620,
         disabled: false,
         replace: [
           [
-            `clips.twitch.tv/`,
-            `https://clips.twitch.tv/embed?parent=ggs.sx&clip=`
+            'https://clips.twitch.tv',
+            'https://clips.twitch.tv/embed?parent=ggs.sx&clip='
           ],
           ['http://', 'https://']
         ]

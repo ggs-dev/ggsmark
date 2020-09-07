@@ -342,7 +342,7 @@ describe('render twitch blocks', () => {
 
     // Assert
     expect(result).toBe(dedent`
-    <p><strong>bold text</strong> before text <iframe src=\"https://clips.twitch.tv/embed?clip=LovelyAstuteCoffeeImGlitch&parent=www.example.com\" frameborder=\"0"\ allowfullscreen=\"true"\ scrolling=\"no"\ height=\"378"\ width=\"620"\></iframe> after text <strong>bold</strong></p>
+    <p><strong>bold text</strong> before text<iframe src=\"https://https//clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=LovelyAstuteCoffeeImGlitch\" width=\"720\" height=\"1280\" allowfullscreen frameborder=\"0\"></iframe> after text <strong>bold</strong></p>
     `)
   })
 
