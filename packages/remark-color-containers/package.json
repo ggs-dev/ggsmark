@@ -1,0 +1,13 @@
+{
+  "name": "remark-color-containers",
+  "version": "0.0.1",
+  "author": "Johnny Huynh <info@johnnyhuy.com>",
+  "scripts": {
+    "test": "jest",
+    "coverage": "jest --coverage"
+  },
+  "keywords": [
+    "remark"
+  ],
+  "license": "MIT"
+}
