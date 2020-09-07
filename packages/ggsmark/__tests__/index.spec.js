@@ -152,7 +152,7 @@ describe('render youtube blocks', () => {
   test('repeated youtube with text before and after', () => {
     // Arrange
     let string = dedent`
-    **bold** string before comyoutube !(http://www.youtube./watch?v=52c_QSg64fs) after youtube !(http://www.youtube.com/watch?v=waefawefwaef) *italics*
+    **bold** string before com youtube !(http://www.youtube.com/watch?v=52c_QSg64fs) after youtube !(http://www.youtube.com/watch?v=waefawefwaef) *italics*
     soft new line
     new line
     `
