@@ -154,7 +154,6 @@ describe('render youtube blocks', () => {
     let string = dedent`
     **bold** string before comyoutube !(http://www.youtube./watch?v=52c_QSg64fs) after youtube !(http://www.youtube.com/watch?v=waefawefwaef) *italics*
     soft new line
-
     new line
     `
 
@@ -191,6 +190,7 @@ describe('render youtube blocks', () => {
     expect(result).toMatchSnapshot()
   })
 })
+
 describe('render left alignment text', () => {
   test('single line', () => {
     // Arrange
@@ -204,6 +204,7 @@ describe('render left alignment text', () => {
     // Assert
     expect(result).toMatchSnapshot()
   })
+
   test('multi line', () => {
     // Arrange
     let string = dedent`
@@ -258,6 +259,7 @@ describe('render right alignment text', () => {
     // Assert
     expect(result).toMatchSnapshot()
   })
+
   test('multi line', () => {
     // Arrange
     let string = dedent`
@@ -271,6 +273,7 @@ describe('render right alignment text', () => {
     expect(result).toMatchSnapshot()
   })
 })
+
 describe('do not render custom html', () => {
   test('span', () => {
     // Arrange
