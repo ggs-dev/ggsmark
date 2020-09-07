@@ -1,34 +1,67 @@
+const C_NEWLINE = '\n'
+const C_NEWPARAGRAPH = '\n\n'
+
 export default function plugin() {
   const Parser = this.Parser
-  const tokenizers = Parser.prototype.inlineTokenizers
-  const methods = Parser.prototype.inlineMethods
+  const tokenizers = Parser.prototype.blockTokenizers
+  const methods = Parser.prototype.blockMethods
 
-  // Add an inline tokenizer (defined in the following example).
-  tokenizers.mention = tokenizeMention
+  tokenizers.colorContainer = tokenizeColorContainer
 
-  // Run it just before `text`.
-  methods.splice(methods.indexOf('text'), 0, 'mention')
+  methods.splice(methods.indexOf('blockquote') + 1, 0, 'colorContainer')
 
-  tokenizeMention.notInLink = true
-  tokenizeMention.locator = locateMention
+  // tokenizeColorContainer.notInLink = true
+  // tokenizeColorContainer.locator = locateMention
 
-  function tokenizeMention(eat, value, silent) {
-    var match = /^@(\w+)/.exec(value)
+  function tokenizeColorContainer(eat, value, silent) {
+    let match = /^\!\#\s(\w+||\#[A-z0-9]{3,6}||[A-z]+|\d{1,3}\,\d{1,3}\,\d{1,3}(?:\,\d{1,3})?)/.exec(
+      value
+    )
 
-    if (match) {
-      if (silent) {
-        return true
+    if (!match) return
+
+    if (silent) return true
+
+    let [, color] = match
+    let index = 0
+    let linesToEat = []
+    const finishedBlocks = []
+    let canEatLine = true
+    let blockStartIndex = 0
+
+    while (canEatLine) {
+      const nextIndex = value.indexOf(C_NEWLINE, index + 1)
+      const lineToEat =
+        nextIndex !== -1 ? value.slice(index, nextIndex) : value.slice(index)
+
+      linesToEat.push(lineToEat)
+
+      if (
+        (nextIndex > blockStartIndex + 2 || nextIndex === -1) &&
+        lineToEat.length >= 2
+      ) {
+        finishedBlocks.push(linesToEat.join(C_NEWLINE))
+
+        linesToEat = []
+        blockStartIndex = nextIndex + 1
       }
 
-      return eat(match[0])({
-        type: 'link',
-        url: 'https://social-network/' + match[1],
-        children: [{ type: 'text', value: match[0] }]
-      })
+      index = nextIndex + 1
+      canEatLine = nextIndex !== -1
     }
+
+    return add({
+      type: 'colorContainer',
+      data: {
+        hName: 'div',
+        hProperties: {
+          style: 'color: red'
+        }
+      }
+    })
   }
 
-  function locateMention(value, fromIndex) {
-    return value.indexOf('@', fromIndex)
-  }
+  // function locateMention(value, fromIndex) {
+  //   return value.indexOf('!#', fromIndex)
+  // }
 }

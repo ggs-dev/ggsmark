@@ -3,11 +3,11 @@ import html from 'remark-html'
 import color from '..'
 import dedent from 'dedent'
 
-describe('align text with inline style', () => {
-  test('should align single line', () => {
+describe('color text with inline style', () => {
+  test('should color single line', () => {
     // Arrange
     let string = dedent`
-    <-LeftText<-
+    !# red (this is inline!)
     `
 
     // Act
@@ -17,11 +17,43 @@ describe('align text with inline style', () => {
     expect(result).toMatchSnapshot()
   })
 
-  test('should align multi line', () => {
+  test('should color multi line', () => {
     // Arrange
     let string = dedent`
-    <-This is a multiple line texts
-    2nd line here<-
+    !# red
+    Hello I should be in red text :D
+    
+    # Test
+
+    Test
+    123
+    !#
+    `
+
+    // Act
+    let result = remark().use(html).use(color).processSync(string).toString()
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+})
+
+describe('color ast testing', () => {
+  test('create color block', () => {
+    // Arrange
+    let string = dedent`
+    # Hello world
+
+    Test 123
+
+    !# red
+    Hello I should be in red text :D
+    
+    # Test
+
+    Test
+    123
+    !#
     `
 
     // Act
