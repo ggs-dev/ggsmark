@@ -8,7 +8,7 @@ import align from 'remark-text-alignment'
 // Import this since remark-iframe needs it
 import 'regenerator-runtime/runtime'
 
-export default (text) => {
+export default (text, options = {}) => {
   return unified()
     .use(markdown, {
       blocks: []
@@ -63,26 +63,20 @@ export default (text) => {
         height: 1280,
         disabled: false,
         replace: [
-          [
-            'clips.twitch.tv/',
-            'clips.twitch.tv/embed?clip='
-          ],
+          ['clips.twitch.tv/', 'clips.twitch.tv/embed?clip='],
           ['http://', 'https://']
         ]
 
       },
       'clips.twitch.tv': {
-        tag:      'iframe',
-        width:    720,
-        height:   1280,
+        tag: 'iframe',
+        width: 720,
+        height: 1280,
         disabled: false,
         replace: [
-          [
-            'clips.twitch.tv/',
-            'clips.twitch.tv/embed?clip='
-          ],
+          ['clips.twitch.tv/', 'clips.twitch.tv/embed?clip='],
           ['http://', 'https://']
-        ],
+        ]
       }
     })
     .use(align, {
