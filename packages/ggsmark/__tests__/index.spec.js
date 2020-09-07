@@ -328,7 +328,7 @@ describe('render twitch blocks', () => {
 
     // Assert
     expect(result).toBe(dedent`
-    <iframe src=\"https://clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=/LovelyAstuteCoffeeImGlitch\" width=\"620\" height=\"378\" allowfullscreen frameborder=\"0\"></iframe>
+    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=/LovelyAstuteCoffeeImGlitch" width="620" height="378" allowfullscreen frameborder="0"></iframe>
     `)
   })
 
@@ -342,7 +342,7 @@ describe('render twitch blocks', () => {
 
     // Assert
     expect(result).toBe(dedent`
-    <p><strong>bold text</strong> before text <iframe src=\"https://clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=/LovelyAstuteCoffeeImGlitch\" width=\"620\" height=\"378\" allowfullscreen frameborder=\"0\"></iframe> after text <strong>bold</strong></p>
+    <p><strong>bold text</strong> before text <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=/LovelyAstuteCoffeeImGlitch" width="620" height="378" allowfullscreen frameborder="0"></iframe> after text <strong>bold</strong></p>
     `)
   })
 
@@ -359,9 +359,9 @@ describe('render twitch blocks', () => {
 
     // Assert
     expect(result).toBe(dedent`
-    <iframe src=\"https://clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=/LovelyAstuteCoffeeImGlitch\" width=\"620\" height=\"378\" allowfullscreen frameborder=\"0\"></iframe>
-    <iframe src=\"https://clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=/LovelyAstuteCoffeeImGlitch\" width=\"620\" height=\"378\" allowfullscreen frameborder=\"0\"></iframe>
-    <iframe src=\"https://clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=/LovelyAstuteCoffeeImGlitch\" width=\"620\" height=\"378\" allowfullscreen frameborder=\"0\"></iframe>
+    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=/LovelyAstuteCoffeeImGlitch" width="620" height="378" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=/LovelyAstuteCoffeeImGlitch" width="620" height="378" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=/LovelyAstuteCoffeeImGlitch" width="620" height="378" allowfullscreen frameborder="0"></iframe>
     `)
   })
 })
