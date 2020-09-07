@@ -6,21 +6,19 @@ pool:
 
 jobs:
 - job: build
-  displayName: Build Node Package
+  displayName: Build
   steps:
   - task: NodeTool@0
     inputs:
       versionSpec: 14.x
     displayName: Install Node.js
 
-  - task: YarnInstaller@3
-    inputs:
-      versionSpec: 1.x
-    displayName: Install Yarn
+  - script: |
+      npm ci
+    displayName: Install Packages
 
   - script: |
-      yarn
-      yarn test --ci
+      npm run test --ci
     displayName: Run Tests
 
   - task: PublishTestResults@2
@@ -31,7 +29,7 @@ jobs:
       testRunTitle: Jest Tests
 
 - job: release
-  displayName: Release Packages
+  displayName: Release
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   dependsOn: build
   steps:
@@ -40,18 +38,19 @@ jobs:
       versionSpec: 14.x
     displayName: Install Node.js
 
-  - task: YarnInstaller@3
+  - task: npmAuthenticate@0
+    displayName: NPM Login
     inputs:
-      versionSpec: 1.x
-    displayName: Install Yarn
+      workingFile: .npmrc
+      customEndpoint: johnnyhuy-npm
 
   - script: |
       git remote set-url origin https://$GH_USERNAME:$GH_TOKEN@github.com/johnnyhuy/ggsmark.git
       git config --global user.email $GH_EMAIL
       git config --global user.name $GH_USERNAME
-      yarn
-      yarn release
-    displayName: Release
+      npm ci
+      npm run release
+    displayName: Node Packages
     env:
       GH_USERNAME: $(GH.Username)
       GH_EMAIL: $(GH.Email)
@@ -59,7 +58,7 @@ jobs:
       NPM_TOKEN: $(NPM.Token)
       
   - task: GitHubRelease@1
-    displayName: GitHub Release
+    displayName: GitHub
     inputs:
       gitHubConnection: johnnyhuy-github
       repositoryName: $(Build.Repository.Name)

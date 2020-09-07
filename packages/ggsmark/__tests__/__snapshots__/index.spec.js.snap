@@ -1,25 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`render center alignment text multi line 1`] = `
-"<div class=\\"align-center\\"><p>This is a multiple line texts
+"<div style=\\"text-align: center\\"><p>This is a multiple line texts
 2nd line here</p></div>"
 `;
 
-exports[`render center alignment text single line 1`] = `"<div class=\\"align-center\\"><p>CenterText</p></div>"`;
+exports[`render center alignment text single line 1`] = `"<div style=\\"text-align: center\\"><p>CenterText</p></div>"`;
 
 exports[`render left alignment text multi line 1`] = `
-"<div class=\\"align-left\\"><p>This is a multiple line texts
+"<div style=\\"text-align: left\\"><p>This is a multiple line texts
 2nd line here</p></div>"
 `;
 
-exports[`render left alignment text single line 1`] = `"<div class=\\"align-left\\"><p>LeftText</p></div>"`;
+exports[`render left alignment text single line 1`] = `"<div style=\\"text-align: left\\"><p>LeftText</p></div>"`;
 
 exports[`render right alignment text multi line 1`] = `
-"<div class=\\"align-right\\"><p>This is a multiple line texts
+"<div style=\\"text-align: right\\"><p>This is a multiple line texts
 2nd line here</p></div>"
 `;
 
-exports[`render right alignment text single line 1`] = `"<div class=\\"align-right\\"><p>RightText</p></div>"`;
+exports[`render right alignment text single line 1`] = `"<div style=\\"text-align: right\\"><p>RightText</p></div>"`;
 
 exports[`render soundcloud blocks content before and after 1`] = `"<p><strong>bold text</strong> before text !(<a href=\\"https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion\\">https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion</a>) after text <strong>bold</strong></p>"`;
 

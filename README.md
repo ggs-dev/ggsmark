@@ -1,10 +1,12 @@
 # GGSMark
 
-Markdown extension for the Gentlemen's Gaming Society website.
+Monorepo of [remark](https://github.com/remarkjs/remark) packages including a Markdown extension for the Gentlemen's Gaming Society website.
 
 ## Credits
 
 This package is built on top of the [remarkjs/remark](https://github.com/remarkjs/remark) ecosystem. Mad props to the community and their [plugins](https://github.com/remarkjs/remark/blob/HEAD/doc/plugins.md#list-of-plugins).
+
+Packages in this monorepo have taken inspiration from [zestedesavoir/zmarkdown](https://github.com/zestedesavoir/zmarkdown). Check out their large suite of plugins!
 
 ## Installing
 

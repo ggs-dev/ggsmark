@@ -104,5 +104,4 @@ dist
 .tern-port
 
 test_results.xml
-package-lock.json
 yarn.lock
