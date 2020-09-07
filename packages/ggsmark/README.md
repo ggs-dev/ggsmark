@@ -1,28 +1,90 @@
-# remark-text-alignment
+# GGSMark
 
-Markdown extension for the Gentlemen's Gaming Society website.
-
-## Credits
-
-Plugin was originally built on top of [zMarkdown's remark-align plugin](https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-align).
+This is the Markdown package used in the GGS.SX website.
 
 ## Usage
 
+Basic usage example:
+
 ```js
-import remark from 'remark'
-import html from 'remark-html'
-import alignment from 'remark-text-alignment'
+// If you use ESModules
+import ggsmark from 'ggsmark'
 
-let result = remark()
-  .use(html)
-  .use(alignment)
-  .processSync('example markdown text')
-  .toString()
+let output = ggsmark('**foo** bar')
 
-console.log(result)
+console.log(output) // <p><strong>foo</strong> bar</p>
 ```
 
-## Examples
+It's also worth investigating unit tests to understand the expected output.
+
+## Wiki
+
+I've composed a wiki page to describe features of this extension.
+
+### Markdown features
+
+#### Strikethrough
+```markdown
+~~Text~~
+```
+
+<!-- #### Spoiler
+```
+||secret suprise||
+``` -->
+
+#### SoundCloud
+
+```markdown
+!(https://soundcloud.com/djtechnoboy/tnt-sound-rush-right-now)
+```
+
+#### YouTube
+
+```markdown
+!(https://www.youtube.com/watch?v=pwmY1XUTBpE)
+```
+
+#### Color
+
+```markdown
+# Worded colors
+!# red
+Hello I should be in red text :D
+!#
+
+!# red (this is inline!)
+
+# 3 Character hex
+!# #AAA
+Hello!
+!#
+
+!# #AAA (this is inline!)
+
+# 6 Character hex
+!# #DADADA
+Hello!
+!#
+
+!# #DADADA (this is inline!)
+
+# RGB
+!# 255,255,255
+Hello!
+!#
+
+!# 255,255,255 (this is inline!)
+
+# RGBA
+!# 255,255,255,50
+Hello!
+!#
+
+!# 255,255,255,50 (this is inline!)
+```
+
+#### Text Alignment
 
 ```markdown
 # Center alignment

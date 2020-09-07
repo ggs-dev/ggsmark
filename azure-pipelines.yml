@@ -6,7 +6,7 @@ pool:
 
 jobs:
 - job: build
-  displayName: Build Node Package
+  displayName: Build
   steps:
   - task: NodeTool@0
     inputs:
@@ -14,7 +14,7 @@ jobs:
     displayName: Install Node.js
 
   - script: |
-      npm i
+      npm ci
     displayName: Install Packages
 
   - script: |
@@ -29,7 +29,7 @@ jobs:
       testRunTitle: Jest Tests
 
 - job: release
-  displayName: Release Packages
+  displayName: Release
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   dependsOn: build
   steps:
@@ -42,9 +42,10 @@ jobs:
       git remote set-url origin https://$GH_USERNAME:$GH_TOKEN@github.com/johnnyhuy/ggsmark.git
       git config --global user.email $GH_EMAIL
       git config --global user.name $GH_USERNAME
-      npm i
+      npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
+      npm ci
       npm run release
-    displayName: Release
+    displayName: Node Packages
     env:
       GH_USERNAME: $(GH.Username)
       GH_EMAIL: $(GH.Email)
@@ -52,7 +53,7 @@ jobs:
       NPM_TOKEN: $(NPM.Token)
       
   - task: GitHubRelease@1
-    displayName: GitHub Release
+    displayName: GitHub
     inputs:
       gitHubConnection: johnnyhuy-github
       repositoryName: $(Build.Repository.Name)

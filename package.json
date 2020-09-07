@@ -5,12 +5,12 @@
   "author": "Johnny Huynh <info@johnnyhuy.com>",
   "license": "MIT",
   "scripts": {
-    "postinstall": "lerna bootstrap --no-ci",
+    "postinstall": "lerna bootstrap",
     "format": "prettier packages/**/* --write",
     "lerna": "lerna",
     "lint": "eslint packages/**/*",
     "test": "jest",
-    "release": "lerna publish from-git && git push --tags"
+    "release": "lerna publish from-package --yes && git push --tags"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.11.0",
