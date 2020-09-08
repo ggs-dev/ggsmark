@@ -51,6 +51,15 @@ describe('color ast testing', () => {
     
     # I should still be red text
 
+    !#
+
+    text in between
+
+    !# blue
+    Hello I should be in red text right under the start point
+    
+    # I should still be blue text
+
     more text
     I'm right above the color token and should still be red
     !#

@@ -6,17 +6,22 @@ export default function plugin(options = {}) {
   const tokenizers = Parser.prototype.blockTokenizers
   const methods = Parser.prototype.blockMethods
 
-  options.token = options.token ?? /^\!\#/
+  options.openCloseToken = options.openCloseToken ?? /^\!\#/
+  options.colorExpression =
+    options.colorExpression ??
+    /^\!\#(\s(?:(\#?[A-z]{3,12}|\d{1,3}\,\s?\d{1,3}\,\s?\d{1,3}(\,\s?\d{1,3})?)))?$/
 
   tokenizers.colorContainer = tokenizeColorContainer
 
-  methods.splice(methods.indexOf('blockquote') + 1, 0, 'colorContainer')
+  methods.splice(methods.indexOf('list') + 1, 0, 'colorContainer')
 
   // tokenizeColorContainer.notInLink = true
   // tokenizeColorContainer.locator = locateMention
 
   function tokenizeColorContainer(eat, value, silent) {
-    let match = value.match(options.token)
+    let match = value.match(options.openCloseToken)
+
+    return
 
     if (!match) return
 
@@ -41,7 +46,7 @@ export default function plugin(options = {}) {
 
       prepareEatLines.push(lineToEat)
 
-      endToken = entered && !!lineToEat.match(options.token)
+      endToken = entered && !!lineToEat.match(options.openCloseToken)
       entered = true
 
       if (
@@ -53,22 +58,27 @@ export default function plugin(options = {}) {
 
         prepareEatLines = []
         blockStartIndex = nextNewLine + 1
+        entered = false
       }
 
       index = nextNewLine + 1
       canEatLine = nextNewLine !== -1
     }
-    debugger
-    // const add = eat(toEat.join(C_NEWLINE))
-    // const values = this.tokenizeBlock(stringToEat, now)
-    // this.enterBlock()
+
+    if (finalEatLines.length === 0) return
+
+    let split = finalEatLines[0].split(options.colorExpression)
+
+    const add = eat(finalEatLines[0].join(C_NEWLINE))
+    const values = this.tokenizeBlock(stringToEat, now)
+    this.enterBlock()
 
     return add({
       type: 'colorContainer',
       data: {
         hName: 'div',
         hProperties: {
-          style: 'color: red'
+          style: 'color: ' + color
         }
       }
     })
