@@ -6,83 +6,75 @@ export default function plugin(options = {}) {
   const tokenizers = Parser.prototype.blockTokenizers
   const methods = Parser.prototype.blockMethods
 
-  options.openCloseToken = options.openCloseToken ?? /^\!\#/
   options.colorExpression =
     options.colorExpression ??
-    /^\!\#(\s(?:(\#?[A-z]{3,12}|\d{1,3}\,\s?\d{1,3}\,\s?\d{1,3}(\,\s?\d{1,3})?)))?$/
+    /^\s*\!\#(?:\s(?:(\#?[A-z0-9]{3,12}|\d{1,3}\,\s?\d{1,3}\,\s?\d{1,3}(\,\s?\d{1,3})?)))?/
 
-  tokenizers.colorContainer = tokenizeColorContainer
-
-  methods.splice(methods.indexOf('list') + 1, 0, 'colorContainer')
-
-  // tokenizeColorContainer.notInLink = true
-  // tokenizeColorContainer.locator = locateMention
-
-  function tokenizeColorContainer(eat, value, silent) {
-    let match = value.match(options.openCloseToken)
-
-    return
+  function tokenize(eat, value, silent) {
+    let match = value.match(options.colorExpression)
 
     if (!match) return
 
     if (silent) return true
 
-    const now = eat.now()
-    let index = 0
-    let prepareEatLines = []
-    const finalEatLines = []
-    let canEatLine = true
-    let blockStartIndex = 0
-    let entered = false
-    let endToken = false
+    // Get the color through expression
+    let [, color] = match
+    let startBlockIndex,
+      endBlockIndex = 0
+    let index,
+      newLineIndex = 0
+    let completeBlock = false
+    let matchedEndToken = []
+    let firstRun = true
 
-    while (canEatLine) {
-      const nextNewLine = value.indexOf(C_NEWLINE, index + 1)
+    do {
+      newLineIndex = value.indexOf(C_NEWLINE, index + 1)
+      let line = value.substring(index, newLineIndex)
 
-      const lineToEat =
-        nextNewLine !== -1
-          ? value.slice(index, nextNewLine)
-          : value.slice(index)
+      matchedEndToken = line.match(options.colorExpression)
 
-      prepareEatLines.push(lineToEat)
-
-      endToken = entered && !!lineToEat.match(options.openCloseToken)
-      entered = true
-
-      if (
-        (nextNewLine > blockStartIndex + 2 || nextNewLine === -1) &&
-        lineToEat.length >= 2 &&
-        endToken
-      ) {
-        finalEatLines.push(prepareEatLines.join(C_NEWLINE))
-
-        prepareEatLines = []
-        blockStartIndex = nextNewLine + 1
-        entered = false
+      // Found a match to end the block
+      if (!!matchedEndToken && !firstRun) {
+        endBlockIndex = newLineIndex
+        completeBlock = true
       }
+      // debugger
+      index = newLineIndex
+      firstRun = false
+    } while (!completeBlock || newLineIndex >= value.length)
 
-      index = nextNewLine + 1
-      canEatLine = nextNewLine !== -1
-    }
+    let block = value.substring(startBlockIndex, endBlockIndex)
+    let blockContent = block
+      .substring(block.indexOf(C_NEWLINE), block.lastIndexOf(C_NEWLINE))
+      .trim()
 
-    if (finalEatLines.length === 0) return
-
-    let split = finalEatLines[0].split(options.colorExpression)
-
-    const add = eat(finalEatLines[0].join(C_NEWLINE))
-    const values = this.tokenizeBlock(stringToEat, now)
-    this.enterBlock()
+    const start = eat.now()
+    const add = eat(block)
+    const end = eat.now()
+    const children = this.tokenizeBlock(blockContent, start)
 
     return add({
-      type: 'colorContainer',
+      type: 'colorText',
+      children: children,
       data: {
         hName: 'div',
         hProperties: {
-          style: 'color: ' + color
+          style: `color: ${color}`
         }
+      },
+      position: {
+        start,
+        end
       }
     })
   }
+
+  tokenizers.colorText = tokenize
+
+  methods.splice(methods.indexOf('blockquote') + 1, 0, 'colorText')
+
+  // tokenizeColorText.notInLink = true
+  // tokenizeColorText.locator = locateMention
 
   // function locateMention(value, fromIndex) {
   //   return value.indexOf('!#', fromIndex)

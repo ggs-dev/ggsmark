@@ -3,7 +3,8 @@ import html from 'remark-html'
 import color from '..'
 import dedent from 'dedent'
 
-describe('color text with inline style', () => {
+describe('color text with inline style', () => {\
+  // TODO this one is timing out since the loop it not stopping
   test('should color single line', () => {
     // Arrange
     let string = dedent`
@@ -36,10 +37,8 @@ describe('color text with inline style', () => {
     // Assert
     expect(result).toMatchSnapshot()
   })
-})
 
-describe('color ast testing', () => {
-  test('create color block', () => {
+  test('multiple lines of coloring', () => {
     // Arrange
     let string = dedent`
     # Hello world before color
@@ -56,12 +55,12 @@ describe('color ast testing', () => {
     text in between
 
     !# blue
-    Hello I should be in red text right under the start point
+    Hello I should be in blue text right under the start point
     
     # I should still be blue text
 
     more text
-    I'm right above the color token and should still be red
+    I'm right above the color token and should still be blue
     !#
     I'm right under the end token
     after text

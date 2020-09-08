@@ -1,27 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`color ast testing create color block 1`] = `
-"!# red
-Hello I should be in red text :D
-
-# Test
-
-Test
-123
-!#
+exports[`color text with inline style multiple lines of coloring 1`] = `
+"<h1>Hello world before color</h1>
+<p>before color</p>
+<div style=\\"color: red\\"><p>Hello I should be in red text right under the start point</p><h1>I should still be red text</h1></div>
+<p>text in between</p>
+<div style=\\"color: blue\\"><p>Hello I should be in blue text right under the start point</p><h1>I should still be blue text</h1><p>more text
+I'm right above the color token and should still be blue</p></div>
+<p>I'm right under the end token
+after text</p>
+<h2>Some more headings</h2>
 "
 `;
 
 exports[`color text with inline style should color multi line 1`] = `
-"<div style=\\"color: red\\"><p>red
-Hello I should be in red text :D</p>
+"<div style=\\"color: red\\"></div>
+<p>Hello I should be in red text :D</p>
 <h1>Test</h1>
 <p>Test
-123</p></div>
-"
-`;
-
-exports[`color text with inline style should color single line 1`] = `
-"<div style=\\"color: red\\"><p>this is inline!</p></div>
+123</p>
 "
 `;
