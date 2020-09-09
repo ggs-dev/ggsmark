@@ -31,6 +31,7 @@ export default function plugin(options = {}) {
   const tokenizers = Parser.prototype.blockTokenizers
   const methods = Parser.prototype.blockMethods
 
+  // TODO: select tokens once found so that we can close them properly
   options.tokens = ['!#']
 
   // TODO: add RGB to regex

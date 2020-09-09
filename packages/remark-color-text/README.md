@@ -21,7 +21,23 @@ console.log(output)
 
 ## Options
 
-TODO
+### `.use(color, '[, options])`
+
+Add the color plugin to remark.
+
+### `options`
+
+#### `options.tokens`
+
+Array of strings used to check tokens.
+
+**Default** `['!#']`
+
+#### `options.colorExpression`
+
+Regular expression used to get the color from a tokenized block. The **first** capture group is set as the color.
+
+**Default** `/^(?:(\#?[A-z0-9]{3,12}|\d{1,3}\,\s?\d{1,3}\,\s?\d{1,3}(\,\s?\d{1,3})?))?/`
 
 ## Examples
 
@@ -48,17 +64,17 @@ Hello!
 !# #DADADA (this is inline!)
 
 # RGB
-!# 255,255,255
+!# rgb(255,255,255)
 Hello!
 !#
 
-!# 255,255,255 (this is inline!)
+!# rgb(255,255,255) (this is inline!)
 
 # RGBA
-!# 255,255,255,50
+!# rgba(255,255,255,50)
 Hello!
 !#
 
-!# 255,255,255,50 (this is inline!)
+!# rgba(255,255,255,50) (this is inline!)
 ```
 
