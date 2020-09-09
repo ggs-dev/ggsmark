@@ -21,7 +21,7 @@ console.log(output)
 
 ## Options
 
-### `.use(color, '[, options])`
+### `.use(color [, options])`
 
 Add the color plugin to remark.
 
