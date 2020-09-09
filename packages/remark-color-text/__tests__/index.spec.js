@@ -18,15 +18,27 @@ describe('color text with inline style', () => {
     expect(result).toMatchSnapshot()
   })
 
+  test('should not color if token never ends', () => {
+    // Arrange
+    let string = dedent`
+    !# red
+    
+    this should not be red
+
+    there's no end!!!
+    `
+
+    // Act
+    let result = remark().use(html).use(color).processSync(string).toString()
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+
   test('should color multi line', () => {
     // Arrange
     let string = dedent`
     !# red
-    Hello I should be in red text :D
-    
-    # Test
-
-    Test
     123
     !#
     `

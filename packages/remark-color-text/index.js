@@ -24,24 +24,29 @@ export default function plugin(options = {}) {
     let index,
       newLineIndex = 0
     let completeBlock = false
-    let matchedEndToken = []
     let firstRun = true
 
     do {
       newLineIndex = value.indexOf(C_NEWLINE, index + 1)
-      let line = value.substring(index, newLineIndex)
 
-      matchedEndToken = line.match(options.colorExpression)
+      if (newLineIndex === -1) {
+        break
+      }
+
+      let line = value.substring(index, newLineIndex)
+      let matchedEndToken = line.match(options.colorExpression)
 
       // Found a match to end the block
       if (!!matchedEndToken && !firstRun) {
         endBlockIndex = newLineIndex
         completeBlock = true
       }
-      // debugger
+
       index = newLineIndex
       firstRun = false
-    } while (!completeBlock || newLineIndex >= value.length)
+    } while (!completeBlock)
+
+    if (!completeBlock) return
 
     let block = value.substring(startBlockIndex, endBlockIndex)
     let blockContent = block

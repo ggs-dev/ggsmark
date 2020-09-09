@@ -14,10 +14,19 @@ after text</p>
 `;
 
 exports[`color text with inline style should color multi line 1`] = `
-"<div style=\\"color: red\\"></div>
-<p>Hello I should be in red text :D</p>
-<h1>Test</h1>
-<p>Test
-123</p>
+"<div style=\\"color: red\\">
+<p>1233</p></div>
+"
+`;
+
+exports[`color text with inline style should color single line 1`] = `
+"<p>!# red (this is inline!)</p>
+"
+`;
+
+exports[`color text with inline style should not color if token never ends 1`] = `
+"<p>!# red</p>
+<p>this should not be red</p>
+<p>there's no end!!!</p>
 "
 `;
