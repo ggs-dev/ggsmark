@@ -152,7 +152,7 @@ describe('render youtube blocks', () => {
   test('repeated youtube with text before and after', () => {
     // Arrange
     let string = dedent`
-    **bold** string before comyoutube !(http://www.youtube./watch?v=52c_QSg64fs) after youtube !(http://www.youtube.com/watch?v=waefawefwaef) *italics*
+    **bold** string before comyoutube !(http://www.youtube.com/watch?v=52c_QSg64fs) after youtube !(http://www.youtube.com/watch?v=waefawefwaef) *italics*
     soft new line
     new line
     `
@@ -317,7 +317,7 @@ describe('do not render custom html', () => {
   })
 })
 
-describe('render twitch video blocks', () => {
+describe('render twitch stream blocks', () => {
   test('single line', () => {
     // Arrange
     let string = dedent(`!(http://www.twitch.tv/heavybob)`)
@@ -351,6 +351,54 @@ describe('render twitch video blocks', () => {
     !(https://www.twitch.tv/heavybob)
     !(https://www.twitch.tv/heavybob)
     !(https://www.twitch.tv/heavybob)
+    `)
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://www.player.twitch.tv/?parent=ggs.sx&#x26;channel=heavybob" width="620" height="378" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://www.player.twitch.tv/?parent=ggs.sx&#x26;channel=heavybob" width="620" height="378" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://www.player.twitch.tv/?parent=ggs.sx&#x26;channel=heavybob" width="620" height="378" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+})
+
+describe('render twitch video blocks', () => {
+  test('single line', () => {
+    // Arrange
+    let string = dedent(`!(https://www.twitch.tv/videos/726762096)`)
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://www.player.twitch.tv/?parent=ggs.sx&#x26;channel=heavybob" width="620" height="378" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('content before and after', () => {
+    // Arrange
+    let string =
+      '**bold text** before text !(https://www.twitch.tv/videos/726762096) after text **bold**'
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <p><strong>bold text</strong> before text <iframe src=\"https://www.player.twitch.tv/?parent=ggs.sx&#x26;channel=heavybob\" width=\"620\" height=\"378\" allowfullscreen frameborder=\"0\"></iframe> after text <strong>bold</strong></p>
+    `)
+  })
+
+  test('multiple occurrences', () => {
+    // Arrange
+    let string = dedent(`
+    !(https://www.twitch.tv/videos/726762096)
+    !(https://www.twitch.tv/videos/726762096)
+    !(https://www.twitch.tv/videos/726762096)
     `)
 
     // Act

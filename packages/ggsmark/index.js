@@ -99,6 +99,26 @@ export default (text) => {
           ['twitch.tv/', 'player.twitch.tv/?parent=ggs.sx&channel='],
           ['http://', 'https://']
         ]
+      },
+      'www.twitch.tv/videos': {
+        tag: 'iframe',
+        width: 620,
+        height: 378,
+        disabled: false,
+        replace: [
+          ['twitch.tv/videos/', 'player.twitch.tv/?parent=ggs.sx&video='],
+          ['http://', 'https://']
+        ]
+      },
+      'twitch.tv/videos': {
+        tag: 'iframe',
+        width: 620,
+        height: 378,
+        disabled: false,
+        replace: [
+          ['twitch.tv/videos/', 'player.twitch.tv/?parent=ggs.sx&video='],
+          ['http://', 'https://']
+        ]
       }
     })
     .use(align, {
