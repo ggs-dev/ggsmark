@@ -69,7 +69,6 @@ export default (text) => {
           ],
           ['http://', 'https://']
         ]
-
       },
       'clips.twitch.tv': {
         tag: 'iframe',
@@ -77,10 +76,27 @@ export default (text) => {
         height: 378,
         disabled: false,
         replace: [
-          [
-            'https://clips.twitch.tv',
-            'https://clips.twitch.tv/embed?parent=ggs.sx&clip='
-          ],
+          ['clips.twitch.tv', 'clips.twitch.tv/embed?parent=ggs.sx&clip='],
+          ['http://', 'https://']
+        ]
+      },
+      'www.twitch.tv': {
+        tag: 'iframe',
+        width: 620,
+        height: 378,
+        disabled: false,
+        replace: [
+          ['twitch.tv/', 'player.twitch.tv/?parent=ggs.sx&channel='],
+          ['http://', 'https://']
+        ]
+      },
+      'twitch.tv': {
+        tag: 'iframe',
+        width: 620,
+        height: 378,
+        disabled: false,
+        replace: [
+          ['twitch.tv/', 'player.twitch.tv/?parent=ggs.sx&channel='],
           ['http://', 'https://']
         ]
       }

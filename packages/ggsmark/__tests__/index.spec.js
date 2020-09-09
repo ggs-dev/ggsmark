@@ -163,8 +163,6 @@ describe('render youtube blocks', () => {
     // Assert
     expect(result).toMatchSnapshot()
   })
-
-
   test('repeated youtube', () => {
     // Arrange
     let string = dedent`
@@ -315,6 +313,54 @@ describe('do not render custom html', () => {
     // Assert
     expect(result).toBe(dedent`
     <p>Test</p>
+    `)
+  })
+})
+
+describe('render twitch video blocks', () => {
+  test('single line', () => {
+    // Arrange
+    let string = dedent(`!(http://www.twitch.tv/heavybob)`)
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://www.player.twitch.tv/?parent=ggs.sx&#x26;channel=heavybob" width="620" height="378" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('content before and after', () => {
+    // Arrange
+    let string =
+      '**bold text** before text !(https://www.twitch.tv/heavybob) after text **bold**'
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <p><strong>bold text</strong> before text <iframe src=\"https://www.player.twitch.tv/?parent=ggs.sx&#x26;channel=heavybob\" width=\"620\" height=\"378\" allowfullscreen frameborder=\"0\"></iframe> after text <strong>bold</strong></p>
+    `)
+  })
+
+  test('multiple occurrences', () => {
+    // Arrange
+    let string = dedent(`
+    !(https://www.twitch.tv/heavybob)
+    !(https://www.twitch.tv/heavybob)
+    !(https://www.twitch.tv/heavybob)
+    `)
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://www.player.twitch.tv/?parent=ggs.sx&#x26;channel=heavybob" width="620" height="378" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://www.player.twitch.tv/?parent=ggs.sx&#x26;channel=heavybob" width="620" height="378" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://www.player.twitch.tv/?parent=ggs.sx&#x26;channel=heavybob" width="620" height="378" allowfullscreen frameborder="0"></iframe>
     `)
   })
 })
