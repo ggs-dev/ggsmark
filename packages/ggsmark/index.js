@@ -86,31 +86,11 @@ export default (text) => {
         height: 378,
         disabled: false,
         replace: [
-          ['twitch.tv/', 'player.twitch.tv/?parent=ggs.sx&channel='],
-          ['http://', 'https://']
-        ]
-      },
-      'twitch.tv': {
-        tag: 'iframe',
-        width: 620,
-        height: 378,
-        disabled: false,
-        replace: [
-          ['twitch.tv/', 'player.twitch.tv/?parent=ggs.sx&channel='],
-          ['http://', 'https://']
-        ]
-      },
-      'www.twitch.tv/videos': {
-        tag: 'iframe',
-        width: 620,
-        height: 378,
-        disabled: false,
-        replace: [
           ['twitch.tv/videos/', 'player.twitch.tv/?parent=ggs.sx&video='],
           ['http://', 'https://']
         ]
       },
-      'twitch.tv/videos': {
+      'twitch.tv': {
         tag: 'iframe',
         width: 620,
         height: 378,
