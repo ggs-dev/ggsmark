@@ -59,20 +59,20 @@ export default (text) => {
       },
       'www.clips.twitch.tv': {
         tag: 'iframe',
-        width: 620,
+        width: '100%',
         height: 378,
         disabled: false,
         replace: [
           [
-            'https://clips.twitch.tv/',
-            'https://clips.twitch.tv/embed?parent=ggs.sx&clip='
+            'www.clips.twitch.tv/',
+            'www.clips.twitch.tv/embed?parent=ggs.sx&clip='
           ],
           ['http://', 'https://']
         ]
       },
       'clips.twitch.tv': {
         tag: 'iframe',
-        width: 620,
+        width: '100%',
         height: 378,
         disabled: false,
         replace: [
