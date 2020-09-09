@@ -14,8 +14,7 @@ after text</p>
 `;
 
 exports[`color text with inline style should color multi line 1`] = `
-"<div style=\\"color: red\\">
-<p>1233</p></div>
+"<div style=\\"color: red\\"><p>123</p></div>
 "
 `;
 

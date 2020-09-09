@@ -29,22 +29,21 @@ export default function plugin(options = {}) {
     do {
       newLineIndex = value.indexOf(C_NEWLINE, index + 1)
 
-      if (newLineIndex === -1) {
-        break
-      }
-
-      let line = value.substring(index, newLineIndex)
+      let line = value.substring(
+        index,
+        newLineIndex === -1 ? value.length : newLineIndex
+      )
       let matchedEndToken = line.match(options.colorExpression)
 
       // Found a match to end the block
       if (!!matchedEndToken && !firstRun) {
-        endBlockIndex = newLineIndex
+        endBlockIndex = newLineIndex === -1 ? value.length : newLineIndex
         completeBlock = true
       }
 
       index = newLineIndex
       firstRun = false
-    } while (!completeBlock)
+    } while (!completeBlock && newLineIndex !== -1)
 
     if (!completeBlock) return
 

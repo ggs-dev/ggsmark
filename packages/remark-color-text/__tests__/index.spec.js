@@ -4,7 +4,6 @@ import color from '..'
 import dedent from 'dedent'
 
 describe('color text with inline style', () => {
-  // TODO this one is timing out since the loop it not stopping
   test('should color single line', () => {
     // Arrange
     let string = dedent`
