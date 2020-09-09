@@ -1,24 +1,52 @@
 const C_NEWLINE = '\n'
 const C_NEWPARAGRAPH = '\n\n'
 
+/**
+ * Match line against an array of tokens
+ * @param {Array<String>} tokens list of tokens like '!#'
+ * @param {String} line single line to check of the token
+ */
+function matchTokens(tokens, line) {
+  return tokens.findIndex((token) => line.trim().startsWith(token)) !== -1
+}
+
+/**
+ * Get the color of a block
+ * @param {Array<String>} tokens list of tokens like '!#'
+ * @param {String} colorExpression regular expression to match, it must capture the first group
+ * @param {String} block final string block to be parsed
+ */
+function getBlockColor(tokens, colorExpression, block) {
+  for (let token of tokens) {
+    let trimmedBlock = block.trim()
+    if (trimmedBlock.startsWith(token)) {
+      return trimmedBlock.slice(token.length).match(colorExpression)[1]
+      break
+    }
+  }
+}
+
 export default function plugin(options = {}) {
   const Parser = this.Parser
   const tokenizers = Parser.prototype.blockTokenizers
   const methods = Parser.prototype.blockMethods
 
+  options.tokens = ['!#']
+
+  // TODO: add RGB to regex
   options.colorExpression =
     options.colorExpression ??
-    /^\s*\!\#(?:\s(?:(\#?[A-z0-9]{3,12}|\d{1,3}\,\s?\d{1,3}\,\s?\d{1,3}(\,\s?\d{1,3})?)))?/
+    /^(?:(\#?[A-z0-9]{3,12}|\d{1,3}\,\s?\d{1,3}\,\s?\d{1,3}(\,\s?\d{1,3})?))?/
 
-  function tokenize(eat, value, silent) {
-    let match = value.match(options.colorExpression)
+  function tokenizeBlocks(eat, value, silent) {
+    // let match = value.match(options.colorExpression)
+    let match = matchTokens(options.tokens, value)
 
     if (!match) return
 
     if (silent) return true
 
     // Get the color through expression
-    let [, color] = match
     let startBlockIndex,
       endBlockIndex = 0
     let index,
@@ -33,10 +61,10 @@ export default function plugin(options = {}) {
         index,
         newLineIndex === -1 ? value.length : newLineIndex
       )
-      let matchedEndToken = line.match(options.colorExpression)
+      let matchedEndToken = matchTokens(options.tokens, line) && !firstRun
 
       // Found a match to end the block
-      if (!!matchedEndToken && !firstRun) {
+      if (!!matchedEndToken) {
         endBlockIndex = newLineIndex === -1 ? value.length : newLineIndex
         completeBlock = true
       }
@@ -51,6 +79,8 @@ export default function plugin(options = {}) {
     let blockContent = block
       .substring(block.indexOf(C_NEWLINE), block.lastIndexOf(C_NEWLINE))
       .trim()
+
+    let color = getBlockColor(options.tokens, options.colorExpression, block)
 
     const start = eat.now()
     const add = eat(block)
@@ -73,14 +103,9 @@ export default function plugin(options = {}) {
     })
   }
 
-  tokenizers.colorText = tokenize
+  tokenizers.colorText = tokenizeBlocks
+
+  // TODO: add inline tokenizer
 
   methods.splice(methods.indexOf('blockquote') + 1, 0, 'colorText')
-
-  // tokenizeColorText.notInLink = true
-  // tokenizeColorText.locator = locateMention
-
-  // function locateMention(value, fromIndex) {
-  //   return value.indexOf('!#', fromIndex)
-  // }
 }
