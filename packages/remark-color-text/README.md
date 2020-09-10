@@ -37,7 +37,7 @@ Array of strings used to check tokens.
 
 Regular expression used to get the color from a tokenized block. The **first** capture group is set as the color.
 
-**Default** `/^(?:(\#?[A-z0-9]{3,12}|\d{1,3}\,\s?\d{1,3}\,\s?\d{1,3}(\,\s?\d{1,3})?))?/`
+**Default** `/^\s*(rgba?\(\d{1,3}\s*\,\s*\d{1,3}\s*\,\s*\d{1,3}\s*(\,\s*\d{1,3}\s*)?\)|(\#?[A-z0-9]{3,12}))?/`
 
 ## Examples
 

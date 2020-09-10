@@ -14,12 +14,12 @@ after text</p>
 `;
 
 exports[`block color text with inline style should color hex 3 characters 1`] = `
-"<div style=\\"color: red\\"><p>123</p></div>
+"<div style=\\"color: #A0D\\"><p>123</p></div>
 "
 `;
 
 exports[`block color text with inline style should color hex 6 characters 1`] = `
-"<div style=\\"color: red\\"><p>123</p></div>
+"<div style=\\"color: #D0E10E\\"><p>123</p></div>
 "
 `;
 

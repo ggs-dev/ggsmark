@@ -37,7 +37,7 @@ export default function plugin(options = {}) {
   // TODO: add RGB to regex
   options.colorExpression =
     options.colorExpression ??
-    /^(?:(\#?[A-z0-9]{3,12}|\d{1,3}\,\s?\d{1,3}\,\s?\d{1,3}(\,\s?\d{1,3})?))?/
+    /^\s*(rgba?\(\d{1,3}\s*\,\s*\d{1,3}\s*\,\s*\d{1,3}\s*(\,\s*\d{1,3}\s*)?\)|(\#?[A-z0-9]{3,12}))?/
 
   function tokenizeBlocks(eat, value, silent) {
     // let match = value.match(options.colorExpression)
