@@ -28,13 +28,14 @@ function getBlockColor(tokens, colorExpression, block) {
 
 export default function plugin(options = {}) {
   const Parser = this.Parser
-  const tokenizers = Parser.prototype.blockTokenizers
-  const methods = Parser.prototype.blockMethods
+  const blockTokenizers = Parser.prototype.blockTokenizers
+  const blockMethods = Parser.prototype.blockMethods
+  const inlineTokenizers = Parser.prototype.inlineTokenizers
+  const inlineMethods = Parser.prototype.inlineMethods
 
   // TODO: select tokens once found so that we can close them properly
   options.tokens = ['!#']
 
-  // TODO: add RGB to regex
   options.colorExpression =
     options.colorExpression ??
     /^\s*(rgba?\(\d{1,3}\s*\,\s*\d{1,3}\s*\,\s*\d{1,3}\s*(\,\s*\d{1,3}\s*)?\)|(\#?[A-z0-9]{3,12}))?/
@@ -104,9 +105,32 @@ export default function plugin(options = {}) {
     })
   }
 
-  tokenizers.colorText = tokenizeBlocks
+  function locateInlineToken(value, fromIndex) {
+    return value.indexOf('@', fromIndex)
+  }
 
-  // TODO: add inline tokenizer
+  function tokenizeInlines(eat, value, silent) {
+    var match = /^@(\w+)/.exec(value)
 
-  methods.splice(methods.indexOf('blockquote') + 1, 0, 'colorText')
+    if (match) {
+      if (silent) {
+        return true
+      }
+
+      return eat(match[0])({
+        type: 'link',
+        url: 'https://social-network/' + match[1],
+        children: [{ type: 'text', value: match[0] }]
+      })
+    }
+  }
+
+  tokenizeInlines.notInLink = true
+  tokenizeInlines.locator = locateInlineToken
+
+  blockTokenizers.colorText = tokenizeBlocks
+  inlineTokenizers.colorText = tokenizeInlines
+
+  blockMethods.splice(blockMethods.indexOf('blockquote') + 1, 0, 'colorText')
+  inlineMethods.splice(inlineMethods.indexOf('escape') + 1, 0, 'colorText')
 }
