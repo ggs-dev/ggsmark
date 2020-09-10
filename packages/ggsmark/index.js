@@ -86,7 +86,10 @@ export default (text) => {
         height: 378,
         disabled: false,
         replace: [
-          ['twitch.tv/videos/', 'player.twitch.tv/?parent=ggs.sx&video='],
+          [
+            'www.twitch.tv/videos/',
+            'www.player.twitch.tv/?parent=ggs.sx&video='
+          ],
           ['http://', 'https://']
         ]
       },

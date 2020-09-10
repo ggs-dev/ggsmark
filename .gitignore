@@ -105,3 +105,4 @@ dist
 
 test_results.xml
 yarn.lock
+.vscode/settings.json
