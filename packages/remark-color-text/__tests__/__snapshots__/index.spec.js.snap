@@ -51,7 +51,10 @@ exports[`block color text with inline style should short line 1`] = `
 `;
 
 exports[`inline color text with inline style should color between text 1`] = `
-"<p>Lorem ipsum dolor sit <span style=\\"color: red\\">amet</span>, consectetur adipiscing elit.
+"<p>Test</p>
+<p>Lorem ipsum dolor sit <span style=\\"color: red\\"><strong>Vestibulum cursus volutpat auctor</strong></span>, consectetur adipiscing elit.
+Vestibulum cursus volutpat auctor. <span style=\\"color: #D0E10E\\">Pellentesque euismod</span> ipsum placerat arcu condimentum mattis.</p>
+<p>Lorem ipsum dolor sit <span style=\\"color: red\\">amet</span>, consectetur adipiscing elit.
 Vestibulum cursus volutpat auctor. <span style=\\"color: #D0E10E\\">Pellentesque euismod</span> ipsum placerat arcu condimentum mattis.</p>
 "
 `;

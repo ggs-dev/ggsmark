@@ -179,6 +179,11 @@ describe('inline color text with inline style', () => {
   test('should color between text', () => {
     // Arrange
     let string = dedent`
+    Test
+
+    Lorem ipsum dolor sit !# red (**Vestibulum cursus volutpat auctor**), consectetur adipiscing elit.
+    Vestibulum cursus volutpat auctor. !# #D0E10E (Pellentesque euismod) ipsum placerat arcu condimentum mattis.
+
     Lorem ipsum dolor sit !# red (amet), consectetur adipiscing elit.
     Vestibulum cursus volutpat auctor. !# #D0E10E (Pellentesque euismod) ipsum placerat arcu condimentum mattis.
     `

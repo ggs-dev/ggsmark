@@ -5,13 +5,8 @@ const C_NEWPARAGRAPH = '\n\n'
  * Match line against an array of token
  * @param {String} token token like '!#'
  * @param {String} value value to check of the token
- * @param {Integer} fromIndex where the index should start
  */
-function matchToken(token, value, fromIndex = 0) {
-  if (fromIndex > 0) {
-    value.slice(fromIndex)
-  }
-
+function matchToken(token, value) {
   return value.trim().startsWith(token)
 }
 
@@ -47,35 +42,32 @@ export default function plugin(options = {}) {
 
     if (silent) return true
 
-    let startBlockIndex,
-      endBlockIndex = 0
+    let startBlock,
+      endBlock = 0
     let index,
-      newLineIndex = 0
+      newLine = 0
     let completeBlock = false
     let firstRun = true
 
     do {
-      newLineIndex = value.indexOf(C_NEWLINE, index + 1)
+      newLine = value.indexOf(C_NEWLINE, index + 1)
 
-      let line = value.substring(
-        index,
-        newLineIndex === -1 ? value.length : newLineIndex
-      )
+      let line = value.substring(index, newLine === -1 ? value.length : newLine)
       let matchedEndToken = matchToken(options.token, line) && !firstRun
 
       // Found a match to end the block
       if (!!matchedEndToken) {
-        endBlockIndex = newLineIndex === -1 ? value.length : newLineIndex
+        endBlock = newLine === -1 ? value.length : newLine
         completeBlock = true
       }
 
-      index = newLineIndex
+      index = newLine
       firstRun = false
-    } while (!completeBlock && newLineIndex !== -1)
+    } while (!completeBlock && newLine !== -1)
 
     if (!completeBlock) return
 
-    let block = value.substring(startBlockIndex, endBlockIndex)
+    let block = value.substring(startBlock, endBlock)
     let blockContent = block
       .substring(block.indexOf(C_NEWLINE), block.lastIndexOf(C_NEWLINE))
       .trim()
@@ -103,30 +95,52 @@ export default function plugin(options = {}) {
     })
   }
 
-  // function locateInlineToken(value, fromIndex) {
-  //   return matchToken(options.token, value, fromIndex)
-  // }
+  function locateInlineToken(value, fromIndex) {
+    return value.indexOf(options.token, fromIndex)
+  }
 
-  // function tokenizeInlines(eat, value, silent) {
-  //   var match = matchToken(options.token, value)
+  function tokenizeInlines(eat, value, silent) {
+    let match = matchToken(options.token, value)
 
-  //   if (!match) return
+    if (!match) return
 
-  //   if (silent) return true
+    if (silent) return true
 
-  //   return eat(match)({
-  //     type: 'link',
-  //     url: 'https://social-network/' + match[1],
-  //     children: [{ type: 'text', value: match[0] }]
-  //   })
-  // }
+    let color = getBlockColor(options.token, options.colorExpression, value)
+    let openBracket = value.indexOf('(') + 1
+    let closeBracket = value.indexOf(')')
+    let inline = value.substring(0, closeBracket + 1)
+    let inlineContent = value.substring(openBracket, closeBracket)
 
-  // tokenizeInlines.notInLink = true
-  // tokenizeInlines.locator = locateInlineToken
+    if (openBracket === -1 || closeBracket === -1) return
+
+    const start = eat.now()
+    const add = eat(inline)
+    const end = eat.now()
+    const children = this.tokenizeInline(inlineContent, start)
+
+    return add({
+      type: 'colorText',
+      children: children,
+      data: {
+        hName: 'span',
+        hProperties: {
+          style: `color: ${color}`
+        }
+      },
+      position: {
+        start,
+        end
+      }
+    })
+  }
+
+  tokenizeInlines.notInLink = true
+  tokenizeInlines.locator = locateInlineToken
 
   blockTokenizers.colorText = tokenizeBlocks
-  // inlineTokenizers.colorText = tokenizeInlines
+  inlineTokenizers.colorText = tokenizeInlines
 
   blockMethods.splice(blockMethods.indexOf('blockquote') + 1, 0, 'colorText')
-  // inlineMethods.splice(inlineMethods.indexOf('escape') + 1, 0, 'colorText')
+  inlineMethods.splice(inlineMethods.indexOf('escape') + 1, 0, 'colorText')
 }
