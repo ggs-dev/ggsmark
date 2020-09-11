@@ -88,7 +88,7 @@ export default (text) => {
         replace: [
           [
             'www.twitch.tv/videos/',
-            'www.player.twitch.tv/?parent=ggs.sx&video='
+            `www.player.twitch.tv/?${parents}&video=`
           ],
           ['http://', 'https://']
         ]
