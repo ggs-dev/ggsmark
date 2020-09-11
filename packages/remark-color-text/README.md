@@ -29,9 +29,9 @@ Add the color plugin to remark.
 
 #### `options.tokens`
 
-Array of strings used to check tokens.
+Token used to open and close colored text.
 
-**Default** `['!#']`
+**Default** `!#`
 
 #### `options.colorExpression`
 
