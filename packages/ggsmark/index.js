@@ -1,7 +1,6 @@
 import unified from 'unified'
 import markdown from 'remark-parse'
-import stringify from 'rehype-stringify'
-import rehype from 'remark-rehype'
+import html from 'rehype-html'
 import iframe from 'remark-iframes'
 import align from 'remark-text-alignment'
 import color from 'remark-color-text'
@@ -61,8 +60,7 @@ export default (text) => {
     })
     .use(align)
     .use(color)
-    .use(rehype)
-    .use(stringify)
+    .use(html, { sanitize: true })
     .processSync(text)
     .toString()
 }
