@@ -1,6 +1,7 @@
 import unified from 'unified'
 import markdown from 'remark-parse'
-import html from 'remark-html'
+import stringify from 'rehype-stringify'
+import rehype from 'remark-rehype'
 import iframe from 'remark-iframes'
 import align from 'remark-text-alignment'
 import color from 'remark-color-text'
@@ -13,7 +14,6 @@ export default (text) => {
     .use(markdown, {
       blocks: []
     })
-    .use(html)
     .use(iframe, {
       'www.youtube.com': {
         tag: 'iframe',
@@ -60,6 +60,8 @@ export default (text) => {
       }
     })
     .use(align)
+    .use(rehype)
+    .use(stringify)
     .use(color)
     .processSync(text)
     .toString()
