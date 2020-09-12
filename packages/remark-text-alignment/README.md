@@ -13,14 +13,34 @@ import remark from 'remark'
 import html from 'remark-html'
 import alignment from 'remark-text-alignment'
 
-let result = remark()
+// Basic use
+let output = remark()
   .use(html)
   .use(alignment)
   .processSync('example markdown text')
   .toString()
 
-console.log(result)
+console.log(output)
+
+// Use class names and set right class name to example-right
+let output = remark()
+  .use(html)
+  .use(alignment, {
+    useClassNames: true,
+    classNames: {
+      left: 'example-right'
+    }
+  })
+  .processSync('example markdown text')
+  .toString()
+
+console.log(output)
 ```
+
+## Options
+
+- `useClassNames`: Enable class names instead of inline CSS
+- `classNames`: Object that contains left, right and center class names (useClassNames must be enabled)
 
 ## Examples
 
