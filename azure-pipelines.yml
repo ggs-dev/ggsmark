@@ -45,7 +45,6 @@ jobs:
       npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
       npm ci
       npm run release
-      git push --tags
     displayName: Node Packages
     env:
       GH_USERNAME: $(GH.Username)
@@ -53,13 +52,3 @@ jobs:
       GH_TOKEN: $(GH.Token)
       NPM_TOKEN: $(NPM.Token)
       
-  - task: GitHubRelease@1
-    displayName: GitHub
-    inputs:
-      gitHubConnection: johnnyhuy-github
-      repositoryName: $(Build.Repository.Name)
-      action: create
-      target: $(Build.SourceVersion)
-      tagSource: gitTag
-      changeLogCompareToRelease: lastFullRelease
-      changeLogType: commitBased
