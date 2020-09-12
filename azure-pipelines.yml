@@ -45,6 +45,7 @@ jobs:
       npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
       npm ci
       npm run release
+      git push --tags
     displayName: Node Packages
     env:
       GH_USERNAME: $(GH.Username)

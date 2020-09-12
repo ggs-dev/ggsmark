@@ -10,7 +10,7 @@
     "lerna": "lerna",
     "lint": "eslint packages/**/*",
     "test": "jest",
-    "release": "lerna publish from-package --yes && git push --tags"
+    "release": "lerna publish from-package --yes"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.11.0",
