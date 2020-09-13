@@ -1,6 +1,6 @@
 # remark-color-text
 
-Markdown extension for the Gentlemen's Gaming Society website.
+[remark](https://github.com/remarkjs/remark) plugin to color text via block and inline text in Markdown.
 
 ## Usage
 
@@ -9,14 +9,11 @@ import remark from 'remark'
 import html from 'remark-html'
 import color from 'remark-color-text'
 
-// Basic use
-let output = remark()
+remark()
   .use(html)
   .use(color)
-  .processSync('example markdown text')
-  .toString()
 
-console.log(output)
+...
 ```
 
 ## Options
@@ -27,7 +24,7 @@ Add the color plugin to remark.
 
 ### `options`
 
-#### `options.tokens`
+#### `options.token`
 
 Token used to open and close colored text.
 
