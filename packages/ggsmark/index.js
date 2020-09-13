@@ -3,7 +3,6 @@ import markdown from 'remark-parse'
 import merge from 'deepmerge'
 import gh from 'hast-util-sanitize/lib/github'
 import sanitize from 'rehype-sanitize'
-import 'core-js'
 
 // Plugins
 import iframe from 'remark-iframes'
