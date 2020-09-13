@@ -6,6 +6,7 @@ Monorepo of [remark](https://github.com/remarkjs/remark) packages including a Ma
 
 - [`ggsmark`](https://github.com/johnnyhuy/ggsmark/tree/master/packages/ggsmark) - Markdown package used in ggs.sx
 - [`remark-text-alignment`](https://github.com/johnnyhuy/ggsmark/tree/master/packages/remark-text-alignment) - remark plugin to align text
+- [`remark-spoilers`](https://github.com/johnnyhuy/ggsmark/tree/master/packages/remark-spoilers) - remark spoilers to hide Markdown content
 - [`remark-color-text`](https://github.com/johnnyhuy/ggsmark/tree/master/packages/remark-color-text) - remark plugin to set colors inline and blocks
 
 ## Credits
