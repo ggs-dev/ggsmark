@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.9](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.8.8...ggsmark@0.8.9) (2020-09-13)
+
+
+### Bug Fixes
+
+* Added runtime ([46671d9](https://github.com/johnnyhuy/ggsmark/commit/46671d96a8687a6c951b20b0e49cc6f6971bb74b))
+* added the regenerator package properly ([17a5dcf](https://github.com/johnnyhuy/ggsmark/commit/17a5dcfd4fd163bf53f3233c5460af6befe4d099))
+
+
+
+
+
 ## [0.8.8](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.8.7...ggsmark@0.8.8) (2020-09-13)
 
 

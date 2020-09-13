@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.9](https://github.com/johnnyhuy/ggsmark/compare/remark-spoilers@0.4.8...remark-spoilers@0.4.9) (2020-09-13)
+
+**Note:** Version bump only for package remark-spoilers
+
+
+
+
+
 ## [0.4.8](https://github.com/johnnyhuy/ggsmark/compare/remark-spoilers@0.4.7...remark-spoilers@0.4.8) (2020-09-13)
 
 
