@@ -1,6 +1,6 @@
 import remark from 'remark'
 import html from 'remark-html'
-import color from '..'
+import spoiler from '..'
 import dedent from 'dedent'
 
 describe('spoilers', () => {
@@ -13,7 +13,7 @@ describe('spoilers', () => {
     `
 
     // Act
-    let result = remark().use(html).use(color).processSync(string).toString()
+    let result = remark().use(html).use(spoiler).processSync(string).toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -28,7 +28,7 @@ describe('spoilers', () => {
     `
 
     // Act
-    let result = remark().use(html).use(color).processSync(string).toString()
+    let result = remark().use(html).use(spoiler).processSync(string).toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -55,7 +55,7 @@ describe('spoilers', () => {
     `
 
     // Act
-    let result = remark().use(html).use(color).processSync(string).toString()
+    let result = remark().use(html).use(spoiler).processSync(string).toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -72,7 +72,56 @@ describe('spoilers', () => {
     `
 
     // Act
-    let result = remark().use(html).use(color).processSync(string).toString()
+    let result = remark().use(html).use(spoiler).processSync(string).toString()
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+
+  test('should not show spoiler if duped start token', () => {
+    // Arrange
+    let string = dedent`
+    !spoiler
+    !spoiler
+    !spoiler
+    !spoiler
+    !spoiler
+    !spoiler
+    !spoiler
+    !spoiler
+    !spoiler
+    !spoiler
+    !spoiler
+    !spoiler
+    
+    why isn't this working!?
+
+    there's no end!!!
+    `
+
+    // Act
+    let result = remark().use(html).use(spoiler).processSync(string).toString()
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+
+  test('should not show spoiler if duped start token with summary', () => {
+    // Arrange
+    let string = dedent`
+    !spoiler testestestsetset
+    !spoiler lorem
+    !spoiler testipsum
+    !spoiler loreeem
+    !spoiler yeet
+    
+    why isn't this working!?
+
+    there's no end!!!
+    `
+
+    // Act
+    let result = remark().use(html).use(spoiler).processSync(string).toString()
 
     // Assert
     expect(result).toMatchSnapshot()

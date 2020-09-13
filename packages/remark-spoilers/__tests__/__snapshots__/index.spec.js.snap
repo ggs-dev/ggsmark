@@ -1,70 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`block color text with inline style multiple lines of coloring 1`] = `
-"<h1>Hello world before color</h1>
-<p>before color</p>
-<div style=\\"color: red\\"><p>Hello I should be in red text right under the start point</p><h1>I should still be red text</h1></div>
-<p>text in between</p>
-<div style=\\"color: blue\\"><p>Hello I should be in blue text right under the start point</p><h1>I should still be blue text</h1><p>more text
-I'm right above the color token and should still be blue</p></div>
-<p>I'm right under the end token
-after text</p>
-<h2>Some more headings</h2>
-"
-`;
-
-exports[`block color text with inline style should color hex 3 characters 1`] = `
-"<div style=\\"color: #A0D\\"><p>123</p></div>
-"
-`;
-
-exports[`block color text with inline style should color hex 6 characters 1`] = `
-"<div style=\\"color: #D0E10E\\"><p>123</p></div>
-"
-`;
-
-exports[`block color text with inline style should color rgb 1`] = `
-"<div style=\\"color: rgb(100 ,100, 100)\\"><p>123</p></div>
-"
-`;
-
-exports[`block color text with inline style should color rgba 1`] = `
-"<div style=\\"color: rgba(100 ,100, 100, 10)\\"><p>123</p></div>
-"
-`;
-
-exports[`block color text with inline style should not color if token never ends 1`] = `
-"<p>!# red</p>
-<p>this should not be red</p>
+exports[`spoilers should not show spoiler if duped start token 1`] = `
+"<details></details>
+<details></details>
+<details></details>
+<details></details>
+<details></details>
+<details></details>
+<p>why isn't this working!?</p>
 <p>there's no end!!!</p>
 "
 `;
 
-exports[`block color text with inline style should not escape 1`] = `
-"<div style=\\"color: #D0E10E\\"><p>123</p></div>
+exports[`spoilers should not show spoiler if duped start token with summary 1`] = `
+"<details><summary>testestestsetset</summary></details>
+<details><summary>testipsum</summary></details>
+<p>!spoiler yeet</p>
+<p>why isn't this working!?</p>
+<p>there's no end!!!</p>
 "
 `;
 
-exports[`block color text with inline style should short line 1`] = `
-"<div style=\\"color: red\\"><p>123</p></div>
+exports[`spoilers should not show spoiler if not closed 1`] = `
+"<p>!spoiler</p>
+<p>why isn't this working!?</p>
+<p>there's no end!!!</p>
 "
 `;
 
-exports[`inline color text with inline style should color between text 1`] = `
-"<p>Test</p>
-<p>Lorem ipsum dolor sit <span style=\\"color: red\\"><strong>Vestibulum cursus volutpat auctor</strong></span>, consectetur adipiscing elit.
-Vestibulum cursus volutpat auctor. <span style=\\"color: #D0E10E\\">Pellentesque euismod</span> ipsum placerat arcu condimentum mattis.</p>
-<p>Lorem ipsum dolor sit <span style=\\"color: red\\">amet</span>, consectetur adipiscing elit.
-Vestibulum cursus volutpat auctor. <span style=\\"color: #D0E10E\\">Pellentesque euismod</span> ipsum placerat arcu condimentum mattis.</p>
+exports[`spoilers should show multiple spoilers 1`] = `
+"<h1>Hello world</h1>
+<p>This is some text.</p>
+<details><summary>Click me to see a surprise</summary><p>peek-a-boo!</p></details>
+<p>between the spoilers</p>
+<details><summary>Another click me to see a surprise</summary><p>peek-a-boo!</p></details>
+<p>the end</p>
 "
 `;
 
-exports[`inline color text with inline style should color single line 1`] = `
-"<p><span style=\\"color: red\\">this is inline!</span></p>
+exports[`spoilers should show spoiler with custom summary 1`] = `
+"<details><summary>Click me to see a surprise</summary><p>peek-a-boo!</p></details>
 "
 `;
 
-exports[`inline color text with inline style should not color if not closed 1`] = `
-"<p>!# red (this is inline!</p>
+exports[`spoilers should show spoiler without custom summary 1`] = `
+"<details><p>peek-a-boo!</p></details>
 "
 `;

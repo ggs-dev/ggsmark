@@ -17,10 +17,10 @@ export default function plugin(options = {}) {
   const inlineTokenizers = Parser.prototype.inlineTokenizers
   const inlineMethods = Parser.prototype.inlineMethods
 
-  options.token = options.token ?? '!#'
-  options.colorExpression =
-    options.colorExpression ??
-    /^\s*(rgba?\(\d{1,3}\s*\,\s*\d{1,3}\s*\,\s*\d{1,3}\s*(\,\s*\d{1,3}\s*)?\)|(\#?[A-z0-9]{3,12}))?/
+  options.defaultSummary = options.defaultSummary ?? 'Open spoiler'
+  options.token = options.token ?? '!spoiler'
+  options.detailsClassName = options.detailsClassName ?? ''
+  options.summaryClassName = options.summaryClassName ?? ''
 
   function tokenizeBlocks(eat, value, silent) {
     let match = matchToken(options.token, value)
@@ -58,11 +58,32 @@ export default function plugin(options = {}) {
     let blockContent = block
       .substring(block.indexOf(C_NEWLINE), block.lastIndexOf(C_NEWLINE))
       .trim()
+    let summary = block
+      .slice(options.token.length, block.indexOf(C_NEWLINE))
+      .trim()
 
     const start = eat.now()
     const add = eat(block)
     const end = eat.now()
-    const children = this.tokenizeBlock(blockContent, start)
+    let children = []
+    let childrenBlockContent = this.tokenizeBlock(blockContent, start)
+
+    if (summary !== '') {
+      children.push({
+        type: 'summary',
+        data: {
+          hName: 'summary'
+        },
+        children: [
+          {
+            type: 'text',
+            value: summary
+          }
+        ]
+      })
+    }
+
+    children = [...children, ...childrenBlockContent]
 
     return add({
       type: 'spoiler',
@@ -77,48 +98,7 @@ export default function plugin(options = {}) {
     })
   }
 
-  function locateInlineToken(value, fromIndex) {
-    return value.indexOf(options.token, fromIndex)
-  }
-
-  function tokenizeInlines(eat, value, silent) {
-    let match = matchToken(options.token, value)
-
-    if (!match) return
-
-    if (silent) return true
-
-    let openBracket = value.indexOf('(') + 1
-    let closeBracket = value.indexOf(')')
-    let inline = value.substring(0, closeBracket + 1)
-    let inlineContent = value.substring(openBracket, closeBracket)
-
-    if (openBracket === -1 || closeBracket === -1) return
-
-    const start = eat.now()
-    const add = eat(inline)
-    const end = eat.now()
-    const children = this.tokenizeInline(inlineContent, start)
-
-    return add({
-      type: 'spoiler',
-      children: children,
-      data: {
-        hName: 'span'
-      },
-      position: {
-        start,
-        end
-      }
-    })
-  }
-
-  tokenizeInlines.notInLink = true
-  tokenizeInlines.locator = locateInlineToken
-
   blockTokenizers.spoiler = tokenizeBlocks
-  inlineTokenizers.spoiler = tokenizeInlines
 
   blockMethods.splice(blockMethods.indexOf('blockquote') + 1, 0, 'spoiler')
-  inlineMethods.splice(inlineMethods.indexOf('escape') + 1, 0, 'spoiler')
 }
