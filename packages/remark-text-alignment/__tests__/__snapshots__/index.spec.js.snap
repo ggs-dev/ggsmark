@@ -1,8 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`align text with class names should align multi line 1`] = `
-"<div class=\\"align-left\\"><p>This is a multiple line texts
+"<h1>Before text</h1>
+<p>More before text</p>
+<div class=\\"align-left\\"><p>This is a multiple line texts
 2nd line here</p></div>
+<p>After text</p>
+<h2>More heading after text</h2>
 "
 `;
 
