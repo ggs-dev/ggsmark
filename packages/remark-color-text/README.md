@@ -2,6 +2,12 @@
 
 [remark](https://github.com/remarkjs/remark) plugin to color text via block and inline text in Markdown.
 
+## Installation
+
+```bash
+npm i remark-color-text
+```
+
 ## Usage
 
 ```js

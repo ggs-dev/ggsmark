@@ -9,6 +9,12 @@ remark spoiler plugin that uses native [details and summary](https://developer.m
 </details>
 ```
 
+## Installation
+
+```bash
+npm i remark-spoilers
+```
+
 ## Usage
 
 ```js

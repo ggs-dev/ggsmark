@@ -18,11 +18,3 @@ Packages in this monorepo have taken inspiration from [zestedesavoir/zmarkdown](
 ## Contibuting
 
 Follow the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) standard to calculate versioning.
-
-## Installing
-
-When you have Node JS installed run the following command in your project.
-
-```bash
-yarn add ggsmark
-```
