@@ -1,5 +1,7 @@
 # remark-color-text
 
+![npm](https://img.shields.io/npm/v/remark-color-text)
+
 [remark](https://github.com/remarkjs/remark) plugin to color text via block and inline text in Markdown.
 
 ## Installation

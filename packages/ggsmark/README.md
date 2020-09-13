@@ -1,5 +1,7 @@
 # GGSMark
 
+![npm](https://img.shields.io/npm/v/ggsmark)
+
 Markdown package used in the [GGS.SX](https://ggs.sx/) website.
 
 ## Installation

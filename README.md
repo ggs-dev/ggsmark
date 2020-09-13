@@ -1,5 +1,7 @@
 # GGSMark
 
+[![Build Status](https://dev.azure.com/johnnyhuy/ggsmark/_apis/build/status/GGSMark%20Build%20%26%20Release?branchName=master)](https://dev.azure.com/johnnyhuy/ggsmark/_build/latest?definitionId=10&branchName=master) ![GitHub](https://img.shields.io/github/license/johnnyhuy/ggsmark)
+
 Monorepo of [remark](https://github.com/remarkjs/remark) packages including a Markdown extension for the Gentlemen's Gaming Society website.
 
 ## Packages

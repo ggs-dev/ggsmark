@@ -1,5 +1,7 @@
 # remark-spoilers
 
+![npm](https://img.shields.io/npm/v/remark-spoilers)
+
 remark spoiler plugin that uses native [details and summary](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary) HTML elements.
 
 ```html

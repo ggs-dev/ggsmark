@@ -1,5 +1,7 @@
 # remark-text-alignment
 
+![npm](https://img.shields.io/npm/v/remark-text-alignment)
+
 [remark](https://github.com/remarkjs/remark) plugin to align text.
 
 ## Credits
