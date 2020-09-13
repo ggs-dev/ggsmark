@@ -5,5 +5,9 @@
   "keywords": [
     "remark"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "cross-env BABEL_ENV=production babel index.js --config-file ../../babel.config.js --out-dir ."
+  }
 }

@@ -10,10 +10,13 @@
     "lerna": "lerna",
     "lint": "eslint packages/**/*",
     "test": "jest",
-    "release": "lerna version --create-release github --conventional-commits --yes && lerna publish from-package --yes"
+    "release": "lerna run build && lerna version --create-release github --conventional-commits --yes && lerna publish from-package --yes"
   },
   "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
     "@babel/plugin-transform-runtime": "^7.11.0",
+    "cross-env": "^7.0.2",
     "dedent": "^0.7.0",
     "eslint": "^7.7.0",
     "eslint-config-prettier": "^6.11.0",
@@ -26,7 +29,7 @@
     "remark-html": "^12.0.0"
   },
   "dependencies": {
-    "@babel/core": "^7.11.4",
+    "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.0",
     "@babel/runtime": "^7.11.2",
     "regenerator-runtime": "^0.13.7"
