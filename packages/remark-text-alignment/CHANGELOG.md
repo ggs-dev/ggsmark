@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.7](https://github.com/johnnyhuy/ggsmark/compare/remark-text-alignment@0.5.6...remark-text-alignment@0.5.7) (2020-09-13)
+
+
+### Bug Fixes
+
+* move index back to src folder ([b19ac59](https://github.com/johnnyhuy/ggsmark/commit/b19ac590f62a670e122a4af6b42161a8d168ad6d))
+* src path ([820e5b9](https://github.com/johnnyhuy/ggsmark/commit/820e5b9c108a03f2d9d72e6dbd4989c81a601bd6))
+
+
+
+
+
 ## [0.5.6](https://github.com/johnnyhuy/ggsmark/compare/remark-text-alignment@0.5.5...remark-text-alignment@0.5.6) (2020-09-13)
 
 **Note:** Version bump only for package remark-text-alignment
