@@ -2,6 +2,8 @@
 
 ![npm](https://img.shields.io/npm/v/remark-spoilers)
 
+![GitHub followers](https://img.shields.io/github/followers/johnnyhuy?style=social) ![GitHub stars](https://img.shields.io/github/stars/johnnyhuy/ggsmark?style=social)
+
 remark spoiler plugin that uses native [details and summary](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary) HTML elements.
 
 ```html

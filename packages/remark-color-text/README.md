@@ -2,6 +2,8 @@
 
 ![npm](https://img.shields.io/npm/v/remark-color-text)
 
+![GitHub followers](https://img.shields.io/github/followers/johnnyhuy?style=social) ![GitHub stars](https://img.shields.io/github/stars/johnnyhuy/ggsmark?style=social)
+
 [remark](https://github.com/remarkjs/remark) plugin to color text via block and inline text in Markdown.
 
 ## Installation
