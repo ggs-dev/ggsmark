@@ -15,6 +15,10 @@ This package is built on top of the [remarkjs/remark](https://github.com/remarkj
 
 Packages in this monorepo have taken inspiration from [zestedesavoir/zmarkdown](https://github.com/zestedesavoir/zmarkdown). Check out their large suite of plugins!
 
+## Contibuting
+
+Follow the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) standard to calculate versioning.
+
 ## Installing
 
 When you have Node JS installed run the following command in your project.
