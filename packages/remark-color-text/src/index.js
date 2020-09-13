@@ -1,136 +1,146 @@
-"use strict";
+const C_NEWLINE = '\n'
+const C_NEWPARAGRAPH = '\n\n'
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = plugin;
-var C_NEWLINE = '\n';
-var C_NEWPARAGRAPH = '\n\n';
 /**
  * Match line against an array of token
  * @param {String} token token like '!#'
  * @param {String} value value to check of the token
  */
-
 function matchToken(token, value) {
-  return value.trim().startsWith(token);
+  return value.trim().startsWith(token)
 }
+
 /**
  * Get the color of a block
  * @param {String} token token like '!#'
  * @param {String} colorExpression regular expression to match, it must capture the first group
  * @param {String} block final string block to be parsed
  */
-
-
 function getBlockColor(token, colorExpression, block) {
-  var trimmedBlock = block.trim();
-
+  let trimmedBlock = block.trim()
   if (trimmedBlock.startsWith(token)) {
-    return trimmedBlock.slice(token.length).match(colorExpression)[1];
+    return trimmedBlock.slice(token.length).match(colorExpression)[1]
   }
 }
 
-function plugin() {
-  var _options$token, _options$colorExpress;
+export default function plugin(options = {}) {
+  const Parser = this.Parser
+  const blockTokenizers = Parser.prototype.blockTokenizers
+  const blockMethods = Parser.prototype.blockMethods
+  const inlineTokenizers = Parser.prototype.inlineTokenizers
+  const inlineMethods = Parser.prototype.inlineMethods
 
-  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var Parser = this.Parser;
-  var blockTokenizers = Parser.prototype.blockTokenizers;
-  var blockMethods = Parser.prototype.blockMethods;
-  var inlineTokenizers = Parser.prototype.inlineTokenizers;
-  var inlineMethods = Parser.prototype.inlineMethods;
-  options.token = (_options$token = options.token) !== null && _options$token !== void 0 ? _options$token : '!#';
-  options.colorExpression = (_options$colorExpress = options.colorExpression) !== null && _options$colorExpress !== void 0 ? _options$colorExpress : /^\s*(rgba?\(\d{1,3}\s*\,\s*\d{1,3}\s*\,\s*\d{1,3}\s*(\,\s*\d{1,3}\s*)?\)|(\#?[A-z0-9]{3,12}))?/;
+  options.token = options.token ?? '!#'
+  options.colorExpression =
+    options.colorExpression ??
+    /^\s*(rgba?\(\d{1,3}\s*\,\s*\d{1,3}\s*\,\s*\d{1,3}\s*(\,\s*\d{1,3}\s*)?\)|(\#?[A-z0-9]{3,12}))?/
 
   function tokenizeBlocks(eat, value, silent) {
-    var match = matchToken(options.token, value);
-    if (!match) return;
-    if (silent) return true;
-    var startBlock,
-        endBlock = 0;
-    var index,
-        newLine = 0;
-    var completeBlock = false;
-    var firstRun = true;
+    let match = matchToken(options.token, value)
+
+    if (!match) return
+
+    if (silent) return true
+
+    let startBlock,
+      endBlock = 0
+    let index,
+      newLine = 0
+    let completeBlock = false
+    let firstRun = true
 
     do {
-      newLine = value.indexOf(C_NEWLINE, index + 1);
-      var line = value.substring(index, newLine === -1 ? value.length : newLine);
-      var matchedEndToken = matchToken(options.token, line) && !firstRun; // Found a match to end the block
+      newLine = value.indexOf(C_NEWLINE, index + 1)
 
+      let line = value.substring(index, newLine === -1 ? value.length : newLine)
+      let matchedEndToken = matchToken(options.token, line) && !firstRun
+
+      // Found a match to end the block
       if (!!matchedEndToken) {
-        endBlock = newLine === -1 ? value.length : newLine;
-        completeBlock = true;
+        endBlock = newLine === -1 ? value.length : newLine
+        completeBlock = true
       }
 
-      index = newLine;
-      firstRun = false;
-    } while (!completeBlock && newLine !== -1);
+      index = newLine
+      firstRun = false
+    } while (!completeBlock && newLine !== -1)
 
-    if (!completeBlock) return;
-    var block = value.substring(startBlock, endBlock);
-    var blockContent = block.substring(block.indexOf(C_NEWLINE), block.lastIndexOf(C_NEWLINE)).trim();
-    var color = getBlockColor(options.token, options.colorExpression, block);
-    var start = eat.now();
-    var add = eat(block);
-    var end = eat.now();
-    var children = this.tokenizeBlock(blockContent, start);
+    if (!completeBlock) return
+
+    let block = value.substring(startBlock, endBlock)
+    let blockContent = block
+      .substring(block.indexOf(C_NEWLINE), block.lastIndexOf(C_NEWLINE))
+      .trim()
+
+    let color = getBlockColor(options.token, options.colorExpression, block)
+
+    const start = eat.now()
+    const add = eat(block)
+    const end = eat.now()
+    const children = this.tokenizeBlock(blockContent, start)
+
     return add({
       type: 'colorText',
       children: children,
       data: {
         hName: 'div',
         hProperties: {
-          style: "color: ".concat(color)
+          style: `color: ${color}`
         }
       },
       position: {
-        start: start,
-        end: end
+        start,
+        end
       }
-    });
+    })
   }
 
   function locateInlineToken(value, fromIndex) {
-    return value.indexOf(options.token, fromIndex);
+    return value.indexOf(options.token, fromIndex)
   }
 
   function tokenizeInlines(eat, value, silent) {
-    var match = matchToken(options.token, value);
-    if (!match) return;
-    if (silent) return true;
-    var color = getBlockColor(options.token, options.colorExpression, value);
-    var openBracket = value.indexOf('(') + 1;
-    var closeBracket = value.indexOf(')');
-    var inline = value.substring(0, closeBracket + 1);
-    var inlineContent = value.substring(openBracket, closeBracket);
-    if (openBracket === -1 || closeBracket === -1) return;
-    var start = eat.now();
-    var add = eat(inline);
-    var end = eat.now();
-    var children = this.tokenizeInline(inlineContent, start);
+    let match = matchToken(options.token, value)
+
+    if (!match) return
+
+    if (silent) return true
+
+    let color = getBlockColor(options.token, options.colorExpression, value)
+    let openBracket = value.indexOf('(') + 1
+    let closeBracket = value.indexOf(')')
+    let inline = value.substring(0, closeBracket + 1)
+    let inlineContent = value.substring(openBracket, closeBracket)
+
+    if (openBracket === -1 || closeBracket === -1) return
+
+    const start = eat.now()
+    const add = eat(inline)
+    const end = eat.now()
+    const children = this.tokenizeInline(inlineContent, start)
+
     return add({
       type: 'colorText',
       children: children,
       data: {
         hName: 'span',
         hProperties: {
-          style: "color: ".concat(color)
+          style: `color: ${color}`
         }
       },
       position: {
-        start: start,
-        end: end
+        start,
+        end
       }
-    });
+    })
   }
 
-  tokenizeInlines.notInLink = true;
-  tokenizeInlines.locator = locateInlineToken;
-  blockTokenizers.colorText = tokenizeBlocks;
-  inlineTokenizers.colorText = tokenizeInlines;
-  blockMethods.splice(blockMethods.indexOf('blockquote') + 1, 0, 'colorText');
-  inlineMethods.splice(inlineMethods.indexOf('escape') + 1, 0, 'colorText');
+  tokenizeInlines.notInLink = true
+  tokenizeInlines.locator = locateInlineToken
+
+  blockTokenizers.colorText = tokenizeBlocks
+  inlineTokenizers.colorText = tokenizeInlines
+
+  blockMethods.splice(blockMethods.indexOf('blockquote') + 1, 0, 'colorText')
+  inlineMethods.splice(inlineMethods.indexOf('escape') + 1, 0, 'colorText')
 }
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4LmpzIl0sIm5hbWVzIjpbIk9iamVjdCIsInZhbHVlIiwiZXhwb3J0cyIsIkNfTkVXTElORSIsIkNfTkVXUEFSQUdSQVBIIiwidHJpbW1lZEJsb2NrIiwiYmxvY2siLCJ0b2tlbiIsIm9wdGlvbnMiLCJhcmd1bWVudHMiLCJQYXJzZXIiLCJibG9ja1Rva2VuaXplcnMiLCJibG9ja01ldGhvZHMiLCJpbmxpbmVUb2tlbml6ZXJzIiwiaW5saW5lTWV0aG9kcyIsIl9vcHRpb25zJHRva2VuIiwiX29wdGlvbnMkY29sb3JFeHByZXNzIiwibWF0Y2giLCJtYXRjaFRva2VuIiwiZW5kQmxvY2siLCJuZXdMaW5lIiwiY29tcGxldGVCbG9jayIsImZpcnN0UnVuIiwiaW5kZXgiLCJsaW5lIiwibWF0Y2hlZEVuZFRva2VuIiwiYmxvY2tDb250ZW50IiwiY29sb3IiLCJnZXRCbG9ja0NvbG9yIiwic3RhcnQiLCJlYXQiLCJhZGQiLCJlbmQiLCJjaGlsZHJlbiIsInR5cGUiLCJkYXRhIiwiaE5hbWUiLCJoUHJvcGVydGllcyIsInN0eWxlIiwicG9zaXRpb24iLCJvcGVuQnJhY2tldCIsImNsb3NlQnJhY2tldCIsImlubGluZSIsImlubGluZUNvbnRlbnQiLCJ0b2tlbml6ZUlubGluZXMiXSwibWFwcGluZ3MiOiJBQUFBOztBQUVBQSxNQUFNLENBQU5BLGNBQUFBLENBQUFBLE9BQUFBLEVBQUFBLFlBQUFBLEVBQTZDO0FBQzNDQyxFQUFBQSxLQUFLLEVBQUU7QUFEb0MsQ0FBN0NEO0FBR0FFLE9BQU8sQ0FBUEEsU0FBTyxDQUFQQSxHQUFBQSxNQUFBQTtBQUNBLElBQUlDLFNBQVMsR0FBYixJQUFBO0FBQ0EsSUFBSUMsY0FBYyxHQUFsQixNQUFBO0FBQ0E7Ozs7OztBQU1BLFNBQUEsVUFBQSxDQUFBLEtBQUEsRUFBQSxLQUFBLEVBQWtDO0FBQ2hDLFNBQU9ILEtBQUssQ0FBTEEsSUFBQUEsR0FBQUEsVUFBQUEsQ0FBUCxLQUFPQSxDQUFQO0FBQ0Q7QUFDRDs7Ozs7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QUEsSUFBSSxFQURLLFdBQUE7QUFFVEQsTUFBQUEsUUFBUSxFQUZDLFFBQUE7QUFHVEUsTUFBQUEsSUFBSSxFQUFFO0FBQ0pDLFFBQUFBLEtBQUssRUFERCxNQUFBO0FBRUpDLFFBQUFBLFdBQVcsRUFBRTtBQUNYQyxVQUFBQSxLQUFLLEVBQUUsVUFBQSxNQUFBLENBQUEsS0FBQTtBQURJO0FBRlQsT0FIRztBQVNUQyxNQUFBQSxRQUFRLEVBQUU7QUFDUlYsUUFBQUEsS0FBSyxFQURHLEtBQUE7QUFFUkcsUUFBQUEsR0FBRyxFQUFFQTtBQUZHO0FBVEQsS0FBRCxDQUFWO0FBY0Q7O0FBRURZLEVBQUFBLGVBQWUsQ0FBZkEsU0FBQUEsR0FBQUEsSUFBQUE7QUFDQUEsRUFBQUEsZUFBZSxDQUFmQSxPQUFBQSxHQUFBQSxpQkFBQUE7QUFDQWpDLEVBQUFBLGVBQWUsQ0FBZkEsU0FBQUEsR0FBQUEsY0FBQUE7QUFDQUUsRUFBQUEsZ0JBQWdCLENBQWhCQSxTQUFBQSxHQUFBQSxlQUFBQTtBQUNBRCxFQUFBQSxZQUFZLENBQVpBLE1BQUFBLENBQW9CQSxZQUFZLENBQVpBLE9BQUFBLENBQUFBLFlBQUFBLElBQXBCQSxDQUFBQSxFQUFBQSxDQUFBQSxFQUFBQSxXQUFBQTtBQUNBRSxFQUFBQSxhQUFhLENBQWJBLE1BQUFBLENBQXFCQSxhQUFhLENBQWJBLE9BQUFBLENBQUFBLFFBQUFBLElBQXJCQSxDQUFBQSxFQUFBQSxDQUFBQSxFQUFBQSxXQUFBQTtBQUNEIiwic291cmNlc0NvbnRlbnQiOlsiXCJ1c2Ugc3RyaWN0XCI7XG5cbk9iamVjdC5kZWZpbmVQcm9wZXJ0eShleHBvcnRzLCBcIl9fZXNNb2R1bGVcIiwge1xuICB2YWx1ZTogdHJ1ZVxufSk7XG5leHBvcnRzW1wiZGVmYXVsdFwiXSA9IHBsdWdpbjtcbnZhciBDX05FV0xJTkUgPSAnXFxuJztcbnZhciBDX05FV1BBUkFHUkFQSCA9ICdcXG5cXG4nO1xuLyoqXHJcbiAqIE1hdGNoIGxpbmUgYWdhaW5zdCBhbiBhcnJheSBvZiB0b2tlblxyXG4gKiBAcGFyYW0ge1N0cmluZ30gdG9rZW4gdG9rZW4gbGlrZSAnISMnXHJcbiAqIEBwYXJhbSB7U3RyaW5nfSB2YWx1ZSB2YWx1ZSB0byBjaGVjayBvZiB0aGUgdG9rZW5cclxuICovXG5cbmZ1bmN0aW9uIG1hdGNoVG9rZW4odG9rZW4sIHZhbHVlKSB7XG4gIHJldHVybiB2YWx1ZS50cmltKCkuc3RhcnRzV2l0aCh0b2tlbik7XG59XG4vKipcclxuICogR2V0IHRoZSBjb2xvciBvZiBhIGJsb2NrXHJcbiAqIEBwYXJhbSB7U3RyaW5nfSB0b2tlbiB0b2tlbiBsaWtlICchIydcclxuICogQHBhcmFtIHtTdHJpbmd9IGNvbG9yRXhwcmVzc2lvbiByZWd1bGFyIGV4cHJlc3Npb24gdG8gbWF0Y2gsIGl0IG11c3QgY2FwdHVyZSB0aGUgZmlyc3QgZ3JvdXBcclxuICogQHBhcmFtIHtTdHJpbmd9IGJsb2NrIGZpbmFsIHN0cmluZyBibG9jayB0byBiZSBwYXJzZWRcclxuICovXG5cblxuZnVuY3Rpb24gZ2V0QmxvY2tDb2xvcih0b2tlbiwgY29sb3JFeHByZXNzaW9uLCBibG9jaykge1xuICB2YXIgdHJpbW1lZEJsb2NrID0gYmxvY2sudHJpbSgpO1xuXG4gIGlmICh0cmltbWVkQmxvY2suc3RhcnRzV2l0aCh0b2tlbikpIHtcbiAgICByZXR1cm4gdHJpbW1lZEJsb2NrLnNsaWNlKHRva2VuLmxlbmd0aCkubWF0Y2goY29sb3JFeHByZXNzaW9uKVsxXTtcbiAgfVxufVxuXG5mdW5jdGlvbiBwbHVnaW4oKSB7XG4gIHZhciBfb3B0aW9ucyR0b2tlbiwgX29wdGlvbnMkY29sb3JFeHByZXNzO1xuXG4gIHZhciBvcHRpb25zID0gYXJndW1lbnRzLmxlbmd0aCA+IDAgJiYgYXJndW1lbnRzWzBdICE9PSB1bmRlZmluZWQgPyBhcmd1bWVudHNbMF0gOiB7fTtcbiAgdmFyIFBhcnNlciA9IHRoaXMuUGFyc2VyO1xuICB2YXIgYmxvY2tUb2tlbml6ZXJzID0gUGFyc2VyLnByb3RvdHlwZS5ibG9ja1Rva2VuaXplcnM7XG4gIHZhciBibG9ja01ldGhvZHMgPSBQYXJzZXIucHJvdG90eXBlLmJsb2NrTWV0aG9kcztcbiAgdmFyIGlubGluZVRva2VuaXplcnMgPSBQYXJzZXIucHJvdG90eXBlLmlubGluZVRva2VuaXplcnM7XG4gIHZhciBpbmxpbmVNZXRob2RzID0gUGFyc2VyLnByb3RvdHlwZS5pbmxpbmVNZXRob2RzO1xuICBvcHRpb25zLnRva2VuID0gKF9vcHRpb25zJHRva2VuID0gb3B0aW9ucy50b2tlbikgIT09IG51bGwgJiYgX29wdGlvbnMkdG9rZW4gIT09IHZvaWQgMCA/IF9vcHRpb25zJHRva2VuIDogJyEjJztcbiAgb3B0aW9ucy5jb2xvckV4cHJlc3Npb24gPSAoX29wdGlvbnMkY29sb3JFeHByZXNzID0gb3B0aW9ucy5jb2xvckV4cHJlc3Npb24pICE9PSBudWxsICYmIF9vcHRpb25zJGNvbG9yRXhwcmVzcyAhPT0gdm9pZCAwID8gX29wdGlvbnMkY29sb3JFeHByZXNzIDogL15cXHMqKHJnYmE/XFwoXFxkezEsM31cXHMqXFwsXFxzKlxcZHsxLDN9XFxzKlxcLFxccypcXGR7MSwzfVxccyooXFwsXFxzKlxcZHsxLDN9XFxzKik/XFwpfChcXCM/W0EtejAtOV17MywxMn0pKT8vO1xuXG4gIGZ1bmN0aW9uIHRva2VuaXplQmxvY2tzKGVhdCwgdmFsdWUsIHNpbGVudCkge1xuICAgIHZhciBtYXRjaCA9IG1hdGNoVG9rZW4ob3B0aW9ucy50b2tlbiwgdmFsdWUpO1xuICAgIGlmICghbWF0Y2gpIHJldHVybjtcbiAgICBpZiAoc2lsZW50KSByZXR1cm4gdHJ1ZTtcbiAgICB2YXIgc3RhcnRCbG9jayxcbiAgICAgICAgZW5kQmxvY2sgPSAwO1xuICAgIHZhciBpbmRleCxcbiAgICAgICAgbmV3TGluZSA9IDA7XG4gICAgdmFyIGNvbXBsZXRlQmxvY2sgPSBmYWxzZTtcbiAgICB2YXIgZmlyc3RSdW4gPSB0cnVlO1xuXG4gICAgZG8ge1xuICAgICAgbmV3TGluZSA9IHZhbHVlLmluZGV4T2YoQ19ORVdMSU5FLCBpbmRleCArIDEpO1xuICAgICAgdmFyIGxpbmUgPSB2YWx1ZS5zdWJzdHJpbmcoaW5kZXgsIG5ld0xpbmUgPT09IC0xID8gdmFsdWUubGVuZ3RoIDogbmV3TGluZSk7XG4gICAgICB2YXIgbWF0Y2hlZEVuZFRva2VuID0gbWF0Y2hUb2tlbihvcHRpb25zLnRva2VuLCBsaW5lKSAmJiAhZmlyc3RSdW47IC8vIEZvdW5kIGEgbWF0Y2ggdG8gZW5kIHRoZSBibG9ja1xuXG4gICAgICBpZiAoISFtYXRjaGVkRW5kVG9rZW4pIHtcbiAgICAgICAgZW5kQmxvY2sgPSBuZXdMaW5lID09PSAtMSA/IHZhbHVlLmxlbmd0aCA6IG5ld0xpbmU7XG4gICAgICAgIGNvbXBsZXRlQmxvY2sgPSB0cnVlO1xuICAgICAgfVxuXG4gICAgICBpbmRleCA9IG5ld0xpbmU7XG4gICAgICBmaXJzdFJ1biA9IGZhbHNlO1xuICAgIH0gd2hpbGUgKCFjb21wbGV0ZUJsb2NrICYmIG5ld0xpbmUgIT09IC0xKTtcblxuICAgIGlmICghY29tcGxldGVCbG9jaykgcmV0dXJuO1xuICAgIHZhciBibG9jayA9IHZhbHVlLnN1YnN0cmluZyhzdGFydEJsb2NrLCBlbmRCbG9jayk7XG4gICAgdmFyIGJsb2NrQ29udGVudCA9IGJsb2NrLnN1YnN0cmluZyhibG9jay5pbmRleE9mKENfTkVXTElORSksIGJsb2NrLmxhc3RJbmRleE9mKENfTkVXTElORSkpLnRyaW0oKTtcbiAgICB2YXIgY29sb3IgPSBnZXRCbG9ja0NvbG9yKG9wdGlvbnMudG9rZW4sIG9wdGlvbnMuY29sb3JFeHByZXNzaW9uLCBibG9jayk7XG4gICAgdmFyIHN0YXJ0ID0gZWF0Lm5vdygpO1xuICAgIHZhciBhZGQgPSBlYXQoYmxvY2spO1xuICAgIHZhciBlbmQgPSBlYXQubm93KCk7XG4gICAgdmFyIGNoaWxkcmVuID0gdGhpcy50b2tlbml6ZUJsb2NrKGJsb2NrQ29udGVudCwgc3RhcnQpO1xuICAgIHJldHVybiBhZGQoe1xuICAgICAgdHlwZTogJ2NvbG9yVGV4dCcsXG4gICAgICBjaGlsZHJlbjogY2hpbGRyZW4sXG4gICAgICBkYXRhOiB7XG4gICAgICAgIGhOYW1lOiAnZGl2JyxcbiAgICAgICAgaFByb3BlcnRpZXM6IHtcbiAgICAgICAgICBzdHlsZTogXCJjb2xvcjogXCIuY29uY2F0KGNvbG9yKVxuICAgICAgICB9XG4gICAgICB9LFxuICAgICAgcG9zaXRpb246IHtcbiAgICAgICAgc3RhcnQ6IHN0YXJ0LFxuICAgICAgICBlbmQ6IGVuZFxuICAgICAgfVxuICAgIH0pO1xuICB9XG5cbiAgZnVuY3Rpb24gbG9jYXRlSW5saW5lVG9rZW4odmFsdWUsIGZyb21JbmRleCkge1xuICAgIHJldHVybiB2YWx1ZS5pbmRleE9mKG9wdGlvbnMudG9rZW4sIGZyb21JbmRleCk7XG4gIH1cblxuICBmdW5jdGlvbiB0b2tlbml6ZUlubGluZXMoZWF0LCB2YWx1ZSwgc2lsZW50KSB7XG4gICAgdmFyIG1hdGNoID0gbWF0Y2hUb2tlbihvcHRpb25zLnRva2VuLCB2YWx1ZSk7XG4gICAgaWYgKCFtYXRjaCkgcmV0dXJuO1xuICAgIGlmIChzaWxlbnQpIHJldHVybiB0cnVlO1xuICAgIHZhciBjb2xvciA9IGdldEJsb2NrQ29sb3Iob3B0aW9ucy50b2tlbiwgb3B0aW9ucy5jb2xvckV4cHJlc3Npb24sIHZhbHVlKTtcbiAgICB2YXIgb3BlbkJyYWNrZXQgPSB2YWx1ZS5pbmRleE9mKCcoJykgKyAxO1xuICAgIHZhciBjbG9zZUJyYWNrZXQgPSB2YWx1ZS5pbmRleE9mKCcpJyk7XG4gICAgdmFyIGlubGluZSA9IHZhbHVlLnN1YnN0cmluZygwLCBjbG9zZUJyYWNrZXQgKyAxKTtcbiAgICB2YXIgaW5saW5lQ29udGVudCA9IHZhbHVlLnN1YnN0cmluZyhvcGVuQnJhY2tldCwgY2xvc2VCcmFja2V0KTtcbiAgICBpZiAob3BlbkJyYWNrZXQgPT09IC0xIHx8IGNsb3NlQnJhY2tldCA9PT0gLTEpIHJldHVybjtcbiAgICB2YXIgc3RhcnQgPSBlYXQubm93KCk7XG4gICAgdmFyIGFkZCA9IGVhdChpbmxpbmUpO1xuICAgIHZhciBlbmQgPSBlYXQubm93KCk7XG4gICAgdmFyIGNoaWxkcmVuID0gdGhpcy50b2tlbml6ZUlubGluZShpbmxpbmVDb250ZW50LCBzdGFydCk7XG4gICAgcmV0dXJuIGFkZCh7XG4gICAgICB0eXBlOiAnY29sb3JUZXh0JyxcbiAgICAgIGNoaWxkcmVuOiBjaGlsZHJlbixcbiAgICAgIGRhdGE6IHtcbiAgICAgICAgaE5hbWU6ICdzcGFuJyxcbiAgICAgICAgaFByb3BlcnRpZXM6IHtcbiAgICAgICAgICBzdHlsZTogXCJjb2xvcjogXCIuY29uY2F0KGNvbG9yKVxuICAgICAgICB9XG4gICAgICB9LFxuICAgICAgcG9zaXRpb246IHtcbiAgICAgICAgc3RhcnQ6IHN0YXJ0LFxuICAgICAgICBlbmQ6IGVuZFxuICAgICAgfVxuICAgIH0pO1xuICB9XG5cbiAgdG9rZW5pemVJbmxpbmVzLm5vdEluTGluayA9IHRydWU7XG4gIHRva2VuaXplSW5saW5lcy5sb2NhdG9yID0gbG9jYXRlSW5saW5lVG9rZW47XG4gIGJsb2NrVG9rZW5pemVycy5jb2xvclRleHQgPSB0b2tlbml6ZUJsb2NrcztcbiAgaW5saW5lVG9rZW5pemVycy5jb2xvclRleHQgPSB0b2tlbml6ZUlubGluZXM7XG4gIGJsb2NrTWV0aG9kcy5zcGxpY2UoYmxvY2tNZXRob2RzLmluZGV4T2YoJ2Jsb2NrcXVvdGUnKSArIDEsIDAsICdjb2xvclRleHQnKTtcbiAgaW5saW5lTWV0aG9kcy5zcGxpY2UoaW5saW5lTWV0aG9kcy5pbmRleE9mKCdlc2NhcGUnKSArIDEsIDAsICdjb2xvclRleHQnKTtcbn0iXX0=
