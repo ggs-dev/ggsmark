@@ -1,5 +1,5 @@
 import dedent from 'dedent'
-import ggsmark from '../src'
+import ggsmark from '..'
 
 describe('should have github-like markdown', () => {
   test('strikethrough', () => {

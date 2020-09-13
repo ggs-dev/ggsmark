@@ -1,6 +1,6 @@
 import remark from 'remark'
 import html from 'remark-html'
-import color from '../src'
+import color from '..'
 import dedent from 'dedent'
 
 describe('block color text with inline style', () => {
