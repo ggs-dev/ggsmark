@@ -1,4 +1,9 @@
 module.exports = {
   presets: ['@babel/preset-env'],
-  plugins: ['@babel/plugin-transform-runtime']
+  ignore: ['**/*.spec.js', '**/*.test.js'],
+  plugins: [
+    '@babel/plugin-transform-runtime',
+    '@babel/plugin-transform-modules-commonjs'
+  ],
+  sourceMaps: 'both'
 }

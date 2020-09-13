@@ -17,5 +17,9 @@
     "remark-spoilers": "^0.1.1",
     "remark-text-alignment": "^0.2.4",
     "unified": "^9.2.0"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "cross-env BABEL_ENV=production babel index.js --config-file ../../babel.config.js --out-dir ./dist"
   }
 }

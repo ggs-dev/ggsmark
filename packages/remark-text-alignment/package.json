@@ -8,5 +8,9 @@
   "license": "MIT",
   "dependencies": {
     "space-separated-tokens": "^1.1.5"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "cross-env BABEL_ENV=production babel index.js --config-file ../../babel.config.js --out-dir ./dist"
   }
 }
