@@ -8,7 +8,7 @@ import align from 'remark-text-alignment'
 // Import this since remark-iframe needs it
 import 'regenerator-runtime/runtime'
 
-export default (text) => {
+export default (text, options = {}) => {
   return unified()
     .use(markdown, {
       blocks: []
@@ -65,7 +65,7 @@ export default (text) => {
         replace: [
           [
             'www.clips.twitch.tv/',
-            'www.clips.twitch.tv/embed?parent=ggs.sx&clip='
+            `www.clips.twitch.tv/embed?parent=${options.parent}&clip=`
           ],
           ['http://', 'https://']
         ]
@@ -76,7 +76,7 @@ export default (text) => {
         height: 378,
         disabled: false,
         replace: [
-          ['clips.twitch.tv', 'clips.twitch.tv/embed?parent=ggs.sx&clip='],
+          ['clips.twitch.tv', `clips.twitch.tv/embed?parent=${options.parent}&clip=`],
           ['http://', 'https://']
         ]
       },
@@ -88,7 +88,7 @@ export default (text) => {
         replace: [
           [
             'www.twitch.tv/videos/',
-            `www.player.twitch.tv/?${parents}&video=`
+            `www.player.twitch.tv/?${options.parents}&video=`
           ],
           ['http://', 'https://']
         ]
@@ -99,7 +99,7 @@ export default (text) => {
         height: 378,
         disabled: false,
         replace: [
-          ['twitch.tv/videos/', 'player.twitch.tv/?parent=ggs.sx&video='],
+          ['twitch.tv/videos/', 'player.twitch.tv/?parent=${options.parent}&video='],
           ['http://', 'https://']
         ]
       }
