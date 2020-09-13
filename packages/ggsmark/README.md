@@ -1,5 +1,9 @@
 # GGSMark
 
+![npm](https://img.shields.io/npm/v/ggsmark)
+
+![GitHub followers](https://img.shields.io/github/followers/johnnyhuy?style=social) ![GitHub stars](https://img.shields.io/github/stars/johnnyhuy/ggsmark?style=social)
+
 Markdown package used in the [GGS.SX](https://ggs.sx/) website.
 
 ## Installation
