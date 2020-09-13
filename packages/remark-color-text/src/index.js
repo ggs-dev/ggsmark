@@ -1,3 +1,5 @@
+import 'core-js'
+
 const C_NEWLINE = '\n'
 const C_NEWPARAGRAPH = '\n\n'
 

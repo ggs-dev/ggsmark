@@ -1,4 +1,5 @@
 import spaceSeparated from 'space-separated-tokens'
+import 'core-js'
 
 const C_NEWLINE = '\n'
 const C_NEWPARAGRAPH = '\n\n'
