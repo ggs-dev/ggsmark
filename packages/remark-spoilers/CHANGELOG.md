@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.2](https://github.com/johnnyhuy/ggsmark/compare/remark-spoilers@0.4.1...remark-spoilers@0.4.2) (2020-09-13)
+
+
+### Bug Fixes
+
+* Revert "fix: try dist" ([8d6d36e](https://github.com/johnnyhuy/ggsmark/commit/8d6d36e60408532a9218b5db0597540b8bf33bdb))
+* Revert "fix: Use dist" ([f838486](https://github.com/johnnyhuy/ggsmark/commit/f8384861d7b043439a67dc903a9780dfafa8267e))
+* try dist ([d02b34c](https://github.com/johnnyhuy/ggsmark/commit/d02b34c43b9d02ae0ee156113426954e1d0b5bc3))
+* try src folder again ([5329336](https://github.com/johnnyhuy/ggsmark/commit/5329336cbb7456bc9fd844fcc43bbaa6c1fcc169))
+* Use dist ([e030308](https://github.com/johnnyhuy/ggsmark/commit/e03030845ada2600a25b0bd894844eedb4fc1358))
+
+
+
+
+
 ## [0.4.1](https://github.com/johnnyhuy/ggsmark/compare/remark-spoilers@0.4.0...remark-spoilers@0.4.1) (2020-09-13)
 
 **Note:** Version bump only for package remark-spoilers
