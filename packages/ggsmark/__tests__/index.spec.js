@@ -401,7 +401,7 @@ describe('render twitch clip blocks', () => {
     `,​ ​{​parents​ = ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​})
 
     // Act
-    let result = ggsmark(string)
+    let result = ggsmark(string,​ ​{​parents​ = ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​})
 
     // Assert
     expect(result).toBe(dedent`
