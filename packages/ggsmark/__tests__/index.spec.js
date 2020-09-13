@@ -320,7 +320,7 @@ describe('do not render custom html', () => {
 describe('render twitch video blocks', () => {
   test('single line', () => {
     // Arrange
-    let string = dedent(`!(https://www.twitch.tv/videos/726762096)`,​ ​{​parents​: ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​)
+    let string = dedent('!(https://www.twitch.tv/videos/726762096)', ​{​parents​ = ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​})
 
     // Act
     let result = ggsmark(string)
@@ -334,7 +334,7 @@ describe('render twitch video blocks', () => {
   test('content before and after', () => {
     // Arrange
     let string =
-      ('**bold text** before text !(https://www.twitch.tv/videos/726762096) after text **bold**',​ ​{​parents​: ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​)
+      dedent('**bold text** before text !(https://www.twitch.tv/videos/726762096) after text **bold**',​ ​{​parents​ = ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​})
 
     // Act
     let result = ggsmark(string)
@@ -368,7 +368,7 @@ describe('render twitch video blocks', () => {
 describe('render twitch clip blocks', () => {
   test('single line', () => {
     // Arrange
-    let string = dedent(`!(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)`,​ ​{​parents​: ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​)
+    let string = dedent(`!(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)`,​ ​{​parents​ = ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​)
 
     // Act
     let result = ggsmark(string)
@@ -382,7 +382,7 @@ describe('render twitch clip blocks', () => {
   test('content before and after', () => {
     // Arrange
     let string =
-      '**bold text** before text !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch) after text **bold**',​ ​{​parents​: ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​)
+      dedent('**bold text** before text !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch) after text **bold**',​ ​{​parents​ = ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​})
     // Act
     let result = ggsmark(string)
 
@@ -398,7 +398,7 @@ describe('render twitch clip blocks', () => {
     !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
     !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
     !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
-    `,​ ​{​parents​: ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​)
+    `,​ ​{​parents​ = ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​})
 
     // Act
     let result = ggsmark(string)
