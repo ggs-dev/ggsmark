@@ -5,7 +5,7 @@
   "author": "Johnny Huynh <info@johnnyhuy.com>",
   "license": "MIT",
   "scripts": {
-    "postinstall": "lerna bootstrap && lerna run build",
+    "postinstall": "lerna bootstrap",
     "format": "prettier packages/**/* --write",
     "lerna": "lerna",
     "lint": "eslint packages/**/*",
@@ -17,7 +17,6 @@
     "@babel/plugin-transform-runtime": "^7.11.0",
     "cross-env": "^7.0.2",
     "dedent": "^0.7.0",
-    "del-cli": "^3.0.1",
     "eslint": "^7.7.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
