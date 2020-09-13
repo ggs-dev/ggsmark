@@ -9,6 +9,5 @@ module.exports = {
       }
     ]
   ],
-  plugins: ['@babel/plugin-transform-runtime'],
   sourceMaps: 'both'
 }
