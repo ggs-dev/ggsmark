@@ -31,6 +31,12 @@ Add the spoilers plugin to remark.
 
 ### `options`
 
+#### `options.defaultSummary`
+
+The default summary text in the spoiler.
+
+**Default** `Open spoiler`
+
 #### `options.token`
 
 Token used to open and close spoilers text.
@@ -39,15 +45,15 @@ Token used to open and close spoilers text.
 
 #### `options.detailsClassName`
 
-Class name for the `<details />` HTML element.
+Class name for the `<details />` HTML element. No class name set by default.
 
-**Default** `<empty string>`
+**Default** `''`
 
 #### `options.summaryClassName`
 
-Class name for the `<summary />` HTML element.
+Class name for the `<summary />` HTML element. No class name set by default.
 
-**Default** `<empty string>`
+**Default** `''`
 
 ## Examples
 
