@@ -1,11 +1,16 @@
 # GGSMark
 
+[![Build Status](https://dev.azure.com/johnnyhuy/ggsmark/_apis/build/status/GGSMark%20Build%20%26%20Release?branchName=master)](https://dev.azure.com/johnnyhuy/ggsmark/_build/latest?definitionId=10&branchName=master) ![Azure DevOps tests](https://img.shields.io/azure-devops/tests/johnnyhuy/ggsmark/10) ![GitHub](https://img.shields.io/github/license/johnnyhuy/ggsmark)
+
+![GitHub followers](https://img.shields.io/github/followers/johnnyhuy?style=social) ![GitHub stars](https://img.shields.io/github/stars/johnnyhuy/ggsmark?style=social)
+
 Monorepo of [remark](https://github.com/remarkjs/remark) packages including a Markdown extension for the Gentlemen's Gaming Society website.
 
 ## Packages
 
 - [`ggsmark`](https://github.com/johnnyhuy/ggsmark/tree/master/packages/ggsmark) - Markdown package used in ggs.sx
 - [`remark-text-alignment`](https://github.com/johnnyhuy/ggsmark/tree/master/packages/remark-text-alignment) - remark plugin to align text
+- [`remark-spoilers`](https://github.com/johnnyhuy/ggsmark/tree/master/packages/remark-spoilers) - remark spoilers to hide Markdown content
 - [`remark-color-text`](https://github.com/johnnyhuy/ggsmark/tree/master/packages/remark-color-text) - remark plugin to set colors inline and blocks
 
 ## Credits
@@ -20,6 +25,5 @@ Thanks also to [Kaptian Core](https://github.com/KaptianCore) for contributing t
 
 When you have Node JS installed run the following command in your project.
 
-```bash
-yarn add ggsmark
-```
+
+Follow the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) standard to calculate versioning.
