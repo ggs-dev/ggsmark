@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.4](https://github.com/johnnyhuy/ggsmark/compare/remark-spoilers@0.4.3...remark-spoilers@0.4.4) (2020-09-13)
+
+
+### Bug Fixes
+
+* try dist in browser ([aacd213](https://github.com/johnnyhuy/ggsmark/commit/aacd21371db48e1d094a4d64127af0703a919f4e))
+
+
+
+
+
 ## [0.4.3](https://github.com/johnnyhuy/ggsmark/compare/remark-spoilers@0.4.2...remark-spoilers@0.4.3) (2020-09-13)
 
 
