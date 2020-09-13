@@ -1,0 +1,9 @@
+{
+  "name": "remark-spoilers",
+  "version": "0.0.0",
+  "author": "Johnny Huynh <info@johnnyhuy.com>",
+  "keywords": [
+    "remark"
+  ],
+  "license": "MIT"
+}

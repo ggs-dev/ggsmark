@@ -1,13 +1,16 @@
 # GGSMark
 
-This is the Markdown package used in the GGS.SX website.
+Markdown package used in the [GGS.SX](https://ggs.sx/) website.
+
+## Installation
+
+```bash
+npm i ggsmark
+```
 
 ## Usage
 
-Basic usage example:
-
 ```js
-// If you use ESModules
 import ggsmark from 'ggsmark'
 
 let output = ggsmark('**foo** bar')
@@ -20,14 +23,10 @@ It's also worth investigating unit tests to understand the expected output.
 ## Examples
 
 ### Strikethrough
+
 ```markdown
 ~~Text~~
 ```
-
-<!-- ### Spoiler
-```
-||secret suprise||
-``` -->
 
 ### SoundCloud
 
@@ -40,4 +39,3 @@ It's also worth investigating unit tests to understand the expected output.
 ```markdown
 !(https://www.youtube.com/watch?v=pwmY1XUTBpE)
 ```
-

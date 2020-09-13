@@ -6,6 +6,7 @@ Monorepo of [remark](https://github.com/remarkjs/remark) packages including a Ma
 
 - [`ggsmark`](https://github.com/johnnyhuy/ggsmark/tree/master/packages/ggsmark) - Markdown package used in ggs.sx
 - [`remark-text-alignment`](https://github.com/johnnyhuy/ggsmark/tree/master/packages/remark-text-alignment) - remark plugin to align text
+- [`remark-spoilers`](https://github.com/johnnyhuy/ggsmark/tree/master/packages/remark-spoilers) - remark spoilers to hide Markdown content
 - [`remark-color-text`](https://github.com/johnnyhuy/ggsmark/tree/master/packages/remark-color-text) - remark plugin to set colors inline and blocks
 
 ## Credits
@@ -14,10 +15,6 @@ This package is built on top of the [remarkjs/remark](https://github.com/remarkj
 
 Packages in this monorepo have taken inspiration from [zestedesavoir/zmarkdown](https://github.com/zestedesavoir/zmarkdown). Check out their large suite of plugins!
 
-## Installing
+## Contibuting
 
-When you have Node JS installed run the following command in your project.
-
-```bash
-yarn add ggsmark
-```
+Follow the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) standard to calculate versioning.

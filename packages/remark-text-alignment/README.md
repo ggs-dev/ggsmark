@@ -1,10 +1,16 @@
 # remark-text-alignment
 
-Markdown extension for the Gentlemen's Gaming Society website.
+[remark](https://github.com/remarkjs/remark) plugin to align text.
 
 ## Credits
 
 Plugin was originally built on top of [zMarkdown's remark-align plugin](https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-align).
+
+## Installation
+
+```bash
+npm i remark-text-alignment
+```
 
 ## Usage
 
@@ -14,16 +20,14 @@ import html from 'remark-html'
 import alignment from 'remark-text-alignment'
 
 // Basic use
-let output = remark()
+remark()
   .use(html)
   .use(alignment)
-  .processSync('example markdown text')
-  .toString()
 
-console.log(output)
+...
 
 // Use class names and set right class name to example-right
-let output = remark()
+remark()
   .use(html)
   .use(alignment, {
     useClassNames: true,
@@ -31,16 +35,29 @@ let output = remark()
       left: 'example-right'
     }
   })
-  .processSync('example markdown text')
-  .toString()
 
-console.log(output)
+...
 ```
 
 ## Options
 
-- `useClassNames`: Enable class names instead of inline CSS
-- `classNames`: Object that contains left, right and center class names (useClassNames must be enabled)
+### `.use(color [, options])`
+
+Add the color plugin to remark.
+
+### `options`
+
+#### `options.classNames`
+
+Enable class names instead of inline CSS
+
+**Default** `{}`
+
+#### `options.useClassNames`
+
+Object that contains left, right and center class names (useClassNames must be enabled)
+
+**Default** `false`
 
 ## Examples
 
