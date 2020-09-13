@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/johnnyhuy/ggsmark/compare/remark-text-alignment@0.3.0...remark-text-alignment@0.4.0) (2020-09-13)
+
+
+### Features
+
+* Added browser and module files ([9581389](https://github.com/johnnyhuy/ggsmark/commit/958138995ac17ed1eb3a9b13d2abb8b2e42521d5))
+
+
+
+
+
 # [0.3.0](https://github.com/johnnyhuy/ggsmark/compare/remark-text-alignment@0.2.4...remark-text-alignment@0.3.0) (2020-09-13)
 
 

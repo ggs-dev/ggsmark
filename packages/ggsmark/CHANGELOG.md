@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.6.0...ggsmark@0.7.0) (2020-09-13)
+
+
+### Features
+
+* Added browser and module files ([9581389](https://github.com/johnnyhuy/ggsmark/commit/958138995ac17ed1eb3a9b13d2abb8b2e42521d5))
+
+
+
+
+
 # [0.6.0](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.5.1...ggsmark@0.6.0) (2020-09-13)
 
 
