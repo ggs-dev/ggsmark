@@ -16,6 +16,7 @@
     "remark-rehype": "^7.0.0",
     "remark-spoilers": "^0.4.7",
     "remark-text-alignment": "^0.5.7",
+    "regenerator-runtime": "^0.13.7",
     "unified": "^9.2.0"
   },
   "main": "dist/index.js",
