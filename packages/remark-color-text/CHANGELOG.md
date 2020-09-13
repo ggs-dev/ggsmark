@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.3](https://github.com/johnnyhuy/ggsmark/compare/remark-color-text@0.3.2...remark-color-text@0.3.3) (2020-09-13)
+
+
+### Bug Fixes
+
+* color plugin not working ([d136663](https://github.com/johnnyhuy/ggsmark/commit/d13666376825c1077a722fc188ab73cb799ad1af))
+* move index out to main folder ([ee60135](https://github.com/johnnyhuy/ggsmark/commit/ee60135b993d26a7c139046ea5f9c36f1e5f8b9c))
+
+
+
+
+
 ## [0.3.2](https://github.com/johnnyhuy/ggsmark/compare/remark-color-text@0.3.1...remark-color-text@0.3.2) (2020-09-13)
 
 
