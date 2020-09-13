@@ -1,6 +1,6 @@
 import remark from 'remark'
 import html from 'remark-html'
-import alignment from '..'
+import alignment from '../src'
 import dedent from 'dedent'
 
 describe('align text with inline style', () => {

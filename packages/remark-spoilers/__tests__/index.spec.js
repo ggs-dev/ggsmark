@@ -1,6 +1,6 @@
 import remark from 'remark'
 import html from 'remark-html'
-import spoiler from '..'
+import spoiler from '../src'
 import dedent from 'dedent'
 
 describe('spoilers', () => {
