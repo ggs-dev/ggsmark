@@ -8,6 +8,7 @@
   "dependencies": {
     "deepmerge": "^4.2.2",
     "hast-util-sanitize": "^3.0.0",
+    "regenerator-runtime": "^0.13.7",
     "rehype-sanitize": "^4.0.0",
     "rehype-stringify": "^8.0.0",
     "remark-color-text": "^0.3.8",
@@ -16,7 +17,6 @@
     "remark-rehype": "^7.0.0",
     "remark-spoilers": "^0.4.8",
     "remark-text-alignment": "^0.5.8",
-    "regenerator-runtime": "^0.13.7",
     "unified": "^9.2.0"
   },
   "main": "dist/index.js",
