@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.7.0...ggsmark@0.8.0) (2020-09-13)
+
+
+### Features
+
+* added core JS ([1d9e424](https://github.com/johnnyhuy/ggsmark/commit/1d9e424426cdf2ddae38c817e3d3f23d436cfca4))
+* put packages in src folder ([d10a8bb](https://github.com/johnnyhuy/ggsmark/commit/d10a8bb233cf6140a0d0f37b2f8ae2670eeefe2a))
+
+
+
+
+
 # [0.7.0](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.6.0...ggsmark@0.7.0) (2020-09-13)
 
 
