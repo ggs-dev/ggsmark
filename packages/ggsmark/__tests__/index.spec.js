@@ -382,7 +382,7 @@ describe('render twitch clip blocks', () => {
   test('content before and after', () => {
     // Arrange
     let string =
-      dedent('**bold text** before text !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch) after text **bold**',​ ​{​parents​ = ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​})
+      dedent('**bold text** before text !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch) after text **bold**',​ ​{​parents​ = ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​})
     // Act
     let result = ggsmark(string)
 
