@@ -8,6 +8,7 @@ import sanitize from 'rehype-sanitize'
 import iframe from 'remark-iframes'
 import align from 'remark-text-alignment'
 import color from 'remark-color-text'
+import spoilers from 'remark-spoilers'
 
 // Don't use remark-html otherwise we can't customize HTML
 import stringify from 'rehype-stringify'
@@ -85,6 +86,7 @@ export default (text) => {
     .use(rehype)
     .use(stringify)
     .use(color)
+    .use(spoilers)
     .use(sanitize, schema)
     .processSync(text)
     .toString()
