@@ -9,8 +9,9 @@
   "dependencies": {
     "space-separated-tokens": "^1.1.5"
   },
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "browser": "dist/index.js",
+  "module": "dist/index.js",
   "scripts": {
     "build": "cross-env BABEL_ENV=production babel ./src/index.js --config-file ../../babel.config.js --ignore '**/*.spec.js,**/*.test.js' --out-dir ./dist"
   }
