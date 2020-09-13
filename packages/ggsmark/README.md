@@ -1,8 +1,8 @@
 # GGSMark
 
-![npm](https://img.shields.io/npm/v/ggsmark)
+[![npm](https://img.shields.io/npm/v/ggsmark)](https://www.npmjs.com/package/ggsmark)
 
-![GitHub followers](https://img.shields.io/github/followers/johnnyhuy?style=social) ![GitHub stars](https://img.shields.io/github/stars/johnnyhuy/ggsmark?style=social)
+[![GitHub followers](https://img.shields.io/github/followers/johnnyhuy?style=social)](https://github.com/johnnyhuy) [![GitHub stars](https://img.shields.io/github/stars/johnnyhuy/ggsmark?style=social)](https://github.com/johnnyhuy/ggsmark)
 
 Markdown package used in the [GGS.SX](https://ggs.sx/) website.
 
