@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.5](https://github.com/johnnyhuy/ggsmark/compare/remark-color-text@0.3.4...remark-color-text@0.3.5) (2020-09-13)
+
+
+### Bug Fixes
+
+* remove core-js ([cdead31](https://github.com/johnnyhuy/ggsmark/commit/cdead31ce85d614ba4b9f147e11cb5472af6c362))
+
+
+
+
+
 ## [0.3.4](https://github.com/johnnyhuy/ggsmark/compare/remark-color-text@0.3.3...remark-color-text@0.3.4) (2020-09-13)
 
 

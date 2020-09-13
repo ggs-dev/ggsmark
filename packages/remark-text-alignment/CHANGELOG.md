@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.5](https://github.com/johnnyhuy/ggsmark/compare/remark-text-alignment@0.5.4...remark-text-alignment@0.5.5) (2020-09-13)
+
+
+### Bug Fixes
+
+* removed remaining core-js ([58d8d92](https://github.com/johnnyhuy/ggsmark/commit/58d8d9210c9a2915a23ad508873accd63a86a7de))
+
+
+
+
+
 ## [0.5.4](https://github.com/johnnyhuy/ggsmark/compare/remark-text-alignment@0.5.3...remark-text-alignment@0.5.4) (2020-09-13)
 
 
