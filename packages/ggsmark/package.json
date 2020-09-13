@@ -20,6 +20,7 @@
     "unified": "^9.2.0"
   },
   "main": "dist/index.js",
+  "browser": "dist/index.js",
   "module": "src/index.js",
   "scripts": {
     "build": "cross-env BABEL_ENV=production babel src/index.js --config-file ../../babel.config.js --ignore '**/*.spec.js,**/*.test.js' --out-dir dist"
