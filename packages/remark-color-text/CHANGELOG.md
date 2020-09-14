@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.11](https://github.com/johnnyhuy/ggsmark/compare/remark-color-text@0.3.10...remark-color-text@0.3.11) (2020-09-14)
+
+**Note:** Version bump only for package remark-color-text
+
+
+
+
+
 ## [0.3.10](https://github.com/johnnyhuy/ggsmark/compare/remark-color-text@0.3.9...remark-color-text@0.3.10) (2020-09-14)
 
 

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.11](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.8.10...ggsmark@0.8.11) (2020-09-14)
+
+**Note:** Version bump only for package ggsmark
+
+
+
+
+
 ## [0.8.10](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.8.9...ggsmark@0.8.10) (2020-09-14)
 
 

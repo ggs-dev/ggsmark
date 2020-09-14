@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/johnnyhuy/ggsmark/compare/remark-spoilers@0.4.10...remark-spoilers@0.5.0) (2020-09-14)
+
+
+### Features
+
+* added class names to spoilers ([33886f1](https://github.com/johnnyhuy/ggsmark/commit/33886f167e0f7986e7dee82b7a6b3ebe75bea979))
+
+
+
+
+
 ## [0.4.10](https://github.com/johnnyhuy/ggsmark/compare/remark-spoilers@0.4.9...remark-spoilers@0.4.10) (2020-09-14)
 
 
