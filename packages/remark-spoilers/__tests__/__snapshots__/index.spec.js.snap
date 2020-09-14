@@ -43,6 +43,16 @@ exports[`spoilers should show spoiler with custom summary 1`] = `
 "
 `;
 
+exports[`spoilers should show spoiler with details class name 1`] = `
+"<details class=\\"hello hello-world\\"><p>peek-a-boo!</p></details>
+"
+`;
+
+exports[`spoilers should show spoiler with summary class name 1`] = `
+"<details><summary class=\\"hello hello-world\\">test</summary><p>peek-a-boo!</p></details>
+"
+`;
+
 exports[`spoilers should show spoiler without custom summary 1`] = `
 "<details><p>peek-a-boo!</p></details>
 "

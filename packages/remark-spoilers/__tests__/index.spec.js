@@ -19,6 +19,44 @@ describe('spoilers', () => {
     expect(result).toMatchSnapshot()
   })
 
+  test('should show spoiler with details class name', () => {
+    // Arrange
+    let string = dedent`
+    !spoiler
+    peek-a-boo!
+    !spoiler
+    `
+
+    // Act
+    let result = remark()
+      .use(html)
+      .use(spoiler, { detailsClassName: 'hello hello-world' })
+      .processSync(string)
+      .toString()
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+
+  test('should show spoiler with summary class name', () => {
+    // Arrange
+    let string = dedent`
+    !spoiler test
+    peek-a-boo!
+    !spoiler
+    `
+
+    // Act
+    let result = remark()
+      .use(html)
+      .use(spoiler, { summaryClassName: 'hello hello-world' })
+      .processSync(string)
+      .toString()
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+
   test('should show spoiler with custom summary', () => {
     // Arrange
     let string = dedent`
