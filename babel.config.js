@@ -9,5 +9,6 @@ module.exports = {
       }
     ]
   ],
-  sourceMaps: 'both'
+  sourceMaps: 'both',
+  plugins: ['add-module-exports']
 }
