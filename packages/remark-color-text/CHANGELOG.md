@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.10](https://github.com/johnnyhuy/ggsmark/compare/remark-color-text@0.3.9...remark-color-text@0.3.10) (2020-09-14)
+
+
+### Bug Fixes
+
+* added browser to dist ([fe7a4db](https://github.com/johnnyhuy/ggsmark/commit/fe7a4db9a9be13ea4d7d93b24215cd89cde13bad))
+
+
+
+
+
 ## [0.3.9](https://github.com/johnnyhuy/ggsmark/compare/remark-color-text@0.3.8...remark-color-text@0.3.9) (2020-09-13)
 
 **Note:** Version bump only for package remark-color-text
