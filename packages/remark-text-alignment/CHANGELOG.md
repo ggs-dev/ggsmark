@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.9](https://github.com/johnnyhuy/ggsmark/compare/remark-text-alignment@0.5.8...remark-text-alignment@0.5.9) (2020-09-13)
+
+**Note:** Version bump only for package remark-text-alignment
+
+
+
+
+
 ## [0.5.8](https://github.com/johnnyhuy/ggsmark/compare/remark-text-alignment@0.5.7...remark-text-alignment@0.5.8) (2020-09-13)
 
 
