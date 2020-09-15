@@ -18,6 +18,9 @@ import rehype from 'remark-rehype'
 import 'regenerator-runtime/runtime'
 
 export default (text, options = {}) => {
+  options.parents =
+    '?' + options.parents.map((i) => 'parent=' + i).join('&') ?? []
+
   let schema = merge(gh, {
     attributes: {
       '*': [
