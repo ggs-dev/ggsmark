@@ -18,8 +18,9 @@ import rehype from 'remark-rehype'
 import 'regenerator-runtime/runtime'
 
 export default (text, options = {}) => {
-  options.parents =
-    '?' + options.parents.map((i) => 'parent=' + i).join('&') ?? []
+  options.twitchParents = !!options.twitchParents
+    ? '?' + options.twitchParents.map((i) => 'parent=' + i).join('&') + '&'
+    : '?'
 
   let schema = merge(gh, {
     attributes: {
@@ -86,26 +87,26 @@ export default (text, options = {}) => {
       },
       'www.clips.twitch.tv': {
         tag: 'iframe',
-        width: 620,
-        height: 378,
+        width: 560,
+        height: 315,
         disabled: false,
         replace: [
           [
             'https://clips.twitch.tv/',
-            'https://clips.twitch.tv/embed?parent=ggs.sx&clip='
+            `https://clips.twitch.tv/embed${options.twitchParents}clip=`
           ],
           ['http://', 'https://']
         ]
       },
       'clips.twitch.tv': {
         tag: 'iframe',
-        width: 620,
-        height: 378,
+        width: 560,
+        height: 315,
         disabled: false,
         replace: [
           [
-            'https://clips.twitch.tv',
-            'https://clips.twitch.tv/embed?parent=ggs.sx&clip='
+            'https://clips.twitch.tv/',
+            `https://clips.twitch.tv/embed${options.twitchParents}clip=`
           ],
           ['http://', 'https://']
         ]
