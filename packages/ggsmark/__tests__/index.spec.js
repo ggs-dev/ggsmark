@@ -1,5 +1,5 @@
 import dedent from 'dedent'
-import ggsmark from '../index'
+import ggsmark from '../src'
 
 describe('should have github-like markdown', () => {
   test('strikethrough', () => {
@@ -120,7 +120,7 @@ describe('render soundcloud blocks', () => {
     expect(result).toMatchSnapshot()
   })
 
-  test('content before and after', () => {
+  test('should not show iframe inline', () => {
     // Arrange
     let string =
       '**bold text** before text !(https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion) after text **bold**'
@@ -320,94 +320,140 @@ describe('do not render custom html', () => {
 describe('render twitch video blocks', () => {
   test('single line', () => {
     // Arrange
-    let string = dedent('!(https://www.twitch.tv/videos/726762096)', ​{​parents​ = ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​})
+    let string = dedent`
+    !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
+    `
 
     // Act
-    let result = ggsmark(string)
+    let result = ggsmark(string, { twitchParents: ['ggs.sx', 'example.com'] })
 
     // Assert
     expect(result).toBe(dedent`
-    <iframe src="https://www.player.twitch.tv/?parent=ggs.sx&#x26;video=726762096" width="620" height="378" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;parent=example.com&#x26;clip=LovelyAstuteCoffeeImGlitch" width="560" height="315" allowfullscreen frameborder="0"></iframe>
     `)
   })
 
-  test('content before and after', () => {
+  test('should not show iframe inline', () => {
     // Arrange
-    let string =
-      dedent('**bold text** before text !(https://www.twitch.tv/videos/726762096) after text **bold**',​ ​{​parents​ = ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​})
+    let string = dedent`
+    **bold text** before text !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch) after text **bold**
+    `
 
     // Act
-    let result = ggsmark(string)
+    let result = ggsmark(string, { twitchParents: ['ggs.sx', 'example.com'] })
 
     // Assert
     expect(result).toBe(dedent`
-    <p><strong>bold text</strong> before text <iframe src="https://www.player.twitch.tv/?parent=ggs.sx&#x26;video=726762096" width="620" height="378" allowfullscreen frameborder="0"></iframe> after text <strong>bold</strong></p>
+    <p><strong>bold text</strong> before text !(<a href="https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch">https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch</a>) after text <strong>bold</strong></p>
     `)
   })
 
   test('multiple occurrences', () => {
     // Arrange
-    let string = dedent(`
-    !(https://www.twitch.tv/videos/726762096)
-    !(https://www.twitch.tv/videos/726762096)
-    !(https://www.twitch.tv/videos/726762096)
-    `,​ ​{​parents​: ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​)
-
-    // Act
-    let result = ggsmark(string)
-
-    // Assert
-    expect(result).toBe(dedent`
-    <iframe src="https://www.player.twitch.tv/?parent=ggs.sx&#x26;video=726762096" width="620" height="378" allowfullscreen frameborder="0"></iframe>
-    <iframe src="https://www.player.twitch.tv/?parent=ggs.sx&#x26;video=726762096" width="620" height="378" allowfullscreen frameborder="0"></iframe>
-    <iframe src="https://www.player.twitch.tv/?parent=ggs.sx&#x26;video=726762096" width="620" height="378" allowfullscreen frameborder="0"></iframe>
-    `)
-  })
-})
-
-describe('render twitch clip blocks', () => {
-  test('single line', () => {
-    // Arrange
-    let string = dedent(`!(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)`,​ ​{​parents​ = ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​)
-
-    // Act
-    let result = ggsmark(string)
-
-    // Assert
-    expect(result).toBe(dedent`
-    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=/LovelyAstuteCoffeeImGlitch" width="620" height="378" allowfullscreen frameborder="0"></iframe>
-    `)
-  })
-
-  test('content before and after', () => {
-    // Arrange
-    let string =
-      dedent('**bold text** before text !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch) after text **bold**',​ ​{​parents​ = ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​})
-    // Act
-    let result = ggsmark(string)
-
-    // Assert
-    expect(result).toBe(dedent`
-    <p><strong>bold text</strong> before text <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=/LovelyAstuteCoffeeImGlitch" width="620" height="378" allowfullscreen frameborder="0"></iframe> after text <strong>bold</strong></p>
-    `)
-  })
-
-  test('multiple occurrences', () => {
-    // Arrange
-    let string = dedent(`
+    let string = dedent`
     !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
     !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
     !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
-    `,​ ​{​parents​ = ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​})
+    `
 
     // Act
-    let result = ggsmark(string,​ ​{​parents​ = ​[​'ggs.sx'​,​ ​'example.com'​,​ ​'blah.blah'​]​})
+    let result = ggsmark(string, { twitchParents: ['ggs.sx', 'example.com'] })
 
     // Assert
     expect(result).toBe(dedent`
-    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=/LovelyAstuteCoffeeImGlitch" width="620" height="378" allowfullscreen frameborder="0"></iframe>
-    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=/LovelyAstuteCoffeeImGlitch" width="620" height="378" allowfullscreen frameborder="0"></iframe>
-    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=/LovelyAstuteCoffeeImGlitch" width="620" height="378" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;parent=example.com&#x26;clip=LovelyAstuteCoffeeImGlitch" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;parent=example.com&#x26;clip=LovelyAstuteCoffeeImGlitch" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;parent=example.com&#x26;clip=LovelyAstuteCoffeeImGlitch" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('set one twitch parent', () => {
+    // Arrange
+    let string = dedent`
+    !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=LovelyAstuteCoffeeImGlitch" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('should show twitch video', () => {
+    // Arrange
+    let string = dedent`
+    !(https://twitch.tv/videos/732347536)
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://player.twitch.tv/?parent=ggs.sx&#x26;video=732347536" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('should show twitch channel', () => {
+    // Arrange
+    let string = dedent`
+    !(https://twitch.tv/vinesauce)
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://player.twitch.tv/?parent=ggs.sx&#x26;channel=vinesauce" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('should show twitch channel using player url', () => {
+    // Arrange
+    let string = dedent`
+    !(https://player.twitch.tv/?channel=vinesauce)
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://player.twitch.tv/?parent=ggs.sx&#x26;channel=vinesauce" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('should show twitch video using player url', () => {
+    // Arrange
+    let string = dedent`
+    !(https://player.twitch.tv/?video=741520731)
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://player.twitch.tv/?parent=ggs.sx&#x26;video=741520731" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('should show twitch video using player url', () => {
+    // Arrange
+    let string = dedent`
+    !(https://player.twitch.tv/?video=741520731)
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://player.twitch.tv/?parent=ggs.sx&#x26;video=741520731" width="560" height="315" allowfullscreen frameborder="0"></iframe>
     `)
   })
 })

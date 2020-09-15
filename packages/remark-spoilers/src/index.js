@@ -1,3 +1,5 @@
+import spaceSeparated from 'space-separated-tokens'
+
 const C_NEWLINE = '\n'
 const C_NEWPARAGRAPH = '\n\n'
 
@@ -19,8 +21,12 @@ export default function plugin(options = {}) {
 
   options.defaultSummary = options.defaultSummary ?? 'Open spoiler'
   options.token = options.token ?? '!spoiler'
-  options.detailsClassName = options.detailsClassName ?? ''
-  options.summaryClassName = options.summaryClassName ?? ''
+  options.detailsClassName = options.detailsClassName
+    ? spaceSeparated.parse(options.detailsClassName)
+    : null
+  options.summaryClassName = options.summaryClassName
+    ? spaceSeparated.parse(options.summaryClassName)
+    : null
 
   function tokenizeBlocks(eat, value, silent) {
     let match = matchToken(options.token, value)
@@ -72,7 +78,10 @@ export default function plugin(options = {}) {
       children.push({
         type: 'summary',
         data: {
-          hName: 'summary'
+          hName: 'summary',
+          hProperties: {
+            class: options.summaryClassName
+          }
         },
         children: [
           {
@@ -89,7 +98,10 @@ export default function plugin(options = {}) {
       type: 'spoiler',
       children: children,
       data: {
-        hName: 'details'
+        hName: 'details',
+        hProperties: {
+          class: options.detailsClassName
+        }
       },
       position: {
         start,

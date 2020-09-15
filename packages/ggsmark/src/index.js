@@ -18,6 +18,10 @@ import rehype from 'remark-rehype'
 import 'regenerator-runtime/runtime'
 
 export default (text, options = {}) => {
+  options.twitchParents = !!options.twitchParents
+    ? '?' + options.twitchParents.map((i) => 'parent=' + i).join('&') + '&'
+    : '?'
+
   let schema = merge(gh, {
     attributes: {
       '*': [
@@ -80,54 +84,96 @@ export default (text, options = {}) => {
           ['http://', 'https://']
         ]
       },
-      'www.clips.twitch.tv': {
-        tag: 'iframe',
-        width: '100%',
-        height: 378,
-        disabled: false,
-        replace: [
-          [
-            'www.clips.twitch.tv/',
-            `www.clips.twitch.tv/embed?parent=${options.parent}&clip=`
-          ],
-          ['http://', 'https://']
-        ]
-      },
-      'clips.twitch.tv': {
-        tag: 'iframe',
-        width: '100%',
-        height: 378,
-        disabled: false,
-        replace: [
-          [
-            'clips.twitch.tv',
-            `clips.twitch.tv/embed?parent=${options.parent}&clip=`
-          ],
-          ['http://', 'https://']
-        ]
-      },
       'www.twitch.tv': {
         tag: 'iframe',
-        width: 620,
-        height: 378,
+        width: 560,
+        height: 315,
         disabled: false,
         replace: [
           [
-            'www.twitch.tv/videos/',
-            `www.player.twitch.tv/?${options.parents}&video=`
+            'https://twitch.tv/videos/',
+            `https://player.twitch.tv/${options.twitchParents}video=`
+          ],
+          [
+            'https://twitch.tv/',
+            `https://player.twitch.tv/${options.twitchParents}channel=`
           ],
           ['http://', 'https://']
         ]
       },
       'twitch.tv': {
         tag: 'iframe',
-        width: 620,
-        height: 378,
+        width: 560,
+        height: 315,
         disabled: false,
         replace: [
           [
-            'twitch.tv/videos/',
-            'player.twitch.tv/?parent=${options.parent}&video='
+            'https://twitch.tv/videos/',
+            `https://player.twitch.tv/${options.twitchParents}video=`
+          ],
+          [
+            'https://twitch.tv/',
+            `https://player.twitch.tv/${options.twitchParents}channel=`
+          ],
+          ['http://', 'https://']
+        ]
+      },
+      'www.clips.twitch.tv': {
+        tag: 'iframe',
+        width: 560,
+        height: 315,
+        disabled: false,
+        replace: [
+          [
+            'https://clips.twitch.tv/',
+            `https://clips.twitch.tv/embed${options.twitchParents}clip=`
+          ],
+          ['http://', 'https://']
+        ]
+      },
+      'clips.twitch.tv': {
+        tag: 'iframe',
+        width: 560,
+        height: 315,
+        disabled: false,
+        replace: [
+          [
+            'https://clips.twitch.tv/',
+            `https://clips.twitch.tv/embed${options.twitchParents}clip=`
+          ],
+          ['http://', 'https://']
+        ]
+      },
+      'www.player.twitch.tv': {
+        tag: 'iframe',
+        width: 560,
+        height: 315,
+        disabled: false,
+        replace: [
+          [
+            'https://player.twitch.tv/?channel=',
+            `https://player.twitch.tv/${options.twitchParents}channel=`
+          ],
+          [
+            'https://player.twitch.tv/?video=',
+            `https://player.twitch.tv/${options.twitchParents}video=`
+          ],
+          ['http://', 'https://']
+        ]
+      },
+      'player.twitch.tv': {
+        tag: 'iframe',
+        width: 560,
+        height: 315,
+        disabled: false,
+        replace: [
+          [
+            'https://player.twitch.tv/?channel=',
+            `https://player.twitch.tv/${options.twitchParents}channel=`
+          ],
+          [
+            'https://player.twitch.tv/?video=',
+            `https://player.twitch.tv/${options.twitchParents}video=`
           ],
           ['http://', 'https://']
         ]

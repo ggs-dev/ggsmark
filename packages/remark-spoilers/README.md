@@ -1,8 +1,8 @@
 # remark-spoilers
 
-![npm](https://img.shields.io/npm/v/remark-spoilers)
+[![npm](https://img.shields.io/npm/v/remark-spoilers)](https://www.npmjs.com/package/remark-spoilers)
 
-![GitHub followers](https://img.shields.io/github/followers/johnnyhuy?style=social) ![GitHub stars](https://img.shields.io/github/stars/johnnyhuy/ggsmark?style=social)
+[![GitHub followers](https://img.shields.io/github/followers/johnnyhuy?style=social)](https://github.com/johnnyhuy) [![GitHub stars](https://img.shields.io/github/stars/johnnyhuy/ggsmark?style=social)](https://github.com/johnnyhuy/ggsmark)
 
 remark spoiler plugin that uses native [details and summary](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary) HTML elements.
 

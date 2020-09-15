@@ -1,8 +1,8 @@
 # GGSMark
 
-[![Build Status](https://dev.azure.com/johnnyhuy/ggsmark/_apis/build/status/GGSMark%20Build%20%26%20Release?branchName=master)](https://dev.azure.com/johnnyhuy/ggsmark/_build/latest?definitionId=10&branchName=master) ![Azure DevOps tests](https://img.shields.io/azure-devops/tests/johnnyhuy/ggsmark/10) ![GitHub](https://img.shields.io/github/license/johnnyhuy/ggsmark)
+[![Build Status](https://dev.azure.com/johnnyhuy/ggsmark/_apis/build/status/GGSMark%20Build%20%26%20Release?branchName=master)](https://dev.azure.com/johnnyhuy/ggsmark/_build/latest?definitionId=10&branchName=master) ![Azure DevOps tests](https://img.shields.io/azure-devops/tests/johnnyhuy/ggsmark/10) [![GitHub](https://img.shields.io/github/license/johnnyhuy/ggsmark)](https://github.com/johnnyhuy/ggsmark/blob/master/LICENSE)
 
-![GitHub followers](https://img.shields.io/github/followers/johnnyhuy?style=social) ![GitHub stars](https://img.shields.io/github/stars/johnnyhuy/ggsmark?style=social)
+[![GitHub followers](https://img.shields.io/github/followers/johnnyhuy?style=social)](https://github.com/johnnyhuy) [![GitHub stars](https://img.shields.io/github/stars/johnnyhuy/ggsmark?style=social)](https://github.com/johnnyhuy/ggsmark)
 
 Monorepo of [remark](https://github.com/remarkjs/remark) packages including a Markdown extension for the Gentlemen's Gaming Society website.
 
