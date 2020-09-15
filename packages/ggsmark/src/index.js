@@ -85,6 +85,40 @@ export default (text, options = {}) => {
           ['http://', 'https://']
         ]
       },
+      'www.twitch.tv': {
+        tag: 'iframe',
+        width: 560,
+        height: 315,
+        disabled: false,
+        replace: [
+          [
+            'https://twitch.tv/videos/',
+            `https://player.twitch.tv/${options.twitchParents}video=`
+          ],
+          [
+            'https://twitch.tv/',
+            `https://player.twitch.tv/${options.twitchParents}channel=`
+          ],
+          ['http://', 'https://']
+        ]
+      },
+      'twitch.tv': {
+        tag: 'iframe',
+        width: 560,
+        height: 315,
+        disabled: false,
+        replace: [
+          [
+            'https://twitch.tv/videos/',
+            `https://player.twitch.tv/${options.twitchParents}video=`
+          ],
+          [
+            'https://twitch.tv/',
+            `https://player.twitch.tv/${options.twitchParents}channel=`
+          ],
+          ['http://', 'https://']
+        ]
+      },
       'www.clips.twitch.tv': {
         tag: 'iframe',
         width: 560,
@@ -107,6 +141,40 @@ export default (text, options = {}) => {
           [
             'https://clips.twitch.tv/',
             `https://clips.twitch.tv/embed${options.twitchParents}clip=`
+          ],
+          ['http://', 'https://']
+        ]
+      },
+      'www.player.twitch.tv': {
+        tag: 'iframe',
+        width: 560,
+        height: 315,
+        disabled: false,
+        replace: [
+          [
+            'https://player.twitch.tv/?channel=',
+            `https://player.twitch.tv/${options.twitchParents}channel=`
+          ],
+          [
+            'https://player.twitch.tv/?video=',
+            `https://player.twitch.tv/${options.twitchParents}video=`
+          ],
+          ['http://', 'https://']
+        ]
+      },
+      'player.twitch.tv': {
+        tag: 'iframe',
+        width: 560,
+        height: 315,
+        disabled: false,
+        replace: [
+          [
+            'https://player.twitch.tv/?channel=',
+            `https://player.twitch.tv/${options.twitchParents}channel=`
+          ],
+          [
+            'https://player.twitch.tv/?video=',
+            `https://player.twitch.tv/${options.twitchParents}video=`
           ],
           ['http://', 'https://']
         ]
