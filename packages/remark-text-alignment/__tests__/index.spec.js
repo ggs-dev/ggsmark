@@ -1,6 +1,6 @@
 import remark from 'remark'
 import html from 'remark-html'
-import alignment from '..'
+import alignment from '../src'
 import dedent from 'dedent'
 
 describe('align text with inline style', () => {
@@ -61,8 +61,16 @@ describe('align text with class names', () => {
   test('should align multi line', () => {
     // Arrange
     let string = dedent`
+    # Before text
+
+    More before text
+
     <-This is a multiple line texts
     2nd line here<-
+
+    After text
+
+    ## More heading after text
     `
 
     // Act

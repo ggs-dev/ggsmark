@@ -38,16 +38,12 @@ jobs:
       versionSpec: 14.x
     displayName: Install Node.js
 
-  - task: npmAuthenticate@0
-    displayName: NPM Login
-    inputs:
-      workingFile: .npmrc
-      customEndpoint: johnnyhuy-npm
-
   - script: |
       git remote set-url origin https://$GH_USERNAME:$GH_TOKEN@github.com/johnnyhuy/ggsmark.git
       git config --global user.email $GH_EMAIL
       git config --global user.name $GH_USERNAME
+      git checkout master
+      npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
       npm ci
       npm run release
     displayName: Node Packages
@@ -57,13 +53,3 @@ jobs:
       GH_TOKEN: $(GH.Token)
       NPM_TOKEN: $(NPM.Token)
       
-  - task: GitHubRelease@1
-    displayName: GitHub
-    inputs:
-      gitHubConnection: johnnyhuy-github
-      repositoryName: $(Build.Repository.Name)
-      action: create
-      target: $(Build.SourceVersion)
-      tagSource: gitTag
-      changeLogCompareToRelease: lastFullRelease
-      changeLogType: commitBased

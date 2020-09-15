@@ -1,22 +1,28 @@
 {
   "name": "ggsmark",
-  "version": "0.2.1",
+  "version": "0.8.11",
   "description": "Markdown extension for the Gentlemen's Gaming Society website.",
   "repository": "https://github.com/johnnyhuy/ggsmark.git",
   "author": "Johnny Huynh <info@johnnyhuy.com>",
   "license": "MIT",
-  "scripts": {
-    "format": "prettier * --write",
-    "lint": "eslint .",
-    "test": "jest"
-  },
   "dependencies": {
+    "deepmerge": "^4.2.2",
+    "hast-util-sanitize": "^3.0.0",
+    "regenerator-runtime": "^0.13.7",
+    "rehype-sanitize": "^4.0.0",
     "rehype-stringify": "^8.0.0",
+    "remark-color-text": "^0.3.11",
     "remark-iframes": "^4.0.4",
     "remark-parse": "^8.0.3",
     "remark-rehype": "^7.0.0",
-    "remark-stringify": "^8.1.1",
-    "remark-text-alignment": "^0.1.0",
+    "remark-spoilers": "^0.5.0",
+    "remark-text-alignment": "^0.5.11",
     "unified": "^9.2.0"
+  },
+  "main": "dist/index.js",
+  "browser": "dist/index.js",
+  "module": "src/index.js",
+  "scripts": {
+    "build": "cross-env BABEL_ENV=production babel src/index.js --config-file ../../babel.config.js --ignore '**/*.spec.js,**/*.test.js' --out-dir dist"
   }
 }

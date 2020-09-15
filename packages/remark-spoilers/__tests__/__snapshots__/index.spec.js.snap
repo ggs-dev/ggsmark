@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`spoilers should not show spoiler if duped start token 1`] = `
+"<details></details>
+<details></details>
+<details></details>
+<details></details>
+<details></details>
+<details></details>
+<p>why isn't this working!?</p>
+<p>there's no end!!!</p>
+"
+`;
+
+exports[`spoilers should not show spoiler if duped start token with summary 1`] = `
+"<details><summary>testestestsetset</summary></details>
+<details><summary>testipsum</summary></details>
+<p>!spoiler yeet</p>
+<p>why isn't this working!?</p>
+<p>there's no end!!!</p>
+"
+`;
+
+exports[`spoilers should not show spoiler if not closed 1`] = `
+"<p>!spoiler</p>
+<p>why isn't this working!?</p>
+<p>there's no end!!!</p>
+"
+`;
+
+exports[`spoilers should show multiple spoilers 1`] = `
+"<h1>Hello world</h1>
+<p>This is some text.</p>
+<details><summary>Click me to see a surprise</summary><p>peek-a-boo!</p></details>
+<p>between the spoilers</p>
+<details><summary>Another click me to see a surprise</summary><p>peek-a-boo!</p></details>
+<p>the end</p>
+"
+`;
+
+exports[`spoilers should show spoiler with custom summary 1`] = `
+"<details><summary>Click me to see a surprise</summary><p>peek-a-boo!</p></details>
+"
+`;
+
+exports[`spoilers should show spoiler with details class name 1`] = `
+"<details class=\\"hello hello-world\\"><p>peek-a-boo!</p></details>
+"
+`;
+
+exports[`spoilers should show spoiler with summary class name 1`] = `
+"<details><summary class=\\"hello hello-world\\">test</summary><p>peek-a-boo!</p></details>
+"
+`;
+
+exports[`spoilers should show spoiler without custom summary 1`] = `
+"<details><p>peek-a-boo!</p></details>
+"
+`;

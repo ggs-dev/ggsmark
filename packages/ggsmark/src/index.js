@@ -1,14 +1,38 @@
 import unified from 'unified'
 import markdown from 'remark-parse'
-import stringify from 'rehype-stringify'
-import rehype from 'remark-rehype'
+import merge from 'deepmerge'
+import gh from 'hast-util-sanitize/lib/github'
+import sanitize from 'rehype-sanitize'
+
+// Plugins
 import iframe from 'remark-iframes'
 import align from 'remark-text-alignment'
+import color from 'remark-color-text'
+import spoilers from 'remark-spoilers'
+
+// Don't use remark-html otherwise we can't customize HTML
+import stringify from 'rehype-stringify'
+import rehype from 'remark-rehype'
 
 // Import this since remark-iframe needs it
 import 'regenerator-runtime/runtime'
 
 export default (text, options = {}) => {
+  let schema = merge(gh, {
+    attributes: {
+      '*': [
+        'allowfullscreen',
+        'frameborder',
+        'src',
+        'className',
+        'style',
+        'width',
+        'height'
+      ]
+    },
+    tagNames: ['iframe']
+  })
+
   return unified()
     .use(markdown, {
       blocks: []
@@ -69,7 +93,6 @@ export default (text, options = {}) => {
           ],
           ['http://', 'https://']
         ]
-
       },
       'clips.twitch.tv': {
         tag: 'iframe',
@@ -85,13 +108,12 @@ export default (text, options = {}) => {
         ]
       }
     })
-    .use(align, {
-      left: 'align-left',
-      center: 'align-center',
-      right: 'align-right'
-    })
+    .use(align)
     .use(rehype)
     .use(stringify)
+    .use(color)
+    .use(spoilers)
+    .use(sanitize, schema)
     .processSync(text)
     .toString()
 }
