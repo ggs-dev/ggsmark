@@ -8,7 +8,7 @@ import align from 'remark-text-alignment'
 // Import this since remark-iframe needs it
 import 'regenerator-runtime/runtime'
 
-export default (text) => {
+export default (text, options = {}) => {
   return unified()
     .use(markdown, {
       blocks: []
