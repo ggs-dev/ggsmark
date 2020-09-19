@@ -46,6 +46,12 @@ Regular expression used to get the color from a tokenized block. The **first** c
 
 **Default** `/^\s*(rgba?\(\d{1,3}\s*\,\s*\d{1,3}\s*\,\s*\d{1,3}\s*(\,\s*\d{1,3}\s*)?\)|(\#?[A-z0-9]{3,12}))?/`
 
+#### `options.lowercase`
+
+Make sure color strings are always in lowercase. CSS colors are usually lowercase in order to function correctly.
+
+**Default** `true`
+
 ## Examples
 
 ```markdown

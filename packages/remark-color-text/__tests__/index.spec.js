@@ -36,6 +36,40 @@ describe('block color text with inline style', () => {
     expect(result).toMatchSnapshot()
   })
 
+  test('should color in lowercase', () => {
+    // Arrange
+    let string = dedent`
+    !# Red
+    123
+    !#
+    `
+
+    // Act
+    let result = remark().use(html).use(color).processSync(string).toString()
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+
+  test('should not color if lowercase is turned off', () => {
+    // Arrange
+    let string = dedent`
+    !# rEd
+    123
+    !#
+    `
+
+    // Act
+    let result = remark()
+      .use(html)
+      .use(color, { lowercase: false })
+      .processSync(string)
+      .toString()
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+
   test('should color rgba', () => {
     // Arrange
     let string = dedent`
