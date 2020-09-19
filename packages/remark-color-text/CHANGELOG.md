@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/johnnyhuy/ggsmark/compare/remark-color-text@0.3.11...remark-color-text@0.4.0) (2020-09-19)
+
+
+### Features
+
+* make sure colors are lowercased ([051d774](https://github.com/johnnyhuy/ggsmark/commit/051d774b97eab08fc7c8095a3c6484214d80a6b1))
+
+
+
+
+
 ## [0.3.11](https://github.com/johnnyhuy/ggsmark/compare/remark-color-text@0.3.10...remark-color-text@0.3.11) (2020-09-14)
 
 **Note:** Version bump only for package remark-color-text
