@@ -38,7 +38,7 @@ exports[`render youtube blocks repeated youtube 1`] = `
 `;
 
 exports[`render youtube blocks repeated youtube with text before and after 1`] = `
-"<p><strong>bold</strong> string before comyoutube !(<a href=\\"http://www.youtube./watch?v=52c_QSg64fs\\">http://www.youtube./watch?v=52c_QSg64fs</a>) after youtube !(<a href=\\"http://www.youtube.com/watch?v=waefawefwaef\\">http://www.youtube.com/watch?v=waefawefwaef</a>) <em>italics</em>
+"<p><strong>bold</strong> string before comyoutube !(<a href=\\"http://www.youtube.com/watch?v=52c_QSg64fs\\">http://www.youtube.com/watch?v=52c_QSg64fs</a>) after youtube !(<a href=\\"http://www.youtube.com/watch?v=waefawefwaef\\">http://www.youtube.com/watch?v=waefawefwaef</a>) <em>italics</em>
 soft new line
 new line</p>"
 `;

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.8.11...ggsmark@0.9.0) (2020-09-15)
+
+
+### Bug Fixes
+
+* get iframes working with Twitch clips ([b466af3](https://github.com/johnnyhuy/ggsmark/commit/b466af387300dcc00e2975c23a4623756a89bc68))
+* snapshot bug ([90f479b](https://github.com/johnnyhuy/ggsmark/commit/90f479b8e10b6824fa99af27339e9f512d5af29a))
+
+
+### Features
+
+* encode parents into a URL string ([cf2f3bf](https://github.com/johnnyhuy/ggsmark/commit/cf2f3bfb88836de7c1ce71ce3704a4c46320d717))
+* expose options ([259f1b5](https://github.com/johnnyhuy/ggsmark/commit/259f1b525f2d9a379a7bec8a6dc529f424d59de9))
+* show clips, channels and other stuff ([b2c84e0](https://github.com/johnnyhuy/ggsmark/commit/b2c84e09372fe24daf377f6b4915f84ff511e48e))
+
+
+
+
+
 ## [0.8.11](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.8.10...ggsmark@0.8.11) (2020-09-14)
 
 **Note:** Version bump only for package ggsmark

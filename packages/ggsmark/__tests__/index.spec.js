@@ -152,7 +152,7 @@ describe('render youtube blocks', () => {
   test('repeated youtube with text before and after', () => {
     // Arrange
     let string = dedent`
-    **bold** string before comyoutube !(http://www.youtube./watch?v=52c_QSg64fs) after youtube !(http://www.youtube.com/watch?v=waefawefwaef) *italics*
+    **bold** string before comyoutube !(http://www.youtube.com/watch?v=52c_QSg64fs) after youtube !(http://www.youtube.com/watch?v=waefawefwaef) *italics*
     soft new line
     new line
     `
@@ -163,7 +163,6 @@ describe('render youtube blocks', () => {
     // Assert
     expect(result).toMatchSnapshot()
   })
-
   test('repeated youtube', () => {
     // Arrange
     let string = dedent`
@@ -318,7 +317,7 @@ describe('do not render custom html', () => {
   })
 })
 
-describe('render twitch blocks', () => {
+describe('render twitch video blocks', () => {
   test('single line', () => {
     // Arrange
     let string = dedent`
