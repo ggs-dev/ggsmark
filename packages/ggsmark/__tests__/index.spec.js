@@ -98,8 +98,8 @@ describe('should have github-like markdown', () => {
 
     // Assert
     expect(result).toBe(dedent`
-    <pre><code class="language-ruby">require 'redcarpet'
-    markdown = Redcarpet.new("Hello World!")
+    <pre><code class="hljs language-ruby"><span class="hljs-keyword">require</span> <span class="hljs-string">'redcarpet'</span>
+    markdown = Redcarpet.new(<span class="hljs-string">"Hello World!"</span>)
     puts markdown.to_html
     </code></pre>
     `)
