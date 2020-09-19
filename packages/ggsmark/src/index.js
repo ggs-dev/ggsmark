@@ -37,7 +37,6 @@ export default (text, options = {}) => {
     },
     tagNames: ['iframe']
   })
-
   return unified()
     .use(markdown, {
       blocks: []
