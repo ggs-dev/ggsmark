@@ -64,7 +64,8 @@ export default (text, options = {}) => {
         disabled: false,
         replace: [
           ['watch?v=', 'embed/'],
-          ['http://', 'https://']
+          ['http://', 'https://'],
+          ['youtu.be/', 'youtube.com/embed/']
         ],
         thumbnail: {
           format: 'http://img.youtube.com/vi/{id}/0.jpg',

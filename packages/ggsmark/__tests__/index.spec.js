@@ -163,6 +163,20 @@ describe('render youtube blocks', () => {
     // Assert
     expect(result).toMatchSnapshot()
   })
+
+  test('short-hand youtube', () => {
+    // Arrange
+    let string = dedent`
+    !(http://www.youtu.be/52c_QSg64fs)
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+
   test('repeated youtube', () => {
     // Arrange
     let string = dedent`

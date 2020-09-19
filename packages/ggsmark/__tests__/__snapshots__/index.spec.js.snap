@@ -43,4 +43,6 @@ soft new line
 new line</p>"
 `;
 
-exports[`render youtube blocks youtube with timestamp 1`] = `"<iframe src=\\"https://youtu.be/IJhgZBn-LHg?t=712\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>"`;
+exports[`render youtube blocks short-hand youtube 1`] = `"<p>!(http://www.youtu.be/52c_QSg64fs)</p>"`;
+
+exports[`render youtube blocks youtube with timestamp 1`] = `"<iframe src=\\"https://youtube.com/embed/IJhgZBn-LHg?t=712\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>"`;
