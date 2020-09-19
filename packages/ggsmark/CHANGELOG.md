@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.1](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.10.0...ggsmark@0.10.1) (2020-09-19)
+
+
+### Bug Fixes
+
+* YouTube embed short-hand link ([6429f27](https://github.com/johnnyhuy/ggsmark/commit/6429f27065401beabbba9a549757933d0a113abb))
+
+
+
+
+
 # [0.10.0](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.9.0...ggsmark@0.10.0) (2020-09-19)
 
 
