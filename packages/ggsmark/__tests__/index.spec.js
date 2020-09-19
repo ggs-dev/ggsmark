@@ -98,8 +98,8 @@ describe('should have github-like markdown', () => {
 
     // Assert
     expect(result).toBe(dedent`
-    <pre><code class="language-ruby">require 'redcarpet'
-    markdown = Redcarpet.new("Hello World!")
+    <pre><code class="hljs language-ruby"><span class="hljs-keyword">require</span> <span class="hljs-string">'redcarpet'</span>
+    markdown = Redcarpet.new(<span class="hljs-string">"Hello World!"</span>)
     puts markdown.to_html
     </code></pre>
     `)
@@ -454,6 +454,34 @@ describe('render twitch video blocks', () => {
     // Assert
     expect(result).toBe(dedent`
     <iframe src="https://player.twitch.tv/?parent=ggs.sx&#x26;video=741520731" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+})
+
+describe('render code blocks highlighted', () => {
+  test('should highlight javascript', () => {
+    // Arrange
+    let string = dedent`
+    \`\`\`javascript
+    let dog = true
+
+    if (dog) {
+      console.log('woof')
+    }
+    \`\`\`
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <pre><code class="hljs language-javascript"><span class="hljs-keyword">let</span> dog = <span class="hljs-literal">true</span>
+
+    <span class="hljs-keyword">if</span> (dog) {
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'woof'</span>)
+    }
+    </code></pre>
     `)
   })
 })
