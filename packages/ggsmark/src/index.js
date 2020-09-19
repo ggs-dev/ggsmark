@@ -9,6 +9,7 @@ import iframe from 'remark-iframes'
 import align from 'remark-text-alignment'
 import color from 'remark-color-text'
 import spoilers from 'remark-spoilers'
+import highlight from 'rehype-highlight'
 
 // Don't use remark-html otherwise we can't customize HTML
 import stringify from 'rehype-stringify'
@@ -182,6 +183,7 @@ export default (text, options = {}) => {
     })
     .use(align)
     .use(rehype)
+    .use(highlight)
     .use(stringify)
     .use(color)
     .use(spoilers)

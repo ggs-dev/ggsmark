@@ -458,3 +458,31 @@ describe('render twitch blocks', () => {
     `)
   })
 })
+
+describe('render code blocks highlighted', () => {
+  test('should highlight javascript', () => {
+    // Arrange
+    let string = dedent`
+    \`\`\`javascript
+    let dog = true
+
+    if (dog) {
+      console.log('woof')
+    }
+    \`\`\`
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <pre><code class="hljs language-javascript"><span class="hljs-keyword">let</span> dog = <span class="hljs-literal">true</span>
+
+    <span class="hljs-keyword">if</span> (dog) {
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'woof'</span>)
+    }
+    </code></pre>
+    `)
+  })
+})
