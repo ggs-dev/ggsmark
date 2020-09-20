@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.1](https://github.com/johnnyhuy/ggsmark/compare/remark-spoilers@0.5.0...remark-spoilers@0.5.1) (2020-09-20)
+
+
+### Bug Fixes
+
+* Actually use spoiler summary defaults ([f1ebfba](https://github.com/johnnyhuy/ggsmark/commit/f1ebfba8caf8bbaff4d45b263bacc6e0196e0b28))
+
+
+
+
+
 # [0.5.0](https://github.com/johnnyhuy/ggsmark/compare/remark-spoilers@0.4.10...remark-spoilers@0.5.0) (2020-09-14)
 
 

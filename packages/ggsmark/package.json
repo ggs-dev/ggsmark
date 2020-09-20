@@ -1,6 +1,6 @@
 {
   "name": "ggsmark",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "description": "Markdown extension for the Gentlemen's Gaming Society website.",
   "repository": "https://github.com/johnnyhuy/ggsmark.git",
   "author": "Johnny Huynh <info@johnnyhuy.com>",
@@ -16,7 +16,7 @@
     "remark-iframes": "^4.0.4",
     "remark-parse": "^8.0.3",
     "remark-rehype": "^7.0.0",
-    "remark-spoilers": "^0.5.0",
+    "remark-spoilers": "^0.5.1",
     "remark-text-alignment": "^0.5.11",
     "unified": "^9.2.0"
   },
