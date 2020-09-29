@@ -498,4 +498,54 @@ describe('render code blocks highlighted', () => {
     </code></pre>
     `)
   })
+}),
+describe('render medal.tv blocks', () => {
+  test('single line', () => {
+    // Arrange
+    let string = dedent`
+    !(https://medal.tv/clips/33631679/LrG6jg4Y2AUk)
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe width="640" height="360" src="https://medal.tv/clip/33631679/vpFqrOl68" allowfullscreen></iframe>
+    `)
+  })
+
+  test('should not show iframe inline', () => {
+    // Arrange
+    let string =
+      '**bold text** before text !(https://medal.tv/clips/33631679/LrG6jg4Y2AUk) after text **bold**'
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe width="640" height="360" src="https://medal.tv/clip/33631679/vpFqrOl68" allowfullscreen></iframe>
+    `)
+  })
+
+  test('multiple occurrences', () => {
+    // Arrange
+    let string = dedent`
+    !(https://medal.tv/clips/33631679/LrG6jg4Y2AUk)
+    !(https://medal.tv/clips/33631679/LrG6jg4Y2AUk)
+    !(https://medal.tv/clips/33631679/LrG6jg4Y2AUk)
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe width="640" height="360" src="https://medal.tv/clip/33631679/vpFqrOl68" allowfullscreen></iframe>
+    <iframe width="640" height="360" src="https://medal.tv/clip/33631679/vpFqrOl68" allowfullscreen></iframe>
+    <iframe width="640" height="360" src="https://medal.tv/clip/33631679/vpFqrOl68" allowfullscreen></iframe>
+    `)
+  })
 })
+
