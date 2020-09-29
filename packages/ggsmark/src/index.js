@@ -186,6 +186,15 @@ export default (text, options = {}) => {
         height: 360,
         disabled: false
       },
+      'codepen.io': {
+        tag: 'iframe',
+        width: 700,
+        height: 1000,
+        disabled: false,
+        replace: [
+          ['http://', 'https://']
+        ]
+      },
     })
     .use(align)
     .use(rehype)
