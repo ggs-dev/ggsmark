@@ -179,7 +179,13 @@ export default (text, options = {}) => {
           ],
           ['http://', 'https://']
         ]
-      }
+      },
+      'medal.tv': {
+        tag: 'iframe',
+        width: 360,
+        height: 640,
+        disabled: false,
+      },
     })
     .use(align)
     .use(rehype)
