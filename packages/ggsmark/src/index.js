@@ -182,9 +182,9 @@ export default (text, options = {}) => {
       },
       'medal.tv': {
         tag: 'iframe',
-        width: 360,
-        height: 640,
-        disabled: false,
+        width: 640,
+        height: 360,
+        disabled: false
       },
     })
     .use(align)

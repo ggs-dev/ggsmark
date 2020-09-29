@@ -511,7 +511,7 @@ describe('render medal.tv blocks', () => {
 
     // Assert
     expect(result).toBe(dedent`
-    <iframe width="640" height="360" src="https://medal.tv/clip/33631679/vpFqrOl68" allowfullscreen></iframe>
+    <iframe src="https://medal.tv/clips/33631679/LrG6jg4Y2AUk" width="640" height="360" allowfullscreen frameborder="0"></iframe>
     `)
   })
 
@@ -525,7 +525,7 @@ describe('render medal.tv blocks', () => {
 
     // Assert
     expect(result).toBe(dedent`
-    <iframe width="640" height="360" src="https://medal.tv/clip/33631679/vpFqrOl68" allowfullscreen></iframe>
+    <p><strong>bold text</strong> before text !(<a href="https://medal.tv/clips/33631679/LrG6jg4Y2AUk">https://medal.tv/clips/33631679/LrG6jg4Y2AUk</a>) after text <strong>bold</strong></p>
     `)
   })
 
@@ -542,10 +542,9 @@ describe('render medal.tv blocks', () => {
 
     // Assert
     expect(result).toBe(dedent`
-    <iframe width="640" height="360" src="https://medal.tv/clip/33631679/vpFqrOl68" allowfullscreen></iframe>
-    <iframe width="640" height="360" src="https://medal.tv/clip/33631679/vpFqrOl68" allowfullscreen></iframe>
-    <iframe width="640" height="360" src="https://medal.tv/clip/33631679/vpFqrOl68" allowfullscreen></iframe>
+    <iframe src="https://medal.tv/clips/33631679/LrG6jg4Y2AUk" width="640" height="360" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://medal.tv/clips/33631679/LrG6jg4Y2AUk" width="640" height="360" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://medal.tv/clips/33631679/LrG6jg4Y2AUk" width="640" height="360" allowfullscreen frameborder="0"></iframe>
     `)
   })
 })
-
