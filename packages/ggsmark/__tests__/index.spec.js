@@ -547,4 +547,53 @@ describe('render medal.tv blocks', () => {
     <iframe src="https://medal.tv/clips/33631679/LrG6jg4Y2AUk" width="640" height="360" allowfullscreen frameborder="0"></iframe>
     `)
   })
+}),
+describe('render codepen blocks', () => {
+  test('single line', () => {
+    // Arrange
+    let string = dedent`
+    !(https://codepen.io/creativeocean/pen/QWNPxqy)
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://codepen.io/creativeocean/pen/QWNPxqy" width="700" height="1000" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('should not show iframe inline', () => {
+    // Arrange
+    let string =
+      '**bold text** before text !(https://codepen.io/creativeocean/pen/QWNPxqy) after text **bold**'
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <p><strong>bold text</strong> before text !(<a href="https://codepen.io/creativeocean/pen/QWNPxqy">https://codepen.io/creativeocean/pen/QWNPxqy</a>) after text <strong>bold</strong></p>
+    `)
+  })
+
+  test('multiple occurrences', () => {
+    // Arrange
+    let string = dedent`
+    !(https://codepen.io/creativeocean/pen/QWNPxqy)
+    !(https://codepen.io/creativeocean/pen/QWNPxqy)
+    !(https://codepen.io/creativeocean/pen/QWNPxqy)
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://codepen.io/creativeocean/pen/QWNPxqy" width="700" height="1000" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://codepen.io/creativeocean/pen/QWNPxqy" width="700" height="1000" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://codepen.io/creativeocean/pen/QWNPxqy" width="700" height="1000" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
 })
