@@ -86,7 +86,7 @@ export default (text) => {
     .use(rehype)
     .use(stringify)
     .use(color)
-    .use(spoilers)
+    .use(spoilers, { defaultSummary: 'Spoiler' })
     .use(sanitize, schema)
     .processSync(text)
     .toString()
