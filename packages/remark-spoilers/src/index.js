@@ -71,32 +71,28 @@ export default function plugin(options = {}) {
     const start = eat.now()
     const add = eat(block)
     const end = eat.now()
-    let children = []
     let childrenBlockContent = this.tokenizeBlock(blockContent, start)
-
-    if (summary !== '') {
-      children.push({
-        type: 'summary',
-        data: {
-          hName: 'summary',
-          hProperties: {
-            class: options.summaryClassName
-          }
-        },
-        children: [
-          {
-            type: 'text',
-            value: summary
-          }
-        ]
-      })
-    }
-
-    children = [...children, ...childrenBlockContent]
 
     return add({
       type: 'spoiler',
-      children: children,
+      children: [
+        {
+          type: 'summary',
+          data: {
+            hName: 'summary',
+            hProperties: {
+              class: options.summaryClassName
+            }
+          },
+          children: [
+            {
+              type: 'text',
+              value: summary !== '' ? summary : options.defaultSummary
+            }
+          ]
+        },
+        ...childrenBlockContent
+      ],
       data: {
         hName: 'details',
         hProperties: {

@@ -21,13 +21,13 @@ exports[`render right alignment text multi line 1`] = `
 
 exports[`render right alignment text single line 1`] = `"<div style=\\"text-align: right\\"><p>RightText</p></div>"`;
 
-exports[`render soundcloud blocks content before and after 1`] = `"<p><strong>bold text</strong> before text !(<a href=\\"https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion\\">https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion</a>) after text <strong>bold</strong></p>"`;
-
 exports[`render soundcloud blocks multiple occurrences 1`] = `
 "<iframe src=\\"https://w.soundcloud.com/player/?visual=true&#x26;url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion\\" width=\\"100%\\" height=\\"150\\" allowfullscreen frameborder=\\"0\\"></iframe>
 <iframe src=\\"https://w.soundcloud.com/player/?visual=true&#x26;url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion\\" width=\\"100%\\" height=\\"150\\" allowfullscreen frameborder=\\"0\\"></iframe>
 <iframe src=\\"https://w.soundcloud.com/player/?visual=true&#x26;url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion\\" width=\\"100%\\" height=\\"150\\" allowfullscreen frameborder=\\"0\\"></iframe>"
 `;
+
+exports[`render soundcloud blocks should not show iframe inline 1`] = `"<p><strong>bold text</strong> before text !(<a href=\\"https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion\\">https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion</a>) after text <strong>bold</strong></p>"`;
 
 exports[`render soundcloud blocks single line 1`] = `"<iframe src=\\"https://w.soundcloud.com/player/?visual=true&#x26;url=https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion\\" width=\\"100%\\" height=\\"150\\" allowfullscreen frameborder=\\"0\\"></iframe>"`;
 
@@ -38,9 +38,11 @@ exports[`render youtube blocks repeated youtube 1`] = `
 `;
 
 exports[`render youtube blocks repeated youtube with text before and after 1`] = `
-"<p><strong>bold</strong> string before comyoutube !(<a href=\\"http://www.youtube./watch?v=52c_QSg64fs\\">http://www.youtube./watch?v=52c_QSg64fs</a>) after youtube !(<a href=\\"http://www.youtube.com/watch?v=waefawefwaef\\">http://www.youtube.com/watch?v=waefawefwaef</a>) <em>italics</em>
-soft new line</p>
-<p>new line</p>"
+"<p><strong>bold</strong> string before comyoutube !(<a href=\\"http://www.youtube.com/watch?v=52c_QSg64fs\\">http://www.youtube.com/watch?v=52c_QSg64fs</a>) after youtube !(<a href=\\"http://www.youtube.com/watch?v=waefawefwaef\\">http://www.youtube.com/watch?v=waefawefwaef</a>) <em>italics</em>
+soft new line
+new line</p>"
 `;
 
-exports[`render youtube blocks youtube with timestamp 1`] = `"<iframe src=\\"https://youtu.be/IJhgZBn-LHg?t=712\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>"`;
+exports[`render youtube blocks short-hand youtube 1`] = `"<p>!(http://www.youtu.be/52c_QSg64fs)</p>"`;
+
+exports[`render youtube blocks youtube with timestamp 1`] = `"<iframe src=\\"https://youtube.com/embed/IJhgZBn-LHg?t=712\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>"`;

@@ -16,10 +16,11 @@ function matchToken(token, value) {
  * @param {String} colorExpression regular expression to match, it must capture the first group
  * @param {String} block final string block to be parsed
  */
-function getBlockColor(token, colorExpression, block) {
+function getBlockColor(token, colorExpression, lowercase, block) {
   let trimmedBlock = block.trim()
   if (trimmedBlock.startsWith(token)) {
-    return trimmedBlock.slice(token.length).match(colorExpression)[1]
+    let color = trimmedBlock.slice(token.length).match(colorExpression)[1]
+    return lowercase ? color.toLowerCase() : color
   }
 }
 
@@ -31,6 +32,7 @@ export default function plugin(options = {}) {
   const inlineMethods = Parser.prototype.inlineMethods
 
   options.token = options.token ?? '!#'
+  options.lowercase = options.lowercase ?? true
   options.colorExpression =
     options.colorExpression ??
     /^\s*(rgba?\(\d{1,3}\s*\,\s*\d{1,3}\s*\,\s*\d{1,3}\s*(\,\s*\d{1,3}\s*)?\)|(\#?[A-z0-9]{3,12}))?/
@@ -72,7 +74,12 @@ export default function plugin(options = {}) {
       .substring(block.indexOf(C_NEWLINE), block.lastIndexOf(C_NEWLINE))
       .trim()
 
-    let color = getBlockColor(options.token, options.colorExpression, block)
+    let color = getBlockColor(
+      options.token,
+      options.colorExpression,
+      options.lowercase,
+      block
+    )
 
     const start = eat.now()
     const add = eat(block)
@@ -106,7 +113,12 @@ export default function plugin(options = {}) {
 
     if (silent) return true
 
-    let color = getBlockColor(options.token, options.colorExpression, value)
+    let color = getBlockColor(
+      options.token,
+      options.colorExpression,
+      options.lowercase,
+      value
+    )
     let openBracket = value.indexOf('(') + 1
     let closeBracket = value.indexOf(')')
     let inline = value.substring(0, closeBracket + 1)

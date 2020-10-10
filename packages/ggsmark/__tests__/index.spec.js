@@ -98,8 +98,8 @@ describe('should have github-like markdown', () => {
 
     // Assert
     expect(result).toBe(dedent`
-    <pre><code class="language-ruby">require 'redcarpet'
-    markdown = Redcarpet.new("Hello World!")
+    <pre><code class="hljs language-ruby"><span class="hljs-keyword">require</span> <span class="hljs-string">'redcarpet'</span>
+    markdown = Redcarpet.new(<span class="hljs-string">"Hello World!"</span>)
     puts markdown.to_html
     </code></pre>
     `)
@@ -120,7 +120,7 @@ describe('render soundcloud blocks', () => {
     expect(result).toMatchSnapshot()
   })
 
-  test('content before and after', () => {
+  test('should not show iframe inline', () => {
     // Arrange
     let string =
       '**bold text** before text !(https://soundcloud.com/iamcardib/wap-feat-megan-thee-stallion) after text **bold**'
@@ -152,10 +152,22 @@ describe('render youtube blocks', () => {
   test('repeated youtube with text before and after', () => {
     // Arrange
     let string = dedent`
-    **bold** string before comyoutube !(http://www.youtube./watch?v=52c_QSg64fs) after youtube !(http://www.youtube.com/watch?v=waefawefwaef) *italics*
+    **bold** string before comyoutube !(http://www.youtube.com/watch?v=52c_QSg64fs) after youtube !(http://www.youtube.com/watch?v=waefawefwaef) *italics*
     soft new line
-
     new line
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+
+  test('short-hand youtube', () => {
+    // Arrange
+    let string = dedent`
+    !(http://www.youtu.be/52c_QSg64fs)
     `
 
     // Act
@@ -315,6 +327,275 @@ describe('do not render custom html', () => {
     // Assert
     expect(result).toBe(dedent`
     <p>Test</p>
+    `)
+  })
+})
+
+describe('render twitch video blocks', () => {
+  test('single line', () => {
+    // Arrange
+    let string = dedent`
+    !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx', 'example.com'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;parent=example.com&#x26;clip=LovelyAstuteCoffeeImGlitch" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('should not show iframe inline', () => {
+    // Arrange
+    let string = dedent`
+    **bold text** before text !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch) after text **bold**
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx', 'example.com'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <p><strong>bold text</strong> before text !(<a href="https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch">https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch</a>) after text <strong>bold</strong></p>
+    `)
+  })
+
+  test('multiple occurrences', () => {
+    // Arrange
+    let string = dedent`
+    !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
+    !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
+    !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx', 'example.com'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;parent=example.com&#x26;clip=LovelyAstuteCoffeeImGlitch" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;parent=example.com&#x26;clip=LovelyAstuteCoffeeImGlitch" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;parent=example.com&#x26;clip=LovelyAstuteCoffeeImGlitch" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('set one twitch parent', () => {
+    // Arrange
+    let string = dedent`
+    !(https://clips.twitch.tv/LovelyAstuteCoffeeImGlitch)
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://clips.twitch.tv/embed?parent=ggs.sx&#x26;clip=LovelyAstuteCoffeeImGlitch" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('should show twitch video', () => {
+    // Arrange
+    let string = dedent`
+    !(https://twitch.tv/videos/732347536)
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://player.twitch.tv/?parent=ggs.sx&#x26;video=732347536" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('should show twitch channel', () => {
+    // Arrange
+    let string = dedent`
+    !(https://twitch.tv/vinesauce)
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://player.twitch.tv/?parent=ggs.sx&#x26;channel=vinesauce" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('should show twitch channel using player url', () => {
+    // Arrange
+    let string = dedent`
+    !(https://player.twitch.tv/?channel=vinesauce)
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://player.twitch.tv/?parent=ggs.sx&#x26;channel=vinesauce" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('should show twitch video using player url', () => {
+    // Arrange
+    let string = dedent`
+    !(https://player.twitch.tv/?video=741520731)
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://player.twitch.tv/?parent=ggs.sx&#x26;video=741520731" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('should show twitch video using player url', () => {
+    // Arrange
+    let string = dedent`
+    !(https://player.twitch.tv/?video=741520731)
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://player.twitch.tv/?parent=ggs.sx&#x26;video=741520731" width="560" height="315" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+})
+
+describe('render code blocks highlighted', () => {
+  test('should highlight javascript', () => {
+    // Arrange
+    let string = dedent`
+    \`\`\`javascript
+    let dog = true
+
+    if (dog) {
+      console.log('woof')
+    }
+    \`\`\`
+    `
+
+    // Act
+    let result = ggsmark(string, { twitchParents: ['ggs.sx'] })
+
+    // Assert
+    expect(result).toBe(dedent`
+    <pre><code class="hljs language-javascript"><span class="hljs-keyword">let</span> dog = <span class="hljs-literal">true</span>
+
+    <span class="hljs-keyword">if</span> (dog) {
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'woof'</span>)
+    }
+    </code></pre>
+    `)
+  })
+})
+
+describe('render medal.tv blocks', () => {
+  test('single line', () => {
+    // Arrange
+    let string = dedent`
+    !(https://medal.tv/clips/33631679/LrG6jg4Y2AUk)
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://medal.tv/clips/33631679/LrG6jg4Y2AUk" width="640" height="360" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('should not show iframe inline', () => {
+    // Arrange
+    let string =
+      '**bold text** before text !(https://medal.tv/clips/33631679/LrG6jg4Y2AUk) after text **bold**'
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <p><strong>bold text</strong> before text !(<a href="https://medal.tv/clips/33631679/LrG6jg4Y2AUk">https://medal.tv/clips/33631679/LrG6jg4Y2AUk</a>) after text <strong>bold</strong></p>
+    `)
+  })
+
+  test('multiple occurrences', () => {
+    // Arrange
+    let string = dedent`
+    !(https://medal.tv/clips/33631679/LrG6jg4Y2AUk)
+    !(https://medal.tv/clips/33631679/LrG6jg4Y2AUk)
+    !(https://medal.tv/clips/33631679/LrG6jg4Y2AUk)
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://medal.tv/clips/33631679/LrG6jg4Y2AUk" width="640" height="360" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://medal.tv/clips/33631679/LrG6jg4Y2AUk" width="640" height="360" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://medal.tv/clips/33631679/LrG6jg4Y2AUk" width="640" height="360" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+})
+
+describe('render codepen blocks', () => {
+  test('single line', () => {
+    // Arrange
+    let string = dedent`
+    !(https://codepen.io/creativeocean/pen/QWNPxqy)
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://codepen.io/creativeocean/pen/QWNPxqy" width="700" height="1000" allowfullscreen frameborder="0"></iframe>
+    `)
+  })
+
+  test('should not show iframe inline', () => {
+    // Arrange
+    let string =
+      '**bold text** before text !(https://codepen.io/creativeocean/pen/QWNPxqy) after text **bold**'
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <p><strong>bold text</strong> before text !(<a href="https://codepen.io/creativeocean/pen/QWNPxqy">https://codepen.io/creativeocean/pen/QWNPxqy</a>) after text <strong>bold</strong></p>
+    `)
+  })
+
+  test('multiple occurrences', () => {
+    // Arrange
+    let string = dedent`
+    !(https://codepen.io/creativeocean/pen/QWNPxqy)
+    !(https://codepen.io/creativeocean/pen/QWNPxqy)
+    !(https://codepen.io/creativeocean/pen/QWNPxqy)
+    `
+
+    // Act
+    let result = ggsmark(string)
+
+    // Assert
+    expect(result).toBe(dedent`
+    <iframe src="https://codepen.io/creativeocean/pen/QWNPxqy" width="700" height="1000" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://codepen.io/creativeocean/pen/QWNPxqy" width="700" height="1000" allowfullscreen frameborder="0"></iframe>
+    <iframe src="https://codepen.io/creativeocean/pen/QWNPxqy" width="700" height="1000" allowfullscreen frameborder="0"></iframe>
     `)
   })
 })

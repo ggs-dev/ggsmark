@@ -3,6 +3,77 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.3](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.10.2...ggsmark@0.10.3) (2020-09-20)
+
+**Note:** Version bump only for package ggsmark
+
+
+
+
+
+## [0.10.2](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.10.1...ggsmark@0.10.2) (2020-09-19)
+
+**Note:** Version bump only for package ggsmark
+
+
+
+
+
+## [0.10.1](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.10.0...ggsmark@0.10.1) (2020-09-19)
+
+
+### Bug Fixes
+
+* YouTube embed short-hand link ([6429f27](https://github.com/johnnyhuy/ggsmark/commit/6429f27065401beabbba9a549757933d0a113abb))
+
+
+
+
+
+# [0.10.0](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.9.0...ggsmark@0.10.0) (2020-09-19)
+
+
+### Bug Fixes
+
+* removed unused package ([52a7562](https://github.com/johnnyhuy/ggsmark/commit/52a7562ac6cf671690d1c432cb9ff0ac7ea9e9c9))
+* Ruby fence test output ([a47eb75](https://github.com/johnnyhuy/ggsmark/commit/a47eb75a2e772fa3b6b2070f914931907c7774eb))
+
+
+### Features
+
+* added code highlighting ([9c836a5](https://github.com/johnnyhuy/ggsmark/commit/9c836a52f9fbbb2849ea2c27f2755e80d0787e0f))
+
+
+
+
+
+# [0.9.0](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.8.11...ggsmark@0.9.0) (2020-09-15)
+
+
+### Bug Fixes
+
+* get iframes working with Twitch clips ([b466af3](https://github.com/johnnyhuy/ggsmark/commit/b466af387300dcc00e2975c23a4623756a89bc68))
+* snapshot bug ([90f479b](https://github.com/johnnyhuy/ggsmark/commit/90f479b8e10b6824fa99af27339e9f512d5af29a))
+
+
+### Features
+
+* encode parents into a URL string ([cf2f3bf](https://github.com/johnnyhuy/ggsmark/commit/cf2f3bfb88836de7c1ce71ce3704a4c46320d717))
+* expose options ([259f1b5](https://github.com/johnnyhuy/ggsmark/commit/259f1b525f2d9a379a7bec8a6dc529f424d59de9))
+* show clips, channels and other stuff ([b2c84e0](https://github.com/johnnyhuy/ggsmark/commit/b2c84e09372fe24daf377f6b4915f84ff511e48e))
+
+
+
+
+
+## [0.8.11](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.8.10...ggsmark@0.8.11) (2020-09-14)
+
+**Note:** Version bump only for package ggsmark
+
+
+
+
+
 ## [0.8.10](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.8.9...ggsmark@0.8.10) (2020-09-14)
 
 
