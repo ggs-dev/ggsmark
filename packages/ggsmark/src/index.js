@@ -179,6 +179,19 @@ export default (text, options = {}) => {
           ],
           ['http://', 'https://']
         ]
+      },
+      'medal.tv': {
+        tag: 'iframe',
+        width: 640,
+        height: 360,
+        disabled: false
+      },
+      'codepen.io': {
+        tag: 'iframe',
+        width: 700,
+        height: 1000,
+        disabled: false,
+        replace: [['http://', 'https://']]
       }
     })
     .use(align)
