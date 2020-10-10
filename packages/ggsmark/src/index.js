@@ -191,10 +191,8 @@ export default (text, options = {}) => {
         width: 700,
         height: 1000,
         disabled: false,
-        replace: [
-          ['http://', 'https://']
-        ]
-      },
+        replace: [['http://', 'https://']]
+      }
     })
     .use(align)
     .use(rehype)

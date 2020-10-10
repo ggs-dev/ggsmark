@@ -498,7 +498,8 @@ describe('render code blocks highlighted', () => {
     </code></pre>
     `)
   })
-}),
+})
+
 describe('render medal.tv blocks', () => {
   test('single line', () => {
     // Arrange
@@ -547,7 +548,8 @@ describe('render medal.tv blocks', () => {
     <iframe src="https://medal.tv/clips/33631679/LrG6jg4Y2AUk" width="640" height="360" allowfullscreen frameborder="0"></iframe>
     `)
   })
-}),
+})
+
 describe('render codepen blocks', () => {
   test('single line', () => {
     // Arrange
