@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.4](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.10.3...ggsmark@0.10.4) (2020-10-10)
+
+
+### Bug Fixes
+
+* Formatting ([fb35086](https://github.com/johnnyhuy/ggsmark/commit/fb35086842e498158f043fca3c667ad75d8785d7))
+* Set default summary to spoiler ([8563e19](https://github.com/johnnyhuy/ggsmark/commit/8563e19a609f49d27989b1fceb9fcc2003803114))
+
+
+
+
+
 ## [0.10.3](https://github.com/johnnyhuy/ggsmark/compare/ggsmark@0.10.2...ggsmark@0.10.3) (2020-09-20)
 
 **Note:** Version bump only for package ggsmark
