@@ -18,5 +18,6 @@ jobs:
       with:
         webhook_url: ${{ secrets.DISCORD_CHANGELOG_WEBHOOK }}
         repo_name: GGSMark
-        hide_links: true
+        hide_links: false
+        censor_username: false
         color: 0f3d2b
