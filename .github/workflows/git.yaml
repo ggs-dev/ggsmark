@@ -1,0 +1,23 @@
+name: Publish Git Commits
+
+on: [push]
+
+jobs:
+  git:
+
+    name: Git Commits
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_BUILDKIT: 1
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Run Discord Webhook
+      uses: johnnyhuy/actions-discord-git-webhook@main
+      with:
+        webhook_url: ${{ secrets.DISCORD_CHANGELOG_WEBHOOK }}
+        repo_name: GGSMark
+        hide_links: false
+        censor_username: false
+        color: 0f3d2b
