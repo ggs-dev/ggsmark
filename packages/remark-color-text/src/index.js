@@ -153,6 +153,24 @@ export default function plugin(options = {}) {
   blockTokenizers.colorText = tokenizeBlocks
   inlineTokenizers.colorText = tokenizeInlines
 
+  if (this.Compiler && this.Compiler.prototype.visitors) {
+    function stringify(node) {
+      return `!# ${node.data.hProperties.style.substring(
+        'color: '.length
+      )} (${this.block({
+        ...node,
+        children: [
+          {
+            type: 'paragraph',
+            children: node.children
+          }
+        ]
+      })})`
+    }
+
+    this.Compiler.prototype.visitors.colorText = stringify
+  }
+
   blockMethods.splice(blockMethods.indexOf('blockquote') + 1, 0, 'colorText')
   inlineMethods.splice(inlineMethods.indexOf('escape') + 1, 0, 'colorText')
 }
