@@ -8,7 +8,7 @@ describe('block color text with inline style', () => {
     // Arrange
     let string = dedent`
     !# red
-    
+
     this should not be red
 
     there's no end!!!
@@ -154,7 +154,7 @@ describe('block color text with inline style', () => {
 
     !# red
     Hello I should be in red text right under the start point
-    
+
     # I should still be red text
 
     !#
@@ -163,7 +163,7 @@ describe('block color text with inline style', () => {
 
     !# blue
     Hello I should be in blue text right under the start point
-    
+
     # I should still be blue text
 
     more text
@@ -224,6 +224,17 @@ describe('inline color text with inline style', () => {
 
     // Act
     let result = remark().use(html).use(color).processSync(string).toString()
+
+    // Assert
+    expect(result).toMatchSnapshot()
+  })
+
+  test('should not split by nbsp character', () => {
+    // Arrange
+    let string = `!# #D0E10E (hello&nbsp;world)`
+
+    // Act
+    let result = remark().use(color).processSync(string).toString()
 
     // Assert
     expect(result).toMatchSnapshot()

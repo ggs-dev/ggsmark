@@ -78,3 +78,8 @@ exports[`inline color text with inline style should not color if not closed 1`] 
 "<p>!# red (this is inline!</p>
 "
 `;
+
+exports[`inline color text with inline style should not split by nbsp character 1`] = `
+"!# #d0e10e (hello world)
+"
+`;
