@@ -1,9 +1,9 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`align text with class names should align multi line 1`] = `
 "<h1>Before text</h1>
 <p>More before text</p>
-<div class=\\"align-left\\"><p>This is a multiple line texts
+<div class="align-left"><p>This is a multiple line texts
 2nd line here</p></div>
 <p>After text</p>
 <h2>More heading after text</h2>
@@ -11,17 +11,17 @@ exports[`align text with class names should align multi line 1`] = `
 `;
 
 exports[`align text with class names should align single line 1`] = `
-"<div class=\\"align-left\\"><p>LeftText</p></div>
+"<div class="align-left"><p>LeftText</p></div>
 "
 `;
 
 exports[`align text with inline style should align multi line 1`] = `
-"<div style=\\"text-align: left\\"><p>This is a multiple line texts
+"<div style="text-align: left"><p>This is a multiple line texts
 2nd line here</p></div>
 "
 `;
 
 exports[`align text with inline style should align single line 1`] = `
-"<div style=\\"text-align: left\\"><p>LeftText</p></div>
+"<div style="text-align: left"><p>LeftText</p></div>
 "
 `;

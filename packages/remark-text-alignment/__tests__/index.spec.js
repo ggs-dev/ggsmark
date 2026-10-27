@@ -1,6 +1,6 @@
-import remark from 'remark'
+import { remark } from 'remark'
 import html from 'remark-html'
-import alignment from '../src'
+import alignment from '../src/index.js'
 import dedent from 'dedent'
 
 describe('align text with inline style', () => {
@@ -12,7 +12,7 @@ describe('align text with inline style', () => {
 
     // Act
     let result = remark()
-      .use(html)
+      .use(html, { sanitize: false })
       .use(alignment)
       .processSync(string)
       .toString()
@@ -30,7 +30,7 @@ describe('align text with inline style', () => {
 
     // Act
     let result = remark()
-      .use(html)
+      .use(html, { sanitize: false })
       .use(alignment)
       .processSync(string)
       .toString()
@@ -49,7 +49,7 @@ describe('align text with class names', () => {
 
     // Act
     let result = remark()
-      .use(html)
+      .use(html, { sanitize: false })
       .use(alignment, { useClassNames: true })
       .processSync(string)
       .toString()
@@ -75,7 +75,7 @@ describe('align text with class names', () => {
 
     // Act
     let result = remark()
-      .use(html)
+      .use(html, { sanitize: false })
       .use(alignment, { useClassNames: true })
       .processSync(string)
       .toString()

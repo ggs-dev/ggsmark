@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`spoilers should not show spoiler if duped start token 1`] = `
 "<details><summary>Open spoiler</summary></details>
@@ -44,12 +44,12 @@ exports[`spoilers should show spoiler with custom summary 1`] = `
 `;
 
 exports[`spoilers should show spoiler with details class name 1`] = `
-"<details class=\\"hello hello-world\\"><summary>Open spoiler</summary><p>peek-a-boo!</p></details>
+"<details class="hello hello-world"><summary>Open spoiler</summary><p>peek-a-boo!</p></details>
 "
 `;
 
 exports[`spoilers should show spoiler with summary class name 1`] = `
-"<details><summary class=\\"hello hello-world\\">test</summary><p>peek-a-boo!</p></details>
+"<details><summary class="hello hello-world">test</summary><p>peek-a-boo!</p></details>
 "
 `;
 

@@ -15,12 +15,12 @@ npm i remark-color-text
 ## Usage
 
 ```js
-import remark from 'remark'
+import { remark } from 'remark'
 import html from 'remark-html'
 import color from 'remark-color-text'
 
 remark()
-  .use(html)
+  .use(html, { sanitize: false })
   .use(color)
 
 ...

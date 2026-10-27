@@ -1,29 +1,33 @@
 {
   "name": "ggsmark",
   "version": "0.10.4",
+  "type": "module",
   "description": "Markdown extension for the Gentlemen's Gaming Society website.",
   "repository": "https://github.com/johnnyhuy/ggsmark.git",
   "author": "Johnny Huynh <info@johnnyhuy.com>",
   "license": "MIT",
   "dependencies": {
-    "deepmerge": "^4.2.2",
-    "hast-util-sanitize": "^3.0.0",
-    "regenerator-runtime": "^0.13.7",
-    "rehype-highlight": "^4.0.0",
-    "rehype-sanitize": "^4.0.0",
-    "rehype-stringify": "^8.0.0",
+    "rehype-highlight": "^7.0.2",
+    "rehype-sanitize": "^6.0.0",
+    "rehype-stringify": "^10.0.1",
     "remark-color-text": "^0.4.1",
-    "remark-iframes": "^4.0.4",
-    "remark-parse": "^8.0.3",
-    "remark-rehype": "^7.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
     "remark-spoilers": "^0.5.2",
     "remark-text-alignment": "^0.5.12",
-    "unified": "^9.2.0"
+    "unified": "^11.0.5"
   },
   "main": "dist/index.js",
   "browser": "dist/index.js",
   "module": "src/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
   "scripts": {
-    "build": "cross-env BABEL_ENV=production babel src/index.js --config-file ../../babel.config.js --ignore '**/*.spec.js,**/*.test.js' --out-dir dist"
+    "build": "cross-env BABEL_ENV=production babel src --config-file ../../babel.config.cjs --ignore \"**/*.spec.js,**/*.test.js\" --out-dir dist"
   }
 }

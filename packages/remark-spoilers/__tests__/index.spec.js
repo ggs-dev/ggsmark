@@ -1,6 +1,6 @@
-import remark from 'remark'
+import { remark } from 'remark'
 import html from 'remark-html'
-import spoiler from '../src'
+import spoiler from '../src/index.js'
 import dedent from 'dedent'
 
 describe('spoilers', () => {
@@ -13,7 +13,11 @@ describe('spoilers', () => {
     `
 
     // Act
-    let result = remark().use(html).use(spoiler).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(spoiler)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -29,7 +33,7 @@ describe('spoilers', () => {
 
     // Act
     let result = remark()
-      .use(html)
+      .use(html, { sanitize: false })
       .use(spoiler, { detailsClassName: 'hello hello-world' })
       .processSync(string)
       .toString()
@@ -48,7 +52,7 @@ describe('spoilers', () => {
 
     // Act
     let result = remark()
-      .use(html)
+      .use(html, { sanitize: false })
       .use(spoiler, { summaryClassName: 'hello hello-world' })
       .processSync(string)
       .toString()
@@ -66,7 +70,11 @@ describe('spoilers', () => {
     `
 
     // Act
-    let result = remark().use(html).use(spoiler).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(spoiler)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -93,7 +101,11 @@ describe('spoilers', () => {
     `
 
     // Act
-    let result = remark().use(html).use(spoiler).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(spoiler)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -110,7 +122,11 @@ describe('spoilers', () => {
     `
 
     // Act
-    let result = remark().use(html).use(spoiler).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(spoiler)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -138,7 +154,11 @@ describe('spoilers', () => {
     `
 
     // Act
-    let result = remark().use(html).use(spoiler).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(spoiler)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -159,7 +179,11 @@ describe('spoilers', () => {
     `
 
     // Act
-    let result = remark().use(html).use(spoiler).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(spoiler)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()

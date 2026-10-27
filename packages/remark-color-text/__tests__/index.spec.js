@@ -1,6 +1,6 @@
-import remark from 'remark'
+import { remark } from 'remark'
 import html from 'remark-html'
-import color from '../src'
+import color from '../src/index.js'
 import dedent from 'dedent'
 
 describe('block color text with inline style', () => {
@@ -15,7 +15,11 @@ describe('block color text with inline style', () => {
     `
 
     // Act
-    let result = remark().use(html).use(color).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(color)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -30,7 +34,11 @@ describe('block color text with inline style', () => {
     `
 
     // Act
-    let result = remark().use(html).use(color).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(color)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -45,7 +53,11 @@ describe('block color text with inline style', () => {
     `
 
     // Act
-    let result = remark().use(html).use(color).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(color)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -61,7 +73,7 @@ describe('block color text with inline style', () => {
 
     // Act
     let result = remark()
-      .use(html)
+      .use(html, { sanitize: false })
       .use(color, { lowercase: false })
       .processSync(string)
       .toString()
@@ -79,7 +91,11 @@ describe('block color text with inline style', () => {
     `
 
     // Act
-    let result = remark().use(html).use(color).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(color)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -94,7 +110,11 @@ describe('block color text with inline style', () => {
     `
 
     // Act
-    let result = remark().use(html).use(color).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(color)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -109,7 +129,11 @@ describe('block color text with inline style', () => {
     `
 
     // Act
-    let result = remark().use(html).use(color).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(color)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -124,7 +148,11 @@ describe('block color text with inline style', () => {
     `
 
     // Act
-    let result = remark().use(html).use(color).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(color)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -139,7 +167,11 @@ describe('block color text with inline style', () => {
     `
 
     // Act
-    let result = remark().use(html).use(color).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(color)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -176,7 +208,11 @@ describe('block color text with inline style', () => {
     `
 
     // Act
-    let result = remark().use(html).use(color).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(color)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -191,7 +227,11 @@ describe('inline color text with inline style', () => {
     `
 
     // Act
-    let result = remark().use(html).use(color).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(color)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -204,7 +244,11 @@ describe('inline color text with inline style', () => {
     `
 
     // Act
-    let result = remark().use(html).use(color).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(color)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()
@@ -223,7 +267,11 @@ describe('inline color text with inline style', () => {
     `
 
     // Act
-    let result = remark().use(html).use(color).processSync(string).toString()
+    let result = remark()
+      .use(html, { sanitize: false })
+      .use(color)
+      .processSync(string)
+      .toString()
 
     // Assert
     expect(result).toMatchSnapshot()

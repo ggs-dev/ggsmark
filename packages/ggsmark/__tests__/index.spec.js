@@ -1,5 +1,5 @@
 import dedent from 'dedent'
-import ggsmark from '../src'
+import ggsmark from '../src/index.js'
 
 describe('should have github-like markdown', () => {
   test('strikethrough', () => {
@@ -98,8 +98,8 @@ describe('should have github-like markdown', () => {
 
     // Assert
     expect(result).toBe(dedent`
-    <pre><code class="hljs language-ruby"><span class="hljs-keyword">require</span> <span class="hljs-string">'redcarpet'</span>
-    markdown = Redcarpet.new(<span class="hljs-string">"Hello World!"</span>)
+    <pre><code class="language-ruby"><span class="hljs-keyword">require</span> <span class="hljs-string">'redcarpet'</span>
+    markdown = <span class="hljs-title class_">Redcarpet</span>.new(<span class="hljs-string">"Hello World!"</span>)
     puts markdown.to_html
     </code></pre>
     `)
@@ -490,10 +490,10 @@ describe('render code blocks highlighted', () => {
 
     // Assert
     expect(result).toBe(dedent`
-    <pre><code class="hljs language-javascript"><span class="hljs-keyword">let</span> dog = <span class="hljs-literal">true</span>
+    <pre><code class="language-javascript"><span class="hljs-keyword">let</span> dog = <span class="hljs-literal">true</span>
 
     <span class="hljs-keyword">if</span> (dog) {
-      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'woof'</span>)
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'woof'</span>)
     }
     </code></pre>
     `)

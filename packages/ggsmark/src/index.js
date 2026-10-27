@@ -1,47 +1,90 @@
-import unified from 'unified'
-import markdown from 'remark-parse'
-import merge from 'deepmerge'
-import gh from 'hast-util-sanitize/lib/github'
-import sanitize from 'rehype-sanitize'
-
-// Plugins
-import iframe from 'remark-iframes'
+import { unified } from 'unified'
+import remarkParse from 'remark-parse'
+import remarkGfm from 'remark-gfm'
+import remarkRehype from 'remark-rehype'
+import rehypeHighlight from 'rehype-highlight'
+import rehypeSanitize, { defaultSchema } from 'rehype-sanitize'
+import rehypeStringify from 'rehype-stringify'
 import align from 'remark-text-alignment'
 import color from 'remark-color-text'
 import spoilers from 'remark-spoilers'
-import highlight from 'rehype-highlight'
+import remarkIframes from './iframe.js'
 
-// Don't use remark-html otherwise we can't customize HTML
-import stringify from 'rehype-stringify'
-import rehype from 'remark-rehype'
+const schema = {
+  ...defaultSchema,
+  tagNames: [...defaultSchema.tagNames, 'iframe'],
+  attributes: {
+    ...defaultSchema.attributes,
+    '*': [
+      ...defaultSchema.attributes['*'],
+      'allowFullScreen',
+      'frameBorder',
+      'src',
+      'className',
+      'style'
+    ],
+    iframe: [
+      'allowFullScreen',
+      'frameBorder',
+      'src',
+      'width',
+      'height',
+      'className',
+      'style'
+    ],
+    div: [...(defaultSchema.attributes.div || []), 'style', 'className'],
+    span: [...(defaultSchema.attributes.span || []), 'style', 'className']
+  }
+}
 
-// Import this since remark-iframe needs it
-import 'regenerator-runtime/runtime'
+function stripRawHtml() {
+  return (tree) => {
+    strip(tree)
+  }
+}
+
+function strip(node) {
+  if (!node?.children) return
+
+  for (let index = 0; index < node.children.length; index++) {
+    const child = node.children[index]
+    if (child.type === 'html') {
+      const text = child.value.replace(/<\/?[^>]+>/g, '')
+      if (node.type === 'root') {
+        const value = text.trim()
+        if (!value) {
+          node.children.splice(index, 1)
+          index -= 1
+          continue
+        }
+        node.children[index] = {
+          type: 'paragraph',
+          children: [{ type: 'text', value }]
+        }
+      } else if (text) {
+        node.children[index] = { type: 'text', value: text }
+      } else {
+        node.children.splice(index, 1)
+        index -= 1
+      }
+      continue
+    }
+
+    strip(child)
+  }
+}
 
 export default (text, options = {}) => {
-  options.twitchParents = !!options.twitchParents
-    ? '?' + options.twitchParents.map((i) => 'parent=' + i).join('&') + '&'
+  const twitchParents = options.twitchParents
+    ? '?' +
+      options.twitchParents.map((parent) => 'parent=' + parent).join('&') +
+      '&'
     : '?'
 
-  let schema = merge(gh, {
-    attributes: {
-      '*': [
-        'allowfullscreen',
-        'frameborder',
-        'src',
-        'className',
-        'style',
-        'width',
-        'height'
-      ]
-    },
-    tagNames: ['iframe']
-  })
   return unified()
-    .use(markdown, {
-      blocks: []
-    })
-    .use(iframe, {
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkIframes, {
       'www.youtube.com': {
         tag: 'iframe',
         width: 560,
@@ -94,11 +137,11 @@ export default (text, options = {}) => {
         replace: [
           [
             'https://twitch.tv/videos/',
-            `https://player.twitch.tv/${options.twitchParents}video=`
+            `https://player.twitch.tv/${twitchParents}video=`
           ],
           [
             'https://twitch.tv/',
-            `https://player.twitch.tv/${options.twitchParents}channel=`
+            `https://player.twitch.tv/${twitchParents}channel=`
           ],
           ['http://', 'https://']
         ]
@@ -111,11 +154,11 @@ export default (text, options = {}) => {
         replace: [
           [
             'https://twitch.tv/videos/',
-            `https://player.twitch.tv/${options.twitchParents}video=`
+            `https://player.twitch.tv/${twitchParents}video=`
           ],
           [
             'https://twitch.tv/',
-            `https://player.twitch.tv/${options.twitchParents}channel=`
+            `https://player.twitch.tv/${twitchParents}channel=`
           ],
           ['http://', 'https://']
         ]
@@ -128,7 +171,7 @@ export default (text, options = {}) => {
         replace: [
           [
             'https://clips.twitch.tv/',
-            `https://clips.twitch.tv/embed${options.twitchParents}clip=`
+            `https://clips.twitch.tv/embed${twitchParents}clip=`
           ],
           ['http://', 'https://']
         ]
@@ -141,7 +184,7 @@ export default (text, options = {}) => {
         replace: [
           [
             'https://clips.twitch.tv/',
-            `https://clips.twitch.tv/embed${options.twitchParents}clip=`
+            `https://clips.twitch.tv/embed${twitchParents}clip=`
           ],
           ['http://', 'https://']
         ]
@@ -154,11 +197,11 @@ export default (text, options = {}) => {
         replace: [
           [
             'https://player.twitch.tv/?channel=',
-            `https://player.twitch.tv/${options.twitchParents}channel=`
+            `https://player.twitch.tv/${twitchParents}channel=`
           ],
           [
             'https://player.twitch.tv/?video=',
-            `https://player.twitch.tv/${options.twitchParents}video=`
+            `https://player.twitch.tv/${twitchParents}video=`
           ],
           ['http://', 'https://']
         ]
@@ -171,11 +214,11 @@ export default (text, options = {}) => {
         replace: [
           [
             'https://player.twitch.tv/?channel=',
-            `https://player.twitch.tv/${options.twitchParents}channel=`
+            `https://player.twitch.tv/${twitchParents}channel=`
           ],
           [
             'https://player.twitch.tv/?video=',
-            `https://player.twitch.tv/${options.twitchParents}video=`
+            `https://player.twitch.tv/${twitchParents}video=`
           ],
           ['http://', 'https://']
         ]
@@ -195,12 +238,13 @@ export default (text, options = {}) => {
       }
     })
     .use(align)
-    .use(rehype)
-    .use(highlight)
-    .use(stringify)
     .use(color)
     .use(spoilers, { defaultSummary: 'Spoiler' })
-    .use(sanitize, schema)
+    .use(stripRawHtml)
+    .use(remarkRehype)
+    .use(rehypeHighlight)
+    .use(rehypeSanitize, schema)
+    .use(rehypeStringify)
     .processSync(text)
     .toString()
 }

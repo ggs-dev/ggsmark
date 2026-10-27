@@ -1,14 +1,15 @@
 module.exports = {
+  sourceType: 'unambiguous',
   presets: [
     [
       '@babel/preset-env',
       {
+        modules: false,
         targets: {
-          esmodules: true
+          node: '20'
         }
       }
     ]
   ],
-  sourceMaps: 'both',
-  plugins: ['add-module-exports']
+  sourceMaps: 'both'
 }

@@ -22,12 +22,12 @@ npm i remark-spoilers
 ## Usage
 
 ```js
-import remark from 'remark'
+import { remark } from 'remark'
 import html from 'remark-html'
 import spoilers from 'remark-spoilers'
 
 remark()
-  .use(html)
+  .use(html, { sanitize: false })
   .use(spoilers)
 
 ...

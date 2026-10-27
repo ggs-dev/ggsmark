@@ -19,20 +19,20 @@ npm i remark-text-alignment
 ## Usage
 
 ```js
-import remark from 'remark'
+import { remark } from 'remark'
 import html from 'remark-html'
 import alignment from 'remark-text-alignment'
 
 // Basic use
 remark()
-  .use(html)
+  .use(html, { sanitize: false })
   .use(alignment)
 
 ...
 
 // Use class names and set right class name to example-right
 remark()
-  .use(html)
+  .use(html, { sanitize: false })
   .use(alignment, {
     useClassNames: true,
     classNames: {
