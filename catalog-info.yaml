@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ggsmark
+  title: ggsmark
+  description: Markdown extension for the Gentlemen's Gaming Society website.
+  annotations:
+    github.com/project-slug: ggs-dev/ggsmark
+  tags:
+    - javascript
+    - hacktoberfest
+    - markdown
+    - monorepo
+    - remark
+    - remark-plugin
+spec:
+  type: library
+  lifecycle: experimental
+  owner: group:default/developers
